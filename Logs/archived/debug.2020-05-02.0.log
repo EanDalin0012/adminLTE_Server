@@ -1,0 +1,243 @@
+2020-05-02 15:13:13 [restartedMain] [INFO] c.s.adminlte.AdminlteApplication - Starting AdminlteApplication on DESKTOP-SSTPOFF with PID 10460 (D:\Projects\adminlte\out\production\classes started by Eanda in D:\Projects\adminlte)
+2020-05-02 15:13:13 [restartedMain] [DEBUG] c.s.adminlte.AdminlteApplication - Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
+2020-05-02 15:13:13 [restartedMain] [INFO] c.s.adminlte.AdminlteApplication - No active profile set, falling back to default profiles: default
+2020-05-02 15:13:13 [restartedMain] [INFO] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-05-02 15:13:13 [restartedMain] [INFO] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.b.a.MybatisAutoConfiguration - Searching for mappers annotated with @Mapper
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.b.a.MybatisAutoConfiguration - Using auto-configuration base package 'com.spring.adminlte'
+2020-05-02 15:13:14 [restartedMain] [INFO] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2020-05-02 15:13:14 [restartedMain] [INFO] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10ms. Found 0 JDBC repository interfaces.
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\CompanyDao.class]
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\ImportProductDao.class]
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\MainCategoryDao.class]
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\ProductDao.class]
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\SubCategoryDao.class]
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\SubCategoryDetailDao.class]
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\SupplierDao.class]
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'companyDao' and 'com.spring.adminlte.dao.CompanyDao' mapperInterface
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'companyDao'.
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'importProductDao' and 'com.spring.adminlte.dao.ImportProductDao' mapperInterface
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'importProductDao'.
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'mainCategoryDao' and 'com.spring.adminlte.dao.MainCategoryDao' mapperInterface
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'mainCategoryDao'.
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'productDao' and 'com.spring.adminlte.dao.ProductDao' mapperInterface
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'productDao'.
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'subCategoryDao' and 'com.spring.adminlte.dao.SubCategoryDao' mapperInterface
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'subCategoryDao'.
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'subCategoryDetailDao' and 'com.spring.adminlte.dao.SubCategoryDetailDao' mapperInterface
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'subCategoryDetailDao'.
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'supplierDao' and 'com.spring.adminlte.dao.SupplierDao' mapperInterface
+2020-05-02 15:13:14 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'supplierDao'.
+2020-05-02 15:13:14 [restartedMain] [INFO] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$382e94ee] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-05-02 15:13:14 [restartedMain] [INFO] o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2020-05-02 15:13:14 [restartedMain] [INFO] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-05-02 15:13:14 [restartedMain] [INFO] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2020-05-02 15:13:14 [restartedMain] [INFO] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2020-05-02 15:13:14 [restartedMain] [INFO] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-05-02 15:13:14 [restartedMain] [INFO] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-05-02 15:13:14 [restartedMain] [INFO] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-05-02 15:13:14 [restartedMain] [INFO] o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1765 ms
+2020-05-02 15:13:15 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed configuration file: 'class path resource [mybatis/mybatis_config.xml]'
+2020-05-02 15:13:15 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\companyDAO.xml]'
+2020-05-02 15:13:15 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\importProductDao.xml]'
+2020-05-02 15:13:15 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\mainCategoryDao.xml]'
+2020-05-02 15:13:15 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\productDao.xml]'
+2020-05-02 15:13:15 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\subCategoryDao.xml]'
+2020-05-02 15:13:15 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\subCategoryDetailDao.xml]'
+2020-05-02 15:13:15 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\supplierDao.xml]'
+2020-05-02 15:13:15 [restartedMain] [INFO] o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-02 15:13:15 [restartedMain] [WARN] o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-05-02 15:13:15 [restartedMain] [WARN] o.t.templatemode.TemplateMode - [THYMELEAF][restartedMain] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2020-05-02 15:13:15 [restartedMain] [DEBUG] o.m.s.b.a.MybatisAutoConfiguration - Not found configuration for registering mapper bean using @MapperScan, MapperFactoryBean and MapperScannerConfigurer.
+2020-05-02 15:13:15 [restartedMain] [INFO] o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2020-05-02 15:13:15 [restartedMain] [INFO] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2020-05-02 15:13:15 [restartedMain] [INFO] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2020-05-02 15:13:15 [restartedMain] [INFO] c.s.adminlte.AdminlteApplication - Started AdminlteApplication in 3.03 seconds (JVM running for 4.669)
+2020-05-02 15:17:02 [http-nio-8080-exec-1] [INFO] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-02 15:17:02 [http-nio-8080-exec-1] [INFO] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-05-02 15:17:02 [http-nio-8080-exec-1] [INFO] o.s.web.servlet.DispatcherServlet - Completed initialization in 16 ms
+2020-05-02 15:17:02 [http-nio-8080-exec-1] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:17:02 [http-nio-8080-exec-1] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58b3320a] was not registered for synchronization because synchronization is not active
+2020-05-02 15:17:02 [http-nio-8080-exec-1] [INFO] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2020-05-02 15:17:02 [http-nio-8080-exec-1] [INFO] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2020-05-02 15:17:02 [http-nio-8080-exec-1] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@565915116 wrapping org.postgresql.jdbc.PgConnection@757f5c5d] will not be managed by Spring
+2020-05-02 15:17:02 [http-nio-8080-exec-1] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:17:02 [http-nio-8080-exec-1] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:17:03 [http-nio-8080-exec-1] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:17:03 [http-nio-8080-exec-1] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58b3320a]
+2020-05-02 15:17:36 [http-nio-8080-exec-4] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:17:36 [http-nio-8080-exec-4] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5a102b6f] was not registered for synchronization because synchronization is not active
+2020-05-02 15:17:36 [http-nio-8080-exec-4] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1423429213 wrapping org.postgresql.jdbc.PgConnection@757f5c5d] will not be managed by Spring
+2020-05-02 15:17:36 [http-nio-8080-exec-4] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:17:36 [http-nio-8080-exec-4] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:17:36 [http-nio-8080-exec-4] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:17:36 [http-nio-8080-exec-4] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5a102b6f]
+2020-05-02 15:21:02 [http-nio-8080-exec-7] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:21:02 [http-nio-8080-exec-7] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@71db16f6] was not registered for synchronization because synchronization is not active
+2020-05-02 15:21:02 [http-nio-8080-exec-7] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@2132604605 wrapping org.postgresql.jdbc.PgConnection@757f5c5d] will not be managed by Spring
+2020-05-02 15:21:02 [http-nio-8080-exec-7] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:21:02 [http-nio-8080-exec-7] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:21:02 [http-nio-8080-exec-7] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:21:02 [http-nio-8080-exec-7] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@71db16f6]
+2020-05-02 15:24:40 [http-nio-8080-exec-10] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:24:40 [http-nio-8080-exec-10] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4358f440] was not registered for synchronization because synchronization is not active
+2020-05-02 15:24:40 [http-nio-8080-exec-10] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1302270555 wrapping org.postgresql.jdbc.PgConnection@757f5c5d] will not be managed by Spring
+2020-05-02 15:24:40 [http-nio-8080-exec-10] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:24:40 [http-nio-8080-exec-10] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:24:40 [http-nio-8080-exec-10] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:24:40 [http-nio-8080-exec-10] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4358f440]
+2020-05-02 15:25:44 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:25:44 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4411e17b] was not registered for synchronization because synchronization is not active
+2020-05-02 15:25:44 [http-nio-8080-exec-5] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1323928075 wrapping org.postgresql.jdbc.PgConnection@757f5c5d] will not be managed by Spring
+2020-05-02 15:25:44 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:25:44 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:25:44 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:25:44 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4411e17b]
+2020-05-02 15:27:51 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:27:51 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a2c33d0] was not registered for synchronization because synchronization is not active
+2020-05-02 15:27:51 [http-nio-8080-exec-2] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@350998245 wrapping org.postgresql.jdbc.PgConnection@757f5c5d] will not be managed by Spring
+2020-05-02 15:27:51 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:27:51 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:27:51 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:27:51 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a2c33d0]
+2020-05-02 15:29:34 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:29:34 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47b212c] was not registered for synchronization because synchronization is not active
+2020-05-02 15:29:34 [http-nio-8080-exec-9] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@180146131 wrapping org.postgresql.jdbc.PgConnection@757f5c5d] will not be managed by Spring
+2020-05-02 15:29:34 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:29:34 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:29:34 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:29:34 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47b212c]
+2020-05-02 15:29:50 [http-nio-8080-exec-3] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:29:50 [http-nio-8080-exec-3] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a06b92] was not registered for synchronization because synchronization is not active
+2020-05-02 15:29:50 [http-nio-8080-exec-3] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@157779222 wrapping org.postgresql.jdbc.PgConnection@757f5c5d] will not be managed by Spring
+2020-05-02 15:29:50 [http-nio-8080-exec-3] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:29:50 [http-nio-8080-exec-3] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:29:50 [http-nio-8080-exec-3] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:29:50 [http-nio-8080-exec-3] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a06b92]
+2020-05-02 15:32:56 [http-nio-8080-exec-6] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:32:56 [http-nio-8080-exec-6] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bb3abf9] was not registered for synchronization because synchronization is not active
+2020-05-02 15:32:56 [http-nio-8080-exec-6] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@359945983 wrapping org.postgresql.jdbc.PgConnection@757f5c5d] will not be managed by Spring
+2020-05-02 15:32:56 [http-nio-8080-exec-6] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:32:56 [http-nio-8080-exec-6] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:32:56 [http-nio-8080-exec-6] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:32:56 [http-nio-8080-exec-6] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bb3abf9]
+2020-05-02 15:33:02 [http-nio-8080-exec-7] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:33:02 [http-nio-8080-exec-7] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b237d86] was not registered for synchronization because synchronization is not active
+2020-05-02 15:33:02 [http-nio-8080-exec-7] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1042414726 wrapping org.postgresql.jdbc.PgConnection@757f5c5d] will not be managed by Spring
+2020-05-02 15:33:02 [http-nio-8080-exec-7] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:33:02 [http-nio-8080-exec-7] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:33:02 [http-nio-8080-exec-7] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:33:02 [http-nio-8080-exec-7] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b237d86]
+2020-05-02 15:48:08 [http-nio-8080-exec-10] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 15:48:08 [http-nio-8080-exec-10] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@85c1740] was not registered for synchronization because synchronization is not active
+2020-05-02 15:48:08 [http-nio-8080-exec-10] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1038406106 wrapping org.postgresql.jdbc.PgConnection@70f08049] will not be managed by Spring
+2020-05-02 15:48:08 [http-nio-8080-exec-10] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 15:48:08 [http-nio-8080-exec-10] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 15:48:08 [http-nio-8080-exec-10] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 15:48:08 [http-nio-8080-exec-10] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@85c1740]
+2020-05-02 16:15:27 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:15:27 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@403a2f8d] was not registered for synchronization because synchronization is not active
+2020-05-02 16:15:27 [http-nio-8080-exec-5] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@975835740 wrapping org.postgresql.jdbc.PgConnection@70f08049] will not be managed by Spring
+2020-05-02 16:15:27 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:15:27 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:15:27 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:15:27 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@403a2f8d]
+2020-05-02 16:16:28 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:16:28 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@35f93b91] was not registered for synchronization because synchronization is not active
+2020-05-02 16:16:28 [http-nio-8080-exec-2] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1699626446 wrapping org.postgresql.jdbc.PgConnection@4ca87628] will not be managed by Spring
+2020-05-02 16:16:28 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:16:28 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:16:28 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:16:28 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@35f93b91]
+2020-05-02 16:19:36 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:19:36 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@226cfd7a] was not registered for synchronization because synchronization is not active
+2020-05-02 16:19:36 [http-nio-8080-exec-9] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@2097516215 wrapping org.postgresql.jdbc.PgConnection@4ca87628] will not be managed by Spring
+2020-05-02 16:19:36 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:19:36 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:19:36 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:19:36 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@226cfd7a]
+2020-05-02 16:20:03 [http-nio-8080-exec-1] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:20:03 [http-nio-8080-exec-1] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2701886b] was not registered for synchronization because synchronization is not active
+2020-05-02 16:20:03 [http-nio-8080-exec-1] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1718987267 wrapping org.postgresql.jdbc.PgConnection@4ca87628] will not be managed by Spring
+2020-05-02 16:20:04 [http-nio-8080-exec-1] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:20:04 [http-nio-8080-exec-1] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:20:04 [http-nio-8080-exec-1] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:20:04 [http-nio-8080-exec-1] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2701886b]
+2020-05-02 16:20:20 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:20:20 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@32d2c956] was not registered for synchronization because synchronization is not active
+2020-05-02 16:20:20 [http-nio-8080-exec-5] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@603015327 wrapping org.postgresql.jdbc.PgConnection@4ca87628] will not be managed by Spring
+2020-05-02 16:20:20 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:20:20 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:20:20 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:20:20 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@32d2c956]
+2020-05-02 16:26:42 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:26:42 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d6efd4e] was not registered for synchronization because synchronization is not active
+2020-05-02 16:26:42 [http-nio-8080-exec-2] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@620992884 wrapping org.postgresql.jdbc.PgConnection@4ca87628] will not be managed by Spring
+2020-05-02 16:26:42 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:26:42 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:26:42 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:26:44 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d6efd4e]
+2020-05-02 16:30:24 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:30:24 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67cc38ef] was not registered for synchronization because synchronization is not active
+2020-05-02 16:30:24 [http-nio-8080-exec-9] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@869260028 wrapping org.postgresql.jdbc.PgConnection@4ca87628] will not be managed by Spring
+2020-05-02 16:30:24 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:30:24 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:30:24 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:30:24 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67cc38ef]
+2020-05-02 16:31:37 [http-nio-8080-exec-3] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:31:37 [http-nio-8080-exec-3] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34cab231] was not registered for synchronization because synchronization is not active
+2020-05-02 16:31:37 [http-nio-8080-exec-3] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@678785122 wrapping org.postgresql.jdbc.PgConnection@4ca87628] will not be managed by Spring
+2020-05-02 16:31:37 [http-nio-8080-exec-3] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:31:37 [http-nio-8080-exec-3] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:31:37 [http-nio-8080-exec-3] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:31:37 [http-nio-8080-exec-3] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34cab231]
+2020-05-02 16:34:47 [http-nio-8080-exec-6] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:34:47 [http-nio-8080-exec-6] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@114bc089] was not registered for synchronization because synchronization is not active
+2020-05-02 16:34:47 [http-nio-8080-exec-6] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1414094020 wrapping org.postgresql.jdbc.PgConnection@4ca87628] will not be managed by Spring
+2020-05-02 16:34:47 [http-nio-8080-exec-6] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:34:47 [http-nio-8080-exec-6] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:34:47 [http-nio-8080-exec-6] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:34:47 [http-nio-8080-exec-6] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@114bc089]
+2020-05-02 16:48:12 [http-nio-8080-exec-8] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:48:14 [http-nio-8080-exec-8] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3538898e] was not registered for synchronization because synchronization is not active
+2020-05-02 16:48:14 [http-nio-8080-exec-8] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1006592345 wrapping org.postgresql.jdbc.PgConnection@3fc0e2fe] will not be managed by Spring
+2020-05-02 16:48:14 [http-nio-8080-exec-8] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:48:14 [http-nio-8080-exec-8] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:48:14 [http-nio-8080-exec-8] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:48:14 [http-nio-8080-exec-8] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3538898e]
+2020-05-02 16:48:59 [http-nio-8080-exec-10] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:48:59 [http-nio-8080-exec-10] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c8de72f] was not registered for synchronization because synchronization is not active
+2020-05-02 16:48:59 [http-nio-8080-exec-10] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@75697129 wrapping org.postgresql.jdbc.PgConnection@3fc0e2fe] will not be managed by Spring
+2020-05-02 16:48:59 [http-nio-8080-exec-10] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:48:59 [http-nio-8080-exec-10] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:48:59 [http-nio-8080-exec-10] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:48:59 [http-nio-8080-exec-10] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c8de72f]
+2020-05-02 16:51:37 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:51:37 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4884e880] was not registered for synchronization because synchronization is not active
+2020-05-02 16:51:37 [http-nio-8080-exec-5] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1744942463 wrapping org.postgresql.jdbc.PgConnection@3fc0e2fe] will not be managed by Spring
+2020-05-02 16:51:37 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:51:37 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:51:37 [http-nio-8080-exec-5] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:51:37 [http-nio-8080-exec-5] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4884e880]
+2020-05-02 16:53:17 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:53:17 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@10abbe4b] was not registered for synchronization because synchronization is not active
+2020-05-02 16:53:17 [http-nio-8080-exec-2] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@436234229 wrapping org.postgresql.jdbc.PgConnection@3fc0e2fe] will not be managed by Spring
+2020-05-02 16:53:17 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:53:17 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:53:17 [http-nio-8080-exec-2] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:53:17 [http-nio-8080-exec-2] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@10abbe4b]
+2020-05-02 16:55:20 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 16:55:20 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b7444f8] was not registered for synchronization because synchronization is not active
+2020-05-02 16:55:20 [http-nio-8080-exec-9] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@895858856 wrapping org.postgresql.jdbc.PgConnection@3fc0e2fe] will not be managed by Spring
+2020-05-02 16:55:20 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 16:55:20 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 16:55:20 [http-nio-8080-exec-9] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 16:55:20 [http-nio-8080-exec-9] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b7444f8]
+2020-05-02 17:05:20 [http-nio-8080-exec-3] [DEBUG] org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2020-05-02 17:05:20 [http-nio-8080-exec-3] [DEBUG] org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7085b4da] was not registered for synchronization because synchronization is not active
+2020-05-02 17:05:20 [http-nio-8080-exec-3] [DEBUG] o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1324636032 wrapping org.postgresql.jdbc.PgConnection@3fc0e2fe] will not be managed by Spring
+2020-05-02 17:05:20 [http-nio-8080-exec-3] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==>  Preparing: select tmc.mn_cat_id , tmc.mn_cat_nm , tmc .mn_cat_desc , tmc .mn_cate_status , tmc .mn_cat_create_by , tmc .mn_cat_create_date , tmc .mn_cat_modify_date , tmc .mn_cat_modify_by from tb_mn_category tmc where tmc.mn_cate_status != '6'; 
+2020-05-02 17:05:20 [http-nio-8080-exec-3] [DEBUG] c.s.a.dao.MainCategoryDao.getList - ==> Parameters: 
+2020-05-02 17:05:20 [http-nio-8080-exec-3] [DEBUG] c.s.a.dao.MainCategoryDao.getList - <==      Total: 1
+2020-05-02 17:05:20 [http-nio-8080-exec-3] [DEBUG] org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7085b4da]
+2020-05-02 20:14:33 [HikariPool-1 housekeeper] [WARN] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h28s952ms482µs800ns).

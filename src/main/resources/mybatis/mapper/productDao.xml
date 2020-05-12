@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.adminlte.dao.ProductDao">
+	
+	<resultMap type="ProductDto"   			id="productDto">
+		<id property="productId"	    	column="pro_id"/>
+		<id property="subCateId" 			column="sub_cat_id"/>
+		<id property="productName" 			column="pro_nm"/>
+		<id property="description" 			column="pro_desc"/>
+
+		<id property="createBy" 			column="pro_create_by"/>
+		<id property="createDate" 			column="pro_create_date"/>
+		<id property="modifyBy" 			column="pro_modify_by"/>
+		<id property="modifyDate" 			column="pro_modify_date"/>
+		<id property="status" 				column="pro_status"/>
+	</resultMap>
+
+	<select id="getList" resultMap="productDto">
+	   <![CDATA[
+			select
+				  tp.pro_id
+				, tp.sub_cat_id
+				, tp.comp_id
+				, tp.pro_nm
+				, tp.pro_price
+				, tp.pro_unit_price
+				, tp.pro_discount
+				, tp.pro_aft_dis_price
+				, tp.pro_desc
+				, tp.pro_create_by
+				, tp.pro_create_date
+				, tp.pro_modify_by
+				, tp.pro_modify_date
+				, tp.pro_status
+			from tb_product tp
+			where tp.pro_status != '6'
+	   ]]>
+	</select>
+
+	<insert id="save" parameterType="productDto">
+    	<![CDATA[
+	    	INSERT INTO tb_product
+			(
+				  sub_cat_id
+				, pro_nm
+				, pro_desc
+				, pro_create_by
+				, pro_create_date
+				, pro_modify_by
+				, pro_modify_date
+				, pro_status
+			)
+			VALUES (
+				  #{subCateId}
+				, #{productName}
+				, COALESCE('', #{description} )
+				, #{createBy}
+				, to_char(NOW(), 'YYYYMMDD')
+				, #{modifyBy}
+				, to_char(NOW(), 'YYYYMMDD')
+				, #{status}
+
+			);
+    	]]>
+    </insert>
+
+	<select id="getValueById" resultMap="productDto">
+	   <![CDATA[
+		 select
+				  tp.pro_id
+				, tp.sub_cat_id
+				, tp.pro_nm
+				, tp.pro_desc
+				, tp.pro_create_by
+				, tp.pro_create_date
+				, tp.pro_modify_by
+				, tp.pro_modify_date
+				, tp.pro_status
+			from tb_product tp
+			where tp.pro_id = #{productId}
+	     ]]>
+	</select>
+
+	<select id="count" resultMap="productDto">
+	   <![CDATA[
+		  select
+	     	count (*)
+	      from tb_product
+	   ]]>
+	</select>
+
+	<update id="update" parameterType="productDto">
+		<![CDATA[
+			UPDATE tb_product
+			SET
+				sub_cat_id			= #{subCateId}
+				, comp_id			= #{companyId}
+				, pro_nm			= #{productName}
+				, pro_desc			= COALESCE('', #{description} )
+				, pro_modify_by		= #{modifyBy}
+				, pro_modify_date	= to_char(NOW(), 'YYYYMMDD')
+				, pro_status		= #{status}
+			WHERE pro_id 		    = #{id}
+		]]>
+	</update>
+
+	<update id="delete" parameterType="productDto">
+		<![CDATA[
+			UPDATE tb_product
+			 SET
+				  pro_status		= #{status}
+				, pro_modify_date	= to_char(NOW(), 'YYYYMMDD')
+				, pro_modify_by		= #{modifyBy}
+			 WHERE   pro_id			= #{id}
+		]]>
+	</update>
+
+</mapper>

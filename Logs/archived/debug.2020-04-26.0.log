@@ -1,0 +1,55 @@
+2020-04-26 13:20:37 [restartedMain] [INFO] c.s.adminlte.AdminlteApplication - Starting AdminlteApplication on DESKTOP-SSTPOFF with PID 4276 (D:\Projects\adminlte\out\production\classes started by Eanda in D:\Projects\adminlte)
+2020-04-26 13:20:37 [restartedMain] [DEBUG] c.s.adminlte.AdminlteApplication - Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
+2020-04-26 13:20:37 [restartedMain] [INFO] c.s.adminlte.AdminlteApplication - No active profile set, falling back to default profiles: default
+2020-04-26 13:20:37 [restartedMain] [INFO] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 13:20:37 [restartedMain] [INFO] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.b.a.MybatisAutoConfiguration - Searching for mappers annotated with @Mapper
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.b.a.MybatisAutoConfiguration - Using auto-configuration base package 'com.spring.adminlte'
+2020-04-26 13:20:40 [restartedMain] [INFO] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2020-04-26 13:20:40 [restartedMain] [INFO] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 27ms. Found 0 JDBC repository interfaces.
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\CompanyDao.class]
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\ImportProductDao.class]
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\MainCategoryDao.class]
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\ProductDao.class]
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\SubCategoryDao.class]
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\SubCategoryDetailDao.class]
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Projects\adminlte\out\production\classes\com\spring\adminlte\dao\SupplierDao.class]
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'companyDao' and 'com.spring.adminlte.dao.CompanyDao' mapperInterface
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'companyDao'.
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'importProductDao' and 'com.spring.adminlte.dao.ImportProductDao' mapperInterface
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'importProductDao'.
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'mainCategoryDao' and 'com.spring.adminlte.dao.MainCategoryDao' mapperInterface
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'mainCategoryDao'.
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'productDao' and 'com.spring.adminlte.dao.ProductDao' mapperInterface
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'productDao'.
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'subCategoryDao' and 'com.spring.adminlte.dao.SubCategoryDao' mapperInterface
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'subCategoryDao'.
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'subCategoryDetailDao' and 'com.spring.adminlte.dao.SubCategoryDetailDao' mapperInterface
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'subCategoryDetailDao'.
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'supplierDao' and 'com.spring.adminlte.dao.SupplierDao' mapperInterface
+2020-04-26 13:20:40 [restartedMain] [DEBUG] o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'supplierDao'.
+2020-04-26 13:20:41 [restartedMain] [INFO] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$d02ac0f3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-26 13:20:41 [restartedMain] [INFO] o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2020-04-26 13:20:41 [restartedMain] [INFO] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-26 13:20:42 [restartedMain] [INFO] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2020-04-26 13:20:42 [restartedMain] [INFO] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2020-04-26 13:20:42 [restartedMain] [INFO] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-04-26 13:20:42 [restartedMain] [INFO] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-04-26 13:20:42 [restartedMain] [INFO] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-04-26 13:20:42 [restartedMain] [INFO] o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 4927 ms
+2020-04-26 13:20:42 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed configuration file: 'class path resource [mybatis/mybatis_config.xml]'
+2020-04-26 13:20:43 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\companyDAO.xml]'
+2020-04-26 13:20:43 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\importProductDao.xml]'
+2020-04-26 13:20:43 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\mainCategoryDao.xml]'
+2020-04-26 13:20:43 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\productDao.xml]'
+2020-04-26 13:20:43 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\subCategoryDao.xml]'
+2020-04-26 13:20:43 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\subCategoryDetailDao.xml]'
+2020-04-26 13:20:43 [restartedMain] [DEBUG] o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\supplierDao.xml]'
+2020-04-26 13:20:43 [restartedMain] [INFO] o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 13:20:44 [restartedMain] [WARN] o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-04-26 13:20:44 [restartedMain] [WARN] o.t.templatemode.TemplateMode - [THYMELEAF][restartedMain] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+2020-04-26 13:20:44 [restartedMain] [DEBUG] o.m.s.b.a.MybatisAutoConfiguration - Not found configuration for registering mapper bean using @MapperScan, MapperFactoryBean and MapperScannerConfigurer.
+2020-04-26 13:20:44 [restartedMain] [INFO] o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2020-04-26 13:20:44 [restartedMain] [INFO] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2020-04-26 13:20:44 [restartedMain] [INFO] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-26 13:20:44 [restartedMain] [INFO] c.s.adminlte.AdminlteApplication - Started AdminlteApplication in 9.233 seconds (JVM running for 14.353)

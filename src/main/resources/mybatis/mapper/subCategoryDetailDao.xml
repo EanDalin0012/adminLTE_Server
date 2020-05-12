@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.adminlte.dao.SubCategoryDetailDao">
+	
+	<resultMap type="SubCategoryDetailDto"   	id="subCategoryDetailDto">
+		<id property="subCatId"	    			column="sub_id"/>
+		<id property="mainCatId" 				column="mn_cat_id"/>
+		<id property="subCatName" 				column="sub_cat_nm"/>
+		<id property="mainCatName" 				column="mn_cat_nm"/>
+		<id property="description" 				column="sub_cat_desc"/>
+		<id property="createBy" 				column="sub_cat_create_by"/>
+		<id property="createDate" 				column="sub_cate_create_date"/>
+		<id property="modifyBy" 				column="sub_cat_modify_by"/>
+		<id property="modifyDate" 				column="sub_cat_modify_date"/>
+		<id property="status" 					column="sub_cat_status"/>
+	</resultMap>
+
+	<select id="getList" resultMap="subCategoryDetailDto">
+	   <![CDATA[
+			select
+				 tsc.sub_id
+				, tmc.mn_cat_id
+				, tsc.sub_cat_nm
+				, tmc.mn_cat_nm
+				, tsc.sub_cat_desc
+				, tsc.sub_cat_status
+				, tsc.sub_cat_create_by
+				, tsc.sub_cate_create_date
+				, tsc.sub_cat_modify_date
+				, tsc.sub_cat_modify_by
+			from tb_sb_category tsc
+			inner join tb_mn_category tmc on tmc.mn_cat_id = tsc.mn_cate_id
+			where tsc.sub_cat_status != '6'
+			order by tsc.sub_id DESC
+	   ]]>
+	</select>
+
+</mapper>

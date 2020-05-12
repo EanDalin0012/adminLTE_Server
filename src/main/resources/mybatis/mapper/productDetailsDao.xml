@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.adminlte.dao.ProductDetailsDao">
+	
+	<resultMap type="ProductDetailsDto"   	id="productDetailsDto">
+		<id property="productId"	    	column="pro_id"/>
+		<id property="productName" 			column="pro_nm"/>
+		<id property="subCategoryId" 		column="sub_cat_id"/>
+		<id property="subCategoryName" 		column="sub_cat_nm"/>
+		<id property="description" 			column="pro_desc"/>
+
+		<id property="createBy" 			column="pro_create_by"/>
+		<id property="createDate" 			column="pro_create_date"/>
+		<id property="modifyBy" 			column="pro_modify_by"/>
+		<id property="modifyDate" 			column="pro_modify_date"/>
+		<id property="status" 				column="pro_status"/>
+	</resultMap>
+
+	<select id="getList" resultMap="productDetailsDto">
+	   <![CDATA[
+			select
+				tp.pro_id
+				,tp.pro_nm
+				,tp.sub_cat_id
+				,tsc.sub_cat_nm
+				,tp.pro_create_by
+				,tp.pro_create_date
+				,tp.pro_create_date
+				, tp.pro_modify_date
+				, tp.pro_desc
+				, tp.pro_status
+			from tb_product tp
+			inner join tb_sb_category tsc on tsc.sub_id = tp.sub_cat_id
+			where tp.pro_status != #{status}
+	   ]]>
+	</select>
+
+
+</mapper>

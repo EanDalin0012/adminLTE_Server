@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.adminlte.dao.SupplierDao">
+	
+	<resultMap type="SupplierDto"   			id="supplierDto">
+		<id property="id"	    				column="sup_id"/>
+		<id property="supName" 					column="sup_nm"/>
+		<id property="supContact" 				column="sup_contact"/>
+		<id property="supContactTwo" 			column="sup_contact_t"/>
+		<id property="supEmail" 				column="sup_email"/>
+		<id property="description" 				column="sup_desc"/>
+		<id property="status" 					column="sup_status"/>
+		<id property="createBy" 				column="sup_create_by"/>
+		<id property="modifyBy" 				column="sup_modify_by"/>
+		<id property="createDate" 				column="sup_create_date"/>
+		<id property="modifyDate" 				column="sup_modify_date"/>
+
+	</resultMap>
+
+	<select id="getList" resultMap="supplierDto">
+	   <![CDATA[
+		select
+			  ts.sup_id
+			, ts.sup_nm
+			, ts.sup_contact
+			, ts.sup_contact_t
+			, ts.sup_email
+			, ts.sup_desc
+			, ts.sup_status
+			, ts.sup_create_by
+			, ts.sup_create_date
+			, ts.sup_modify_by
+			, ts.sup_modify_date
+			from tb_supplier ts
+			where ts.sup_status != #{status}
+	   ]]>
+	</select>
+
+	<insert id="save" parameterType="supplierDto">
+    	<![CDATA[
+	    	INSERT INTO tb_supplier
+			(
+				 sup_nm
+				, sup_contact
+				, sup_contact_t
+				, sup_email
+				, sup_desc
+				, sup_status
+				, sup_create_by
+				, sup_create_date
+				, sup_modify_by
+				, sup_modify_date
+			)
+			VALUES (
+				  #{supName}
+				, #{supContact}
+				, #{supContactTwo}
+				, #{supEmail}
+				, COALESCE( #{description}, '' )
+				, #{status}
+				, #{createBy}
+				, to_char(NOW(), 'YYYYMMDD')
+				, #{modifyBy}
+				, to_char(NOW(), 'YYYYMMDD')
+			);
+    	]]>
+    </insert>
+
+	<select id="getValueById" resultMap="supplierDto">
+	   <![CDATA[
+		  select
+	          ts.sup_id
+			, ts.sup_nm
+			, ts.sup_contact
+			, ts.sup_contact_t
+			, ts.sup_email
+			, ts.sup_desc
+			, ts.sup_status
+			, ts.sup_create_by
+			, ts.sup_create_date
+			, ts.sup_modify_by
+			, ts.sup_modify_date
+			from tb_supplier ts
+			where ts.sup_id = #{id}
+	     ]]>
+	</select>
+
+	<select id="count" resultMap="supplierDto">
+	   <![CDATA[
+		  select
+	     	count (*)
+	      from tb_supplier
+	   ]]>
+	</select>
+
+	<update id="update" parameterType="supplierDto">
+		<![CDATA[
+		UPDATE tb_supplier
+		SET
+			  sup_nm			= #{supName}
+			, sup_contact		= #{supContact}
+			, sup_contact_t		= #{supContactTwo}
+			, sup_email			= #{supEmail}
+			, sup_desc			= COALESCE(#{description}, '' )
+			, sup_status		= #{status}
+			, sup_modify_by 	= #{modifyBy}
+			, sup_modify_date	= to_char(NOW(), 'YYYYMMDD')
+		WHERE sup_id 			= #{id}
+
+		]]>
+	</update>
+
+	<update id="delete" parameterType="supplierDto">
+		<![CDATA[
+		UPDATE tb_supplier
+	     SET
+	     	   sup_status		= #{status}
+	     	, sup_modify_date	= to_char(NOW(), 'YYYYMMDD')
+	     WHERE   sup_id		= #{id}
+		]]>
+	</update>
+
+</mapper>

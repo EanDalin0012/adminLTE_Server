@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.adminlte.dao.SubCategoryDao">
+	
+	<resultMap type="SubCategoryDto"   		id="subCategoryDto">
+		<id property="id"	    			column="sub_id"/>
+		<id property="mainCatId" 			column="mn_cate_id"/>
+		<id property="categoryName" 		column="sub_cat_nm"/>
+		<id property="status" 				column="sub_cat_status"/>
+		<id property="createBy" 			column="sub_cat_create_by"/>
+		<id property="createDate" 			column="sub_cate_create_date"/>
+		<id property="modifyBy" 			column="sub_cat_modify_by"/>
+		<id property="modifyDate" 			column="sub_cat_modify_date"/>
+		<id property="description" 			column="sub_cat_desc"/>
+	</resultMap>
+
+	<select id="getList" resultMap="subCategoryDto">
+	   <![CDATA[
+			select
+		 	  tsc.sub_id
+			, tsc.mn_cate_id
+			, tsc.sub_cat_nm
+			, tsc.sub_cat_desc
+			, tsc.sub_cat_status
+			, tsc.sub_cat_create_by
+			, tsc.sub_cate_create_date
+			, tsc.sub_cat_modify_by
+			, tsc.sub_cat_modify_date
+		 from tb_sb_category tsc
+		 where tsc.sub_cat_status 	!= #{status};
+	   ]]>
+	</select>
+
+	<insert id="save" parameterType="subCategoryDto">
+    	<![CDATA[
+	    	INSERT INTO tb_sb_category
+			(
+				  mn_cate_id
+				, sub_cat_nm
+				, sub_cat_status
+				, sub_cat_create_by
+				, sub_cate_create_date
+				, sub_cat_modify_by
+				, sub_cat_modify_date
+				, sub_cat_desc
+			)
+			VALUES (
+				  #{mainCatId}
+				, #{categoryName}
+				, #{status}
+				, #{createBy}
+				, to_char(NOW(), 'YYYYMMDD')
+				, #{modifyBy}
+				, to_char(NOW(), 'YYYYMMDD')
+				, COALESCE(#{description}, '' )
+			);
+    	]]>
+    </insert>
+
+	<select id="getValueById" resultMap="subCategoryDto">
+	   <![CDATA[
+		  select
+			  tsc.sub_id
+	        , mn_cate_id
+			, sub_cat_nm
+			, sub_cat_status
+			, sub_cat_create_by
+			, sub_cate_create_date
+			, sub_cat_modify_by
+			, sub_cat_modify_date
+			, sub_cat_desc
+	      from tb_sb_category tsc 			where tsc.sub_id = #{id}
+	     ]]>
+	</select>
+
+	<select id="count" resultMap="subCategoryDto">
+	   <![CDATA[
+		  select
+	     	count (*)
+	      from tb_sb_category
+	   ]]>
+	</select>
+
+	<update id="update" parameterType="subCategoryDto">
+		<![CDATA[
+			UPDATE tb_sb_category
+			SET
+				 mn_cate_id				= #{mainCatId}
+				, sub_cat_nm			= #{categoryName}
+				, sub_cat_status		= #{status}
+				, sub_cat_modify_by		= #{modifyBy}
+				, sub_cat_modify_date	= to_char(NOW(), 'YYYYMMDD')
+				, sub_cat_desc			= COALESCE( #{description}, '' )
+			WHERE sub_id 		    	= #{id}
+		]]>
+	</update>
+
+	<update id="delete" parameterType="subCategoryDto">
+		<![CDATA[
+			UPDATE tb_sb_category
+			 SET
+				  sub_cat_status		= #{status}
+				, sub_cat_modify_date	= to_char(NOW(), 'YYYYMMDD')
+				, sub_cat_modify_by		= #{modifyBy}
+			 WHERE   sub_id				= #{id}
+		]]>
+	</update>
+
+</mapper>

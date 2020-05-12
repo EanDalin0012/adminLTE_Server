@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.adminlte.dao.CompanyDao">
+	
+	<resultMap type="CompanyDto"   		id="companyDto">
+		<id property="id"	    		column="comp_id"/>
+		<id property="name" 			column="comp_nm"/>
+		<id property="contact" 			column="comp_contact"/>
+		<id property="email" 			column="comp_email"/>
+		<id property="address" 			column="comp_address"/>
+		<id property="description" 		column="comp_desc"/>
+		<id property="createBy" 		column="comp_create_by"/>
+		<id property="modifyBy" 		column="comp_create_date"/>
+		<id property="createDate" 		column="comp_modify_by"/>
+		<id property="modifyDate" 		column="comp_modify_date"/>
+		<id property="status" 			column="comp_status"/>
+	</resultMap>
+
+	<select id="getList" resultMap="companyDto">
+	   <![CDATA[
+		 SELECT
+		 		  comp_id
+		 		, comp_nm
+				, comp_contact
+				, comp_email
+				, comp_address
+				, comp_desc
+				, comp_status
+				, comp_create_by
+				, comp_modify_by
+				, comp_create_date
+				, comp_modify_date
+		 FROM tb_company
+		 WHERE comp_status != #{status}
+	     ]]>
+	</select>
+
+	<insert id="save" parameterType="companyDto">
+    	<![CDATA[
+	    	INSERT INTO tb_company
+			(
+				comp_nm
+				, comp_contact
+				, comp_email
+				, comp_address
+				, comp_desc
+				, comp_status
+				, comp_create_by
+				, comp_modify_by
+				, comp_create_date
+				, comp_modify_date
+			)
+			VALUES (
+			#{name}
+			, #{contact}
+			, #{email}
+			, #{address}
+			, COALESCE('', #{description} )
+			, #{status}
+			, #{createBy}
+			, #{modifyBy}
+			, to_char(NOW(), 'YYYYMMDD')
+			, to_char(NOW(), 'YYYYMMDD')
+			)
+
+    	]]>
+    </insert>
+
+	<select id="getValueById" resultMap="companyDto">
+	   <![CDATA[
+		  SELECT
+	        id 				AS  "id"
+		 	, name			AS "name"
+		 	, contact		AS "contact"
+		 	, email			AS "email"
+		 	, address		AS "address"
+		 	, description	AS "description"
+		 	, create_by		AS "create_by"
+			, modify_by		AS "modify_by"
+			, create_date	AS "create_date"
+			, modify_date	AS "modify_date"
+	     FROM tb_company WHERE id = #{id}
+	     ]]>
+	</select>
+
+	<select id="count" resultMap="companyDto">
+	   <![CDATA[
+		  SELECT
+	     	COUNT (*)
+	     FROM company
+	     ]]>
+	</select>
+
+	<update id="update" parameterType="companyDto">
+		<![CDATA[
+		UPDATE tb_company
+		SET
+			  comp_nm 			= #{name}
+			, comp_contact		= #{contact}
+			, comp_email		= #{email}
+			, comp_address		= #{address}
+			, comp_desc 		= COALESCE(#{description},'')
+			, comp_status		= #{status}
+			, comp_modify_by	= #{modifyBy}
+			, comp_modify_date	= to_char(NOW(), 'YYYYMMDD')
+		WHERE comp_id 			= #{id}
+
+		]]>
+	</update>
+
+	<update id="delete" parameterType="companyDto">
+		<![CDATA[
+		update tb_company
+        set
+            comp_status = #{status}
+        where comp_id   = #{id}
+		]]>
+	</update>
+
+</mapper>

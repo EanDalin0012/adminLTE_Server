@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.adminlte.dao.MainCategoryDao">
+	
+	<resultMap type="MainCategoryDto"   		id="mainCategoryDto">
+		<id property="id"	    				column="mn_cat_id"/>
+		<id property="mainCategoryName" 		column="mn_cat_nm"/>
+		<id property="status" 					column="mn_cate_status"/>
+		<id property="createBy" 				column="mn_cat_create_by"/>
+		<id property="modifyBy" 				column="mn_cat_modify_by"/>
+		<id property="createDate" 				column="mn_cat_create_date"/>
+		<id property="modifyDate" 				column="mn_cat_modify_date"/>
+		<id property="description" 				column="mn_cat_desc"/>
+	</resultMap>
+
+	<select id="getList" resultMap="mainCategoryDto">
+	   <![CDATA[
+		 select
+			tmc.mn_cat_id
+			, tmc.mn_cat_nm
+			, tmc .mn_cat_desc
+			, tmc .mn_cate_status
+			, tmc .mn_cat_create_by
+			, tmc .mn_cat_create_date
+			, tmc .mn_cat_modify_date
+			, tmc .mn_cat_modify_by
+		 from tb_mn_category tmc
+		 where tmc.mn_cate_status 		!= '6';
+	   ]]>
+	</select>
+
+	<insert id="save" parameterType="mainCategoryDto">
+    	<![CDATA[
+	    	INSERT INTO tb_mn_category
+			(
+				 mn_cat_nm
+				, mn_cat_desc
+				, mn_cate_status
+				, mn_cat_create_by
+				, mn_cat_create_date
+				, mn_cat_modify_by
+				, mn_cat_modify_date
+			)
+			VALUES (
+				#{mainCategoryName}
+				, COALESCE(#{description}, '' )
+				, #{status}
+				, #{createBy}
+				, to_char(NOW(), 'YYYYMMDD')
+				, #{modifyBy}
+				, to_char(NOW(), 'YYYYMMDD')
+			);
+    	]]>
+    </insert>
+
+	<select id="getValueById" resultMap="mainCategoryDto">
+	   <![CDATA[
+		  select
+	        tmc.mn_cat_id
+	        , tmc.mn_cat_nm
+		 	, tmc.mn_cat_desc
+		 	, tmc.mn_cate_status
+		 	, tmc.mn_cat_create_by
+		 	, tmc.mn_cat_create_date
+		 	, tmc.mn_cat_modify_by
+		 	, tmc.mn_cat_modify_date
+	      from tb_mn_category tmc 			where tmc.mn_cat_id = #{id}
+	     ]]>
+	</select>
+
+	<select id="count" resultMap="mainCategoryDto">
+	   <![CDATA[
+		  select
+	     	count (*)
+	      from tb_mn_category
+	   ]]>
+	</select>
+
+	<update id="update" parameterType="mainCategoryDto">
+		<![CDATA[
+		UPDATE tb_mn_category
+		SET
+			 mn_cat_nm				= #{mainCategoryName}
+			, mn_cat_desc			= COALESCE(#{description}, '' )
+			, mn_cat_modify_by 		= #{modifyBy}
+			, mn_cate_status		= #{status}
+			, mn_cat_modify_date	= to_char(NOW(), 'YYYYMMDD')
+		WHERE mn_cat_id 		    = #{id}
+
+		]]>
+	</update>
+
+	<update id="delete" parameterType="mainCategoryDto">
+		<![CDATA[
+		UPDATE tb_mn_category
+	     SET
+	     	mn_cate_status			= #{status}
+	     	, mn_cat_modify_date		= to_char(NOW(), 'YYYYMMDD')
+	     WHERE   mn_cat_id			= #{id}
+		]]>
+	</update>
+
+</mapper>
