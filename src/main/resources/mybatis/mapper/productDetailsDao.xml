@@ -8,6 +8,7 @@
 		<id property="subCategoryId" 		column="sub_cat_id"/>
 		<id property="subCategoryName" 		column="sub_cat_nm"/>
 		<id property="description" 			column="pro_desc"/>
+		<id property="resourceFileInfoId" 	column="resource_file_info_id"/>
 
 		<id property="createBy" 			column="pro_create_by"/>
 		<id property="createDate" 			column="pro_create_date"/>
@@ -29,6 +30,7 @@
 				, tp.pro_modify_date
 				, tp.pro_desc
 				, tp.pro_status
+				, tp.resource_file_info_id
 			from tb_product tp
 			inner join tb_sb_category tsc on tsc.sub_id = tp.sub_cat_id
 			where tp.pro_status != #{status}

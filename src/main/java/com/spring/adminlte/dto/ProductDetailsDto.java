@@ -8,25 +8,34 @@ public class ProductDetailsDto extends CommonDto {
     private int subCategoryId;
     private String subCategoryName;
     private  String description;
+    private String  resourceFileInfoId;
 
-    public ProductDetailsDto(int createBy, int modifyBy, String createDate, String modifyDate, String status, int productId, String productName, int subCategoryId, String subCategoryName, String description) {
+    public ProductDetailsDto(int createBy, int modifyBy, String createDate, String modifyDate, String status, int productId, String productName, int subCategoryId, String subCategoryName, String description, String resourceFileInfoId) {
         super(createBy, modifyBy, createDate, modifyDate, status);
         this.productId = productId;
         this.productName = productName;
         this.subCategoryId = subCategoryId;
         this.subCategoryName = subCategoryName;
         this.description = description;
+        this.resourceFileInfoId = resourceFileInfoId;
     }
 
-    public ProductDetailsDto(int productId, String productName, int subCategoryId, String subCategoryName, String description) {
+    public ProductDetailsDto(int productId, String productName, int subCategoryId, String subCategoryName, String description, String resourceFileInfoId) {
         this.productId = productId;
         this.productName = productName;
         this.subCategoryId = subCategoryId;
         this.subCategoryName = subCategoryName;
         this.description = description;
+        this.resourceFileInfoId = resourceFileInfoId;
     }
 
-    public ProductDetailsDto() {}
+    public ProductDetailsDto(int createBy, int modifyBy, String createDate, String modifyDate, String status) {
+        super(createBy, modifyBy, createDate, modifyDate, status);
+    }
+
+    public ProductDetailsDto() {
+
+    }
 
     public int getProductId() {
         return productId;
@@ -68,6 +77,14 @@ public class ProductDetailsDto extends CommonDto {
         this.description = description;
     }
 
+    public String getResourceFileInfoId() {
+        return resourceFileInfoId;
+    }
+
+    public void setResourceFileInfoId(String resourceFileInfoId) {
+        this.resourceFileInfoId = resourceFileInfoId;
+    }
+
     @Override
     public String toString() {
         return "ProductDetailsDto{" +
@@ -76,6 +93,7 @@ public class ProductDetailsDto extends CommonDto {
                 ", subCategoryId=" + subCategoryId +
                 ", subCategoryName='" + subCategoryName + '\'' +
                 ", description='" + description + '\'' +
+                ", resourceFileInfoId='" + resourceFileInfoId + '\'' +
                 ", createDate='" + createDate + '\'' +
                 ", modifyDate='" + modifyDate + '\'' +
                 ", status='" + status + '\'' +
