@@ -3,10 +3,11 @@
 <mapper namespace="com.spring.adminlte.dao.ProductDao">
 	
 	<resultMap type="ProductDto"   			id="productDto">
-		<id property="productId"	    	column="pro_id"/>
+		<id property="proId"	    		column="pro_id"/>
 		<id property="subCateId" 			column="sub_cat_id"/>
-		<id property="productName" 			column="pro_nm"/>
+		<id property="proName" 				column="pro_nm"/>
 		<id property="description" 			column="pro_desc"/>
+		<id property="resourceFileInfoId" 	column="resource_file_info_id"/>
 
 		<id property="createBy" 			column="pro_create_by"/>
 		<id property="createDate" 			column="pro_create_date"/>
@@ -32,8 +33,9 @@
 				, tp.pro_modify_by
 				, tp.pro_modify_date
 				, tp.pro_status
+				,tp.resource_file_info_id
 			from tb_product tp
-			where tp.pro_status != '6'
+			where tp.pro_status != #{status}
 	   ]]>
 	</select>
 
@@ -49,16 +51,18 @@
 				, pro_modify_by
 				, pro_modify_date
 				, pro_status
+				, resource_file_info_id
 			)
 			VALUES (
 				  #{subCateId}
-				, #{productName}
+				, #{proName}
 				, COALESCE('', #{description} )
 				, #{createBy}
 				, to_char(NOW(), 'YYYYMMDD')
 				, #{modifyBy}
 				, to_char(NOW(), 'YYYYMMDD')
 				, #{status}
+				, #{resourceFileInfoId}
 
 			);
     	]]>

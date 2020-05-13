@@ -1,50 +1,59 @@
 package com.spring.adminlte.dto;
 
 public class ProductDto extends CommonDto {
-    private int productId;
-    private String productName;
-    private int subCategoryId;
+    private int proId;
+    private String proName;
+    private int subCateId;
     private  String description;
+    private  String resourceFileInfoId;
 
-    public ProductDto(int createBy, int modifyBy, String createDate, String modifyDate, String status, int productId, String productName, int subCategoryId, String description) {
+    public ProductDto(int createBy, int modifyBy, String createDate, String modifyDate, String status, int proId, String proName, int subCateId, String description, String resourceFileInfoId) {
         super(createBy, modifyBy, createDate, modifyDate, status);
-        this.productId = productId;
-        this.productName = productName;
-        this.subCategoryId = subCategoryId;
+        this.proId = proId;
+        this.proName = proName;
+        this.subCateId = subCateId;
         this.description = description;
+        this.resourceFileInfoId = resourceFileInfoId;
     }
 
-    public ProductDto(int productId, String productName, int subCategoryId, String description) {
-        this.productId = productId;
-        this.productName = productName;
-        this.subCategoryId = subCategoryId;
+    public ProductDto(int proId, String proName, int subCateId, String description, String resourceFileInfoId) {
+        this.proId = proId;
+        this.proName = proName;
+        this.subCateId = subCateId;
         this.description = description;
+        this.resourceFileInfoId = resourceFileInfoId;
     }
 
-    public ProductDto() {}
-
-    public int getProductId() {
-        return productId;
+    public ProductDto(int createBy, int modifyBy, String createDate, String modifyDate, String status) {
+        super(createBy, modifyBy, createDate, modifyDate, status);
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public ProductDto() {
+
     }
 
-    public String getProductName() {
-        return productName;
+    public int getProId() {
+        return proId;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setProId(int proId) {
+        this.proId = proId;
     }
 
-    public int getSubCategoryId() {
-        return subCategoryId;
+    public String getProName() {
+        return proName;
     }
 
-    public void setSubCategoryId(int subCategoryId) {
-        this.subCategoryId = subCategoryId;
+    public void setProName(String proName) {
+        this.proName = proName;
+    }
+
+    public int getSubCateId() {
+        return subCateId;
+    }
+
+    public void setSubCateId(int subCateId) {
+        this.subCateId = subCateId;
     }
 
     public String getDescription() {
@@ -55,13 +64,22 @@ public class ProductDto extends CommonDto {
         this.description = description;
     }
 
+    public String getResourceFileInfoId() {
+        return resourceFileInfoId;
+    }
+
+    public void setResourceFileInfoId(String resourceFileInfoId) {
+        this.resourceFileInfoId = resourceFileInfoId;
+    }
+
     @Override
     public String toString() {
         return "ProductDto{" +
-                "productId=" + productId +
-                ", productName='" + productName + '\'' +
-                ", subCategoryId=" + subCategoryId +
+                "proId=" + proId +
+                ", proName='" + proName + '\'' +
+                ", subCateId=" + subCateId +
                 ", description='" + description + '\'' +
+                ", resourceFileInfoId='" + resourceFileInfoId + '\'' +
                 ", createDate='" + createDate + '\'' +
                 ", modifyDate='" + modifyDate + '\'' +
                 ", status='" + status + '\'' +

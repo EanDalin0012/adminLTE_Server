@@ -99,14 +99,16 @@ public class ProductRes {
         ProductDto product      = param.getBody();
         HeaderDto header        = param.getHeader();
         try {
-            Long save = productService.update(product);
+            Long save = productService.save(product);
             if (save > 0) {
                 response.setBody(new ReturnYNDto(true, msg));
+                header.setResult(true);
                 response.setHeader(header);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
         }catch (Exception e) {
             log.error("\n get error api save product\n", e.getMessage());
+            msg = "Exception Error";
             throw e;
         }
 
@@ -168,7 +170,7 @@ public class ProductRes {
         try{
             if (listIDDto.getList().size() > 0) {
                 for ( IdDto idDto: listIDDto.getList()) {
-                    product.setProductId(idDto.getId());
+                    product.setProId(idDto.getId());
                     product.setStatus(Status.Delete.getValueStr());
                     productService.delete(product);
                 }
@@ -194,13 +196,16 @@ public class ProductRes {
     }
 
     private Boolean isValid(String langaugeCode, ProductDto product) {
-        if (product.getProductName() == null | product.getProductName().equals("")) {
+        if (product.getProName() == null | product.getProName().equals("")) {
             msg = Translator.toLocale(langaugeCode, "Product_Name_Null");
             return false;
         }
-        if (product.getSubCategoryId() == 0) {
+        if (product.getSubCateId() == 0) {
             msg = Translator.toLocale(langaugeCode, "Product_SubCate");
             return false;
+        }
+        if (product.getResourceFileInfoId().equals("") || product.getResourceFileInfoId().isEmpty() || product.getResourceFileInfoId() == null) {
+            msg = Translator.toLocale(langaugeCode, "Product_IMAGE_NULL");
         }
         return true;
     }
