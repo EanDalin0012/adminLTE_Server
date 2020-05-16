@@ -1,6 +1,9 @@
 package com.spring.adminlte.resController.admin;
 
 import com.spring.adminlte.constants.BizResultCodeType;
+import com.spring.adminlte.constants.ChannelTypeCode;
+import com.spring.adminlte.constants.LangaugeCode;
+import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.dao.ProductImageDao;
 import com.spring.adminlte.dto.*;
 import com.spring.adminlte.services.serviceImplements.FileSystemStorageService;
@@ -102,6 +105,7 @@ public class FileRestController {
                 IOUtils.closeQuietly(is);
                 profile.setId( resID );
                 int add = resourceFileInfoService.addCompanyProfile( profile );
+
                 if (add > 0) {
                     imageUrl.setId(profile.getId());
                     imageUrl.setImageURL(fileImageURL +"/images/resources/"+resID);
@@ -188,6 +192,35 @@ public class FileRestController {
         } catch (IOException e) {
             throw e;
         }
+    }
+
+    @PostMapping("/removeUrl")
+    public ResponseData<ReturnYNDto> handleFileRemove( @RequestParam("resourceFileInfoId") String resourceFileInfoId) throws IOException {
+        ResponseData<ReturnYNDto> response = new ResponseData<>();
+        HeaderDto header = new HeaderDto();
+        header.setMsg("");
+        header.setChannelTypeCode(ChannelTypeCode.ADMIN.getKey());
+        header.setAuthData("");
+        header.setLanguageCode(LangaugeCode.EN.getKey());
+        response.setBody(new ReturnYNDto(false, SYN.N.getKey()));
+        try {
+            if (resourceFileInfoId.isEmpty() || resourceFileInfoId.equals("")) {
+                int delete = resourceFileInfoService.deleteById(resourceFileInfoId);
+                if (delete > 0) {
+                    header.setResult(true);
+                    response.setHeader(header);
+                    response.setBody(new ReturnYNDto(true, SYN.Y.getKey()));
+                    return response;
+                }
+            }
+
+        }catch (Exception e) {
+            log.error("\n get error: handle file remove\n", e.getMessage());
+            throw  e;
+        }
+
+        response.setHeader(header);
+        return response;
     }
 
     }

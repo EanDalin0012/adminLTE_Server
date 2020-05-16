@@ -63,4 +63,9 @@
     <select id="getResourceById" parameterType="String" resultMap="mapper">
 		SELECT * FROM tb_resource_file_info WHERE res_file_id = #{id} LIMIT 1
 	</select>
+
+	<delete id = "deleteById" parameterType = "String">
+		DELETE from tb_resource_file_info WHERE res_file_id = #{resourceFileInfoId};
+	</delete>
+
 </mapper>

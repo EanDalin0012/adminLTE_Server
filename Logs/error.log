@@ -1,19 +1,20 @@
-2020-05-14 00:01:35 [http-nio-8080-exec-2] [ERROR] c.s.a.resController.admin.CompanyRes - 
- ===> get error get product details list
+2020-05-16 15:08:01 [http-nio-8080-exec-3] [ERROR] c.s.a.resController.admin.CompanyRes - 
+ get error api save product
 
-2020-05-14 00:01:35 [http-nio-8080-exec-2] [ERROR] o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.jdbc.BadSqlGrammarException: 
-### Error querying database.  Cause: org.postgresql.util.PSQLException: ERROR: column "resource_file_info_id" does not exist
-  Position: 215
-### The error may exist in file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\productDetailsDao.xml]
-### The error may involve defaultParameterMap
+2020-05-16 15:08:01 [http-nio-8080-exec-3] [ERROR] o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "tb_product_pk"
+  Detail: Key (pro_nm, sub_cat_id)=(Product 2, 8) already exists.
+### The error may exist in file [D:\Projects\adminlte\out\production\resources\mybatis\mapper\productDao.xml]
+### The error may involve com.spring.adminlte.dao.ProductDao.save-Inline
 ### The error occurred while setting parameters
-### SQL: select     tp.pro_id     ,tp.pro_nm     ,tp.sub_cat_id     ,tsc.sub_cat_nm     ,tp.pro_create_by     ,tp.pro_create_date     ,tp.pro_create_date     , tp.pro_modify_date     , tp.pro_desc     , tp.pro_status     , resource_file_info_id    from tb_product tp    inner join tb_sb_category tsc on tsc.sub_id = tp.sub_cat_id    where tp.pro_status != ?
-### Cause: org.postgresql.util.PSQLException: ERROR: column "resource_file_info_id" does not exist
-  Position: 215
-; bad SQL grammar []; nested exception is org.postgresql.util.PSQLException: ERROR: column "resource_file_info_id" does not exist
-  Position: 215] with root cause
-org.postgresql.util.PSQLException: ERROR: column "resource_file_info_id" does not exist
-  Position: 215
+### SQL: INSERT INTO tb_product    (       sub_cat_id     , pro_nm     , pro_desc     , pro_create_by     , pro_create_date     , pro_modify_by     , pro_modify_date     , pro_status     , resource_file_info_id    )    VALUES (       ?     , ?     , COALESCE('', ? )     , ?     , to_char(NOW(), 'YYYYMMDD')     , ?     , to_char(NOW(), 'YYYYMMDD')     , ?     , ?     );
+### Cause: org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "tb_product_pk"
+  Detail: Key (pro_nm, sub_cat_id)=(Product 2, 8) already exists.
+; ERROR: duplicate key value violates unique constraint "tb_product_pk"
+  Detail: Key (pro_nm, sub_cat_id)=(Product 2, 8) already exists.; nested exception is org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "tb_product_pk"
+  Detail: Key (pro_nm, sub_cat_id)=(Product 2, 8) already exists.] with root cause
+org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "tb_product_pk"
+  Detail: Key (pro_nm, sub_cat_id)=(Product 2, 8) already exists.
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
@@ -23,33 +24,39 @@ org.postgresql.util.PSQLException: ERROR: column "resource_file_info_id" does no
 	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
 	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
 	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at jdk.internal.reflect.GeneratedMethodAccessor69.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59)
 	at com.sun.proxy.$Proxy96.execute(Unknown Source)
-	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:64)
-	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79)
-	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63)
-	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324)
-	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
-	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
-	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83)
-	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
-	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:140)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+	at jdk.internal.reflect.GeneratedMethodAccessor150.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)
-	at com.sun.proxy.$Proxy70.selectList(Unknown Source)
-	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:223)
-	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:147)
-	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:80)
+	at com.sun.proxy.$Proxy70.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:271)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
 	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:93)
-	at com.sun.proxy.$Proxy80.getList(Unknown Source)
-	at com.spring.adminlte.resController.admin.ProductRes.getProductDetailsList(ProductRes.java:58)
+	at com.sun.proxy.$Proxy79.save(Unknown Source)
+	at com.spring.adminlte.services.serviceImplements.ProductServiceImplement.save(ProductServiceImplement.java:21)
+	at com.spring.adminlte.services.serviceImplements.ProductServiceImplement$$FastClassBySpringCGLIB$$c20c4390.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:769)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:747)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:747)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
+	at com.spring.adminlte.services.serviceImplements.ProductServiceImplement$$EnhancerBySpringCGLIB$$84227ff5.save(<generated>)
+	at com.spring.adminlte.resController.admin.ProductRes.save(ProductRes.java:102)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

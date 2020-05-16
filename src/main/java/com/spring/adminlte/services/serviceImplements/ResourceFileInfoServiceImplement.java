@@ -30,4 +30,9 @@ public class ResourceFileInfoServiceImplement implements ResourceFileInfoService
     public ResourceFileInfoDto getResourceById(String resID) {
         return resourceFileInfoDao.getResourceById(resID);
     }
+
+    @Override
+    public int deleteById(String resourceFileInfoId) {
+        return resourceFileInfoDao.deleteById(resourceFileInfoId);
+    }
 }

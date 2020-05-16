@@ -9,4 +9,5 @@ public interface ResourceFileInfoService {
     public int addCompanyProfile(ResourceFileInfoDto user);
     public int updateCompanyProfile(ResourceFileInfoDto user);
     public ResourceFileInfoDto getResourceById(String resID);
+    public int deleteById(String resourceFileInfoId);
 }
