@@ -13,8 +13,8 @@ import com.spring.adminlte.dto.HeaderDto;
 import com.spring.adminlte.dto.ImportProductDetailsDto;
 import com.spring.adminlte.dto.ImportProductDto;
 import com.spring.adminlte.dto.ReturnYNDto;
-import com.spring.adminlte.dto.vo.ImportProductDetailsListDto;
-import com.spring.adminlte.dto.vo.ImportProductListDto;
+import com.spring.adminlte.dto.vo.ImportProductDetailsVo;
+import com.spring.adminlte.dto.vo.ImportProductVo;
 import com.spring.adminlte.services.serviceImplements.ImportProductServiceImplement;
 import com.spring.adminlte.templatesDto.RequestData;
 import com.spring.adminlte.templatesDto.ResponseData;
@@ -35,8 +35,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/import-product")
-public class ImportProductRes {
-    private static final Logger log = LoggerFactory.getLogger(ImportProductRes.class);
+public class ImportProductRestController {
+    private static final Logger log = LoggerFactory.getLogger(ImportProductRestController.class);
 
     @Autowired
     private ImportProductServiceImplement importProductService;
@@ -53,10 +53,10 @@ public class ImportProductRes {
     * @decription inquiry data details of import product
     * */
     @PostMapping(value = "/getListDetails")
-    public ResponseEntity<ResponseData<ImportProductDetailsListDto>> inquiryImportProductDetails(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<ImportProductDetailsListDto> response = new ResponseData<>();
+    public ResponseEntity<ResponseData<ImportProductDetailsVo>> inquiryImportProductDetails(@RequestBody RequestData<HeaderDto> param) {
+        ResponseData<ImportProductDetailsVo> response = new ResponseData<>();
         HeaderDto header = param.getHeader();
-        ImportProductDetailsListDto responseList = new ImportProductDetailsListDto();
+        ImportProductDetailsVo responseList = new ImportProductDetailsVo();
         try{
             List<ImportProductDetailsDto> list = importProductDetailsDao.getList(Status.Delete.getValueStr());
             responseList.setList(list);
@@ -74,10 +74,10 @@ public class ImportProductRes {
     * @description get list of import product
     * */
     @PostMapping(value = "/getList")
-    public ResponseEntity<ResponseData<ImportProductListDto>> getList(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<ImportProductListDto> response = new ResponseData<>();
+    public ResponseEntity<ResponseData<ImportProductVo>> getList(@RequestBody RequestData<HeaderDto> param) {
+        ResponseData<ImportProductVo> response = new ResponseData<>();
         HeaderDto header = param.getHeader();
-        ImportProductListDto responseList = new ImportProductListDto();
+        ImportProductVo responseList = new ImportProductVo();
         try{
             List<ImportProductDto> list = importProductService.getList(Status.Delete.getValueStr());
             responseList.setList(list);
@@ -95,10 +95,10 @@ public class ImportProductRes {
     * @description  save import product information
     * */
     @PostMapping(value = "/save")
-    public ResponseEntity<ResponseData<ReturnYNDto>> save (@RequestBody RequestData<ImportProductListDto> requestData) {
+    public ResponseEntity<ResponseData<ReturnYNDto>> save (@RequestBody RequestData<ImportProductVo> requestData) {
         ResponseData<ReturnYNDto> response = new ResponseData<>();
         HeaderDto header = requestData.getHeader();
-        ImportProductListDto list = requestData.getBody();
+        ImportProductVo list = requestData.getBody();
         TransactionStatus transactionStatus = transactionManager.getTransaction(new DefaultTransactionDefinition());
         Long save = null;
 

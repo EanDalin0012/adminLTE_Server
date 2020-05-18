@@ -4,14 +4,14 @@ import com.spring.adminlte.dto.SubCategoryDto;
 
 import java.util.List;
 
-public class SubCategoryListDto {
+public class SubCategoryVo {
     private List<SubCategoryDto> list;
 
-    public SubCategoryListDto(List<SubCategoryDto> list) {
+    public SubCategoryVo(List<SubCategoryDto> list) {
         this.list = list;
     }
 
-    public SubCategoryListDto() {
+    public SubCategoryVo() {
     }
 
     public List<SubCategoryDto> getList() {

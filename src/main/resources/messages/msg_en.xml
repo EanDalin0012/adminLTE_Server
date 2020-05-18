@@ -29,4 +29,8 @@
     <entry key="Contact_Required"> Contact is require. Error: Code(1000)</entry>
     <entry key="Email_Required"> Email is require. Error: Code(1000)</entry>
 
+    <!--Role-->
+    <entry key="Role_Name_Require"> Role Name is require. Error: Code(1000)</entry>
+    <entry key="Role_ID_Undefined"> Role ID of undefined. Error: Code(1000)</entry>
+
 </properties>

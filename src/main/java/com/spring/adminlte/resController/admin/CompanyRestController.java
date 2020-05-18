@@ -10,7 +10,7 @@ import com.spring.adminlte.component.Translator;
 import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
 import com.spring.adminlte.dto.*;
-import com.spring.adminlte.dto.vo.ListIDDto;
+import com.spring.adminlte.dto.vo.IDVo;
 import com.spring.adminlte.templatesDto.*;
 import com.spring.adminlte.services.serviceImplements.CompanyServiceImplement;
 import org.slf4j.Logger;
@@ -30,9 +30,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/company_access")
-public class CompanyRes {
+public class CompanyRestController {
 
-    private static final Logger log = LoggerFactory.getLogger(CompanyRes.class);
+    private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
 
     @Autowired
     private CompanyServiceImplement companyService;
@@ -136,10 +136,10 @@ public class CompanyRes {
      * @description delete main category by id list
      **/
     @PostMapping(value = "/updateListByID")
-    public ResponseEntity<ResponseData<ReturnYNDto> > delete(@RequestBody RequestData<ListIDDto> param) {
+    public ResponseEntity<ResponseData<ReturnYNDto> > delete(@RequestBody RequestData<IDVo> param) {
         ResponseData<ReturnYNDto> response = new ResponseData<>();
         HeaderDto header        = param.getHeader();
-        ListIDDto listIDDto     = param.getBody();
+        IDVo listIDDto     = param.getBody();
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
         CompanyDto company      = new CompanyDto();
         Long delete = 0l;

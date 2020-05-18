@@ -9,7 +9,7 @@ import com.spring.adminlte.component.Translator;
 import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
 import com.spring.adminlte.dto.*;
-import com.spring.adminlte.dto.vo.ListIDDto;
+import com.spring.adminlte.dto.vo.IDVo;
 import com.spring.adminlte.templatesDto.RequestData;
 import com.spring.adminlte.templatesDto.ResponseData;
 import com.spring.adminlte.services.serviceImplements.SupplierServiceImplement;
@@ -30,8 +30,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/res/supplier")
-public class SupplierRes {
-    private static final Logger log = LoggerFactory.getLogger(CompanyRes.class);
+public class SupplierRestController {
+    private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
     @Autowired
     private SupplierServiceImplement supplierService;
     @Autowired
@@ -137,10 +137,10 @@ public class SupplierRes {
     * @description update status to delete
     * */
     @PostMapping(value = "/updateStatus")
-    public ResponseEntity<RequestData<ReturnYNDto>> updateStatus(@RequestBody RequestData<ListIDDto> param) {
+    public ResponseEntity<RequestData<ReturnYNDto>> updateStatus(@RequestBody RequestData<IDVo> param) {
         RequestData<ReturnYNDto> response = new RequestData<>();
         SupplierDto supplierDto            = new SupplierDto();
-        ListIDDto listIDDto               = param.getBody();
+        IDVo listIDDto               = param.getBody();
         HeaderDto header                  = param.getHeader();
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
         try {

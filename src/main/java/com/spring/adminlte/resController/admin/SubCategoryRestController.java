@@ -10,8 +10,8 @@ import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
 import com.spring.adminlte.dao.SubCategoryDetailDao;
 import com.spring.adminlte.dto.*;
-import com.spring.adminlte.dto.vo.ListIDDto;
-import com.spring.adminlte.dto.vo.SubCategoryListDto;
+import com.spring.adminlte.dto.vo.IDVo;
+import com.spring.adminlte.dto.vo.SubCategoryVo;
 import com.spring.adminlte.templatesDto.*;
 import com.spring.adminlte.services.serviceImplements.SubCategoryServiceImplement;
 import org.slf4j.Logger;
@@ -31,8 +31,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/sub_category")
-public class SubCategoryRes {
-    private static final Logger log = LoggerFactory.getLogger(CompanyRes.class);
+public class SubCategoryRestController {
+    private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
     @Autowired
     private SubCategoryServiceImplement subCategoryService;
     @Autowired
@@ -69,9 +69,9 @@ public class SubCategoryRes {
     * @description get all list of subcategory that not delete
     * */
     @PostMapping(value = "/subCategoryList")
-    public ResponseEntity<ResponseData<SubCategoryListDto>> subCategoryList(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<SubCategoryListDto> response = new ResponseData<>();
-        SubCategoryListDto  responseList = new SubCategoryListDto();
+    public ResponseEntity<ResponseData<SubCategoryVo>> subCategoryList(@RequestBody RequestData<HeaderDto> param) {
+        ResponseData<SubCategoryVo> response = new ResponseData<>();
+        SubCategoryVo responseList = new SubCategoryVo();
         HeaderDto header = param.getHeader();
             try{
                     List<SubCategoryDto> list = subCategoryService.getList(Status.Delete.getValueStr());
@@ -185,11 +185,11 @@ public class SubCategoryRes {
      * @return response
      **/
     @PostMapping(value = "/deleteByListID")
-    public ResponseEntity<ResponseData<ReturnYNDto>> deleteByListId (@RequestBody RequestData<ListIDDto> param) {
+    public ResponseEntity<ResponseData<ReturnYNDto>> deleteByListId (@RequestBody RequestData<IDVo> param) {
         ResponseData<ReturnYNDto> response = new ResponseData<>();
         HeaderDto header                = param.getHeader();
         SubCategoryDto subCategoryDto   = new SubCategoryDto();
-        ListIDDto listIDDto             = param.getBody();
+        IDVo listIDDto             = param.getBody();
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
         try{
             if (listIDDto.getList().size() > 0) {

@@ -20,7 +20,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,7 +34,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/api/file")
 public class FileRestController {
-    private static final Logger log = LoggerFactory.getLogger(CompanyRes.class);
+    private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
 
     @Autowired
     private FileSystemStorageService fileSystemStorageService;

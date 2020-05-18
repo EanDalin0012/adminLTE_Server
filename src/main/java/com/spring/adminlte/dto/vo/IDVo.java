@@ -6,14 +6,14 @@ import com.spring.adminlte.dto.IdDto;
 
 import java.util.List;
 
-public class ListIDDto {
+public class IDVo {
     private List<IdDto> list;
 
-    public ListIDDto(List<IdDto> list) {
+    public IDVo(List<IdDto> list) {
         this.list = list;
     }
 
-    public ListIDDto() {
+    public IDVo() {
     }
 
     public List<IdDto> getList() {

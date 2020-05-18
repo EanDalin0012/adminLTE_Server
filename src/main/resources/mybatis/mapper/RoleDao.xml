@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.adminlte.dao.RoleDao">
+	
+	<resultMap type="RoleDto"   		id="roleDto">
+		<id property="id"	    		column="id"/>
+		<id property="roleName" 		column="role_name"/>
+
+		<id property="createBy" 		column="create_by"/>
+		<id property="modifyBy" 		column="create_date"/>
+		<id property="createDate" 		column="modify_by"/>
+		<id property="modifyDate" 		column="modify_date"/>
+		<id property="status" 			column="status"/>
+	</resultMap>
+
+	<select id="getList" resultMap="roleDto">
+	   <![CDATA[
+		 SELECT
+		 		  id
+		 		, role_name
+		 		, create_by
+		 		, create_date
+		 		, modify_by
+		 		, modify_date
+		 FROM role
+		 WHERE status != #{status}
+	     ]]>
+	</select>
+
+	<insert id="save" parameterType="roleDto">
+    	<![CDATA[
+	    	INSERT INTO role
+			(
+				role_name
+				, status
+				, create_by
+				, modify_by
+				, create_date
+				, modify_date
+			)
+			VALUES (
+			#{roleName}
+			, #{status}
+			, #{createBy}
+			, #{modifyBy}
+			, to_char(NOW(), 'YYYYMMDD')
+			, to_char(NOW(), 'YYYYMMDD')
+			)
+
+    	]]>
+    </insert>
+
+	<select id="getValueById" resultMap="roleDto">
+	   <![CDATA[
+		  SELECT
+	        id
+		 	, role_name
+		 	, create_by
+			, modify_by
+			, create_date
+			, modify_date
+	     FROM role WHERE id = #{id}
+	     ]]>
+	</select>
+
+	<select id="count" resultMap="roleDto">
+	   <![CDATA[
+		  SELECT
+	     	COUNT (*)
+	     FROM role
+	     ]]>
+	</select>
+
+	<update id="update" parameterType="roleDto">
+		<![CDATA[
+		UPDATE role
+		SET
+			  role_name 		= #{roleName}
+			, comp_status		= #{status}
+			, comp_modify_by	= #{modifyBy}
+			, comp_modify_date	= to_char(NOW(), 'YYYYMMDD')
+		WHERE id 			= #{id}
+
+		]]>
+	</update>
+
+	<update id="delete" parameterType="roleDto">
+		<![CDATA[
+		update role
+        set
+            status = #{status}
+        where id   = #{id}
+		]]>
+	</update>
+
+</mapper>

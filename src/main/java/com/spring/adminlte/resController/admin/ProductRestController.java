@@ -5,8 +5,8 @@ import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
 import com.spring.adminlte.dao.ProductDetailsDao;
 import com.spring.adminlte.dto.*;
-import com.spring.adminlte.dto.vo.ListIDDto;
-import com.spring.adminlte.dto.vo.ProductDetailsListDto;
+import com.spring.adminlte.dto.vo.IDVo;
+import com.spring.adminlte.dto.vo.ProductDetailsVo;
 import com.spring.adminlte.templatesDto.*;
 import com.spring.adminlte.services.serviceImplements.ProductServiceImplement;
 import com.spring.adminlte.utils.SystemUtil;
@@ -32,8 +32,8 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping(value = "api/product")
-public class ProductRes {
-    private static final Logger log = LoggerFactory.getLogger(CompanyRes.class);
+public class ProductRestController {
+    private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
     @Autowired
     private ProductServiceImplement productService;
     @Autowired
@@ -48,10 +48,10 @@ public class ProductRes {
     * @description get product details list
     * */
     @PostMapping(value = "/getProductDetailsList")
-    public ResponseEntity<ResponseData<ProductDetailsListDto>> getProductDetailsList(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<ProductDetailsListDto> response = new ResponseData();
+    public ResponseEntity<ResponseData<ProductDetailsVo>> getProductDetailsList(@RequestBody RequestData<HeaderDto> param) {
+        ResponseData<ProductDetailsVo> response = new ResponseData();
         HeaderDto header = param.getHeader();
-        ProductDetailsListDto responseList = new ProductDetailsListDto();
+        ProductDetailsVo responseList = new ProductDetailsVo();
         try{
             System.out.println(SystemUtil.projectPath());
 
@@ -161,11 +161,11 @@ public class ProductRes {
      * @return response
      **/
     @PostMapping(value = "/deleteByListID")
-    public ResponseEntity<ResponseData<ReturnYNDto>> deleteByListId (@RequestBody RequestData<ListIDDto> param) {
+    public ResponseEntity<ResponseData<ReturnYNDto>> deleteByListId (@RequestBody RequestData<IDVo> param) {
         ResponseData<ReturnYNDto> response         = new ResponseData<>();
         HeaderDto header                = param.getHeader();
         ProductDto product              = new ProductDto();
-        ListIDDto       listIDDto       = param.getBody();
+        IDVo listIDDto       = param.getBody();
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
         try{
             if (listIDDto.getList().size() > 0) {
@@ -209,4 +209,5 @@ public class ProductRes {
         }
         return true;
     }
+
 }

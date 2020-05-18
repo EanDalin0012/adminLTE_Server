@@ -4,14 +4,14 @@ import com.spring.adminlte.dto.ImportProductDto;
 
 import java.util.List;
 
-public class ImportProductListDto {
+public class ImportProductVo {
     private List<ImportProductDto> list;
 
-    public ImportProductListDto(List<ImportProductDto> list) {
+    public ImportProductVo(List<ImportProductDto> list) {
         this.list = list;
     }
 
-    public ImportProductListDto() {}
+    public ImportProductVo() {}
 
     public List<ImportProductDto> getList() {
         return list;

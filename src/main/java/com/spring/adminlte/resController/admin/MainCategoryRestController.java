@@ -9,7 +9,7 @@ import com.spring.adminlte.component.Translator;
 import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
 import com.spring.adminlte.dto.*;
-import com.spring.adminlte.dto.vo.ListIDDto;
+import com.spring.adminlte.dto.vo.IDVo;
 import com.spring.adminlte.templatesDto.*;
 import com.spring.adminlte.services.serviceImplements.MainCategoryServiceImplement;
 import org.slf4j.Logger;
@@ -29,8 +29,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/main_category")
-public class MainCategoryRes {
-    private static final Logger log = LoggerFactory.getLogger(CompanyRes.class);
+public class MainCategoryRestController {
+    private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
 
     @Autowired
     private MainCategoryServiceImplement mainCategoryService;
@@ -137,10 +137,10 @@ public class MainCategoryRes {
      * @description delete main category by list of ID
      **/
     @PostMapping(value = "/deleteByListId")
-    public ResponseEntity<ResponseData<ReturnYNDto>> deleteByIDList(@RequestBody RequestData<ListIDDto> param) {
+    public ResponseEntity<ResponseData<ReturnYNDto>> deleteByIDList(@RequestBody RequestData<IDVo> param) {
         ResponseData<ReturnYNDto> response  = new ResponseData<>();
         HeaderDto header                    = param.getHeader();
-        ListIDDto       listId                     = param.getBody();
+        IDVo listId                     = param.getBody();
         MainCategoryDto mainCategoryDto     = new MainCategoryDto();
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
 
