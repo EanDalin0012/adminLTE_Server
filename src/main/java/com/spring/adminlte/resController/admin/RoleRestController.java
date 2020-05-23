@@ -60,14 +60,12 @@ public class RoleRestController {
      * */
     @PostMapping(value = "/save")
     public ResponseEntity<ResponseData<ReturnYNDto>> save(@RequestBody RequestData<RoleDto> param) {
-        ResponseData<ReturnYNDto> response = executing(param, "save");
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return getResponseDataEntity(param, "save");
     }
 
     @PostMapping(value = "/update")
     public ResponseEntity<ResponseData<ReturnYNDto>> update(@RequestBody RequestData<RoleDto> param) {
-        ResponseData<ReturnYNDto> response = executing(param, "update");
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return getResponseDataEntity(param, "update");
     }
 
     @PostMapping(value = "/deleteVo")
@@ -111,12 +109,17 @@ public class RoleRestController {
         return output;
     }
 
+    private ResponseEntity<ResponseData<ReturnYNDto>> getResponseDataEntity(RequestData<RoleDto> param, String note) {
+        ResponseData<ReturnYNDto> response = executing(param, note);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     /*
     *@functionName executing
     *@param para note
     *@description save or update role information
     * */
-    private ResponseData<ReturnYNDto> executing(RequestData<RoleDto> param, String note) {
+    private ResponseData<ReturnYNDto> executing(RequestData<RoleDto> param, String note)  {
         ResponseData<ReturnYNDto> output = new ResponseData<>();
         HeaderDto header = new HeaderDto();
         int save = 0;
