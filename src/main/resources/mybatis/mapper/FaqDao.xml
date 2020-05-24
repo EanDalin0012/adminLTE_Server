@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.adminlte.dao.FaqDao">
+	
+	<resultMap type="FaqDto"   		id="faqDto">
+		<id property="id"	    	column="id"/>
+		<id property="EnTitle" 		column="en_title"/>
+		<id property="KHRTitle" 	column="khr_title"/>
+		<id property="CHTitle" 		column="ch_title"/>
+
+		<id property="EnText" 		column="en_text"/>
+		<id property="KHRText" 		column="khr_text"/>
+		<id property="CHText" 		column="ch_text"/>
+
+		<id property="createBy" 	column="create_by"/>
+		<id property="modifyBy" 	column="create_date"/>
+		<id property="createDate" 	column="modify_by"/>
+		<id property="modifyDate" 	column="_modify_date"/>
+		<id property="status" 		column="status"/>
+	</resultMap>
+
+	<select id="getList" resultMap="companyDto">
+	   <![CDATA[
+		 SELECT
+		 		  id
+		 		, en_title
+				, khr_title
+				, ch_title
+				, en_text
+				, khr_text
+				, ch_title
+				, create_by
+				, create_date
+				, modify_by
+				, modify_date
+				, status
+		 FROM faq_info
+		 WHERE comp_status != #{status}
+	     ]]>
+	</select>
+
+	<insert id="save" parameterType="companyDto">
+    	<![CDATA[
+	    	INSERT INTO faq_info
+			(
+				en_title
+				, khr_title
+				, ch_title
+				, en_text
+				, khr_text
+				, ch_title
+				, create_by
+				, create_date
+				, modify_by
+				, modify_date
+				, status
+			)
+			VALUES (
+				#{EnTitle}
+				, #{KHRTitle}
+				, #{CHTitle}
+				, #{EnText}
+				, #{KHRText}
+				, #{CHText}
+				, #{createBy}
+				, to_char(NOW(), 'YYYYMMDD')
+				, #{modifyBy}
+				, to_char(NOW(), 'YYYYMMDD')
+				, #{status}
+			)
+
+    	]]>
+    </insert>
+
+	<select id="getValueById" resultMap="companyDto">
+	   <![CDATA[
+		  SELECT
+	        id
+			, en_title
+			, khr_title
+			, ch_title
+			, en_text
+			, khr_text
+			, ch_text
+			, create_by
+			, create_date
+			, modify_by
+			, modify_date
+			, status
+	     FROM faq_info WHERE id = #{id}
+	     ]]>
+	</select>
+
+	<select id="count" resultMap="companyDto">
+	   <![CDATA[
+		  SELECT
+	     	COUNT (*)
+	     FROM faq_info
+	     ]]>
+	</select>
+
+	<update id="update" parameterType="companyDto">
+		<![CDATA[
+		UPDATE faq_info
+		SET
+			  en_title 		= #{EnTitle}
+			, khr_title		= #{KHRTitle}
+			, ch_title		= #{CHTitle}
+
+			, en_text		= #{EnText}
+			, khr_text 		= #{KHRText}
+			, ch_text 		=  #{CHText}
+			, status		= #{status}
+			, modify_by		= #{modifyBy}
+			, modify_date	= to_char(NOW(), 'YYYYMMDD')
+		WHERE id 			= #{id}
+
+		]]>
+	</update>
+
+	<update id="delete" parameterType="companyDto">
+		<![CDATA[
+		update faq_info
+        set
+            status = #{status}
+        where id   = #{id}
+		]]>
+	</update>
+
+</mapper>
