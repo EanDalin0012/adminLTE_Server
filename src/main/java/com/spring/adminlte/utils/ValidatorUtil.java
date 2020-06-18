@@ -34,7 +34,7 @@ public class ValidatorUtil {
 		for ( String sKey : ipFields ) {
 			if ( MRUtil.isEmpty( MRUtil.trim( ipParam.getString( sKey ) ) ) ) {
 				logger.info( "Error : " + sKey + " is empty !!!" );
-				throw new Exception( "000001 Required information is missing : "  + sKey );
+				throw new Exception( "Your input information is missing field: "  + sKey );
 			}
 		}
 	}

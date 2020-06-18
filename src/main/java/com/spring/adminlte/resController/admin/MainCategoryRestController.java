@@ -10,6 +10,7 @@ import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
 import com.spring.adminlte.dto.*;
 import com.spring.adminlte.dto.vo.IDVo;
+import com.spring.adminlte.mmap.MMap;
 import com.spring.adminlte.templatesDto.*;
 import com.spring.adminlte.services.serviceImplements.MainCategoryServiceImplement;
 import org.slf4j.Logger;
@@ -67,33 +68,30 @@ public class MainCategoryRestController {
      * @description save main category information
      **/
     @PostMapping(value = "/save")
-    public ResponseEntity<ResponseData<ReturnYNDto>> save(@RequestBody RequestData<MainCategoryDto> param) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
-        HeaderDto header        = param.getHeader();
-        MainCategoryDto body    = param.getBody();
+    public ResponseEntity<MMap> save(@RequestBody MMap param) throws Exception {
+            MMap response      = new MMap();
+            MMap getHeader     = param.getMMap("header");
+            MMap getBody       = param.getMMap("body");
+            try {
+                MMap input       = new MMap();
+                MMap responseBody       = new MMap();
 
-        try{
-            if (isValid(body, header.getLanguageCode()) == true ) {
-                String status = Status.Active.getValueStr();
-                body.setStatus(status);
-                body.setCreateBy(1);
-                Long save = mainCategoryService.save(body);
+                input.setString("mainCategoryName", getBody.getString("mainCategoryName"));
+                input.setString("description",  getBody.getString("description"));
+                input.setLong("userID",       getHeader.getLong("userID"));
+                input.setString("status",      Status.Active.getValueStr());
+
+                Long save = mainCategoryService.save(input);
+
+                response.setString("returnYN", "N");
                 if (save > 0) {
-                    response.setBody(new ReturnYNDto(true, SYN.Y.getValue()));
-                    response.setHeader(header);
-                    return new ResponseEntity<>(response, HttpStatus.OK);
+                    response.setString("returnYN", "Y");
                 }
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            }catch (Exception e) {
+                log.error("get Exception ", e);
+                throw e;
             }
-        }catch (Exception e) {
-            log.error("\nget Error api main category ===>>>:", e.getMessage());
-           throw e;
-        }
-
-        header.setResult(false);
-        response.setHeader(header);
-        response.setBody(new ReturnYNDto(false, SYN.N.getValue()));
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
@@ -121,7 +119,7 @@ public class MainCategoryRestController {
             }
         }catch (Exception e) {
             log.error("\n get error api main category update ===>>>:", e.getMessage());
-           throw e;
+            throw e;
         }
 
         header.setResult(false);

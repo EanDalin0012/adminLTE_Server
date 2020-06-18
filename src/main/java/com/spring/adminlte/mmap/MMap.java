@@ -136,7 +136,7 @@ public class MMap extends LinkedHashMap<String, Object> implements MProtocol{
         this.put( key, value );
     }
 
-    public void setData( String key, MMap value ) {
+    public void setMMap( String key, MMap value ) {
         this.put( key, value );
     }
 

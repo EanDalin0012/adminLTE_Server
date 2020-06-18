@@ -2,7 +2,10 @@ package com.spring.adminlte.services.serviceImplements;
 
 import com.spring.adminlte.dao.MainCategoryDao;
 import com.spring.adminlte.dto.MainCategoryDto;
+import com.spring.adminlte.mmap.MMap;
 import com.spring.adminlte.services.MainCategoryService;
+import com.spring.adminlte.utils.ValidatorUtil;
+import org.apache.tomcat.jni.Mmap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +21,13 @@ public class MainCategoryServiceImplement implements MainCategoryService {
     }
 
     @Override
-    public Long save(MainCategoryDto mainCategoryDto) {
-        return mainCategoryDao.save(mainCategoryDto);
+    public Long save(MMap param) throws Exception {
+        try {
+            ValidatorUtil.validate(param, "mainCategoryName", "userID", "status");
+            return mainCategoryDao.save(param);
+        }catch (Exception e) {
+            throw e;
+        }
     }
 
     @Override
@@ -41,4 +49,5 @@ public class MainCategoryServiceImplement implements MainCategoryService {
     public int count() {
         return mainCategoryDao.count();
     }
+
 }
