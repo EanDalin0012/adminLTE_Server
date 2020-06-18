@@ -24,7 +24,6 @@ public class MRUtil extends StringUtils {
     public final static String TRUE_STRING							= "true";
     public final static String FALSE_STRING							= "false";
     public final static String ZERO									= "0";
-    public final static String EMPTY                                = "";
 
     /**
      * <pre>

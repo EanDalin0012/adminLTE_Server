@@ -13,6 +13,11 @@
 package com.spring.adminlte.utils;
 
 import com.spring.adminlte.mmap.MMap;
+import com.spring.adminlte.resController.admin.CompanyRestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.math.BigDecimal;
 
 /**
  * <PRE>
@@ -23,12 +28,50 @@ import com.spring.adminlte.mmap.MMap;
  * @version   0.1, 2018-08-07
  */
 public class ValidatorUtil {
-	public static void validate(MMap ipParam, String... ipFields ) throws Exception {
+	private static final Logger logger = LoggerFactory.getLogger(CompanyRestController.class);
+
+	public static void validate( MMap ipParam, String... ipFields ) throws Exception {
 		for ( String sKey : ipFields ) {
-			if ( ipParam.getString(sKey).trim().equals("") ) {
-				throw new Exception("Required information is missing :"+sKey);
+			if ( MRUtil.isEmpty( MRUtil.trim( ipParam.getString( sKey ) ) ) ) {
+				logger.info( "Error : " + sKey + " is empty !!!" );
+				throw new Exception( "000001 Required information is missing : "  + sKey );
 			}
 		}
 	}
-	
+
+	public static void validateNull( MMap ipParam, String... ipFields ) throws Exception {
+		for ( String sKey : ipFields ) {
+			if ( MRUtil.isNull( ipParam.getString( sKey ) ) ) {
+				logger.info( String.join( " ", "<<<<< *****", sKey, "is null !!!" ) );
+				throw new Exception( "000001 Required information is missing : "  + sKey );
+			}
+		}
+	}
+
+	public static MMap emptyToBeNull( MMap ipParam, String... sField ) {
+		String sTemp = null;
+		for ( String sKey : sField ) {
+			sTemp = ipParam.getString( sKey );
+			if ( MRUtil.isEmpty( sTemp ) ) {
+				ipParam.set( sKey, null );
+			}
+		}
+		return ipParam;
+	}
+
+	public static MMap makeOptional( MMap ipParam, String sType, String... sField ) {
+		for ( String sKey : sField ) {
+			if ( !MRUtil.isEmpty( ipParam.getString( sKey ) ) ) {
+				continue;
+			}
+			if ( sType.equals( "S" ) ) {
+				ipParam.set( sKey, "" );
+			} else if ( sType.equals( "L" ) ) {
+				ipParam.set( sKey, 0L );
+			} else if ( sType.equals( "BD" ) ) {
+				ipParam.set( sKey, BigDecimal.ZERO );
+			}
+		}
+		return ipParam;
+	}
 }
