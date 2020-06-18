@@ -19,7 +19,7 @@
 		<id property="status" 		column="status"/>
 	</resultMap>
 
-	<select id="getList" resultMap="companyDto">
+	<select id="getList" resultMap="faqDto">
 	   <![CDATA[
 		 SELECT
 		 		  id
@@ -39,7 +39,7 @@
 	     ]]>
 	</select>
 
-	<insert id="save" parameterType="companyDto">
+	<insert id="save" parameterType="faqDto">
     	<![CDATA[
 	    	INSERT INTO faq_info
 			(
@@ -72,7 +72,7 @@
     	]]>
     </insert>
 
-	<select id="getValueById" resultMap="companyDto">
+	<select id="getValueById" resultMap="faqDto">
 	   <![CDATA[
 		  SELECT
 	        id
@@ -91,7 +91,7 @@
 	     ]]>
 	</select>
 
-	<select id="count" resultMap="companyDto">
+	<select id="count" resultMap="faqDto">
 	   <![CDATA[
 		  SELECT
 	     	COUNT (*)
@@ -99,7 +99,7 @@
 	     ]]>
 	</select>
 
-	<update id="update" parameterType="companyDto">
+	<update id="update" parameterType="faqDto">
 		<![CDATA[
 		UPDATE faq_info
 		SET
@@ -118,7 +118,7 @@
 		]]>
 	</update>
 
-	<update id="delete" parameterType="companyDto">
+	<update id="delete" parameterType="faqDto">
 		<![CDATA[
 		update faq_info
         set

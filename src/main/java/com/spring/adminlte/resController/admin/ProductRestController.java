@@ -134,7 +134,7 @@ public class ProductRestController {
         ProductDto product      = param.getBody();
         HeaderDto header        = param.getHeader();
         try {
-            Long save = productService.save(product);
+            Long save = productService.update(product);
             if (save > 0) {
                 response.setBody(new ReturnYNDto(true, msg));
                 response.setHeader(header);

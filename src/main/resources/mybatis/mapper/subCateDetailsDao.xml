@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.adminlte.dao.SubCateDetailsDao">
+
+	<resultMap type="java.util.LinkedHashMap" id="UserResult">
+		<id property="mainCategoryId" column="mn_cat_id"/>
+		<result property="id" column="id"/>
+		<result property="mainCategoryName" column="mn_cat_nm"/>
+		<association property="subCategoryList" resultMap="blogResult" javaType="list"/>
+	</resultMap>
+
+	<resultMap type="java.util.LinkedHashMap" id="blogResult">
+		<id property="subCategoryId" column="sub_id"/>
+		<result property="subCategoryName" column="sub_cat_nm"/>
+	</resultMap>
+
+	<select id="getSubCateDetails" parameterType="int" resultMap="UserResult">
+	   <![CDATA[
+		select
+		 	  tmsc.id
+			, tmc.mn_cat_id
+			, tmc.mn_cat_nm
+			, tsc.sub_id
+			, tsc.sub_cat_nm
+		from tb_cate tmsc
+		inner join tb_mn_category tmc on tmc.mn_cat_id = tmsc.mn_cate_id
+		inner join tb_sb_category tsc on tsc.sub_id = tmsc.sb_cate_id
+		where tsc.sub_cat_status != '6'
+	   ]]>
+	</select>
+
+</mapper>
