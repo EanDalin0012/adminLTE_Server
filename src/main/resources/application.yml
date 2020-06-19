@@ -24,6 +24,6 @@ spring:
       wrap-root-value: true
 
 mybatis:
-    type-aliases-package: com.spring.adminlte.dto
+    type-aliases-package: com.spring.adminlte.*
     config-location: classpath:mybatis/mybatis_config.xml
     mapper-locations: classpath:mybatis/mapper/*.xml

@@ -6,7 +6,7 @@ import com.spring.adminlte.dto.FaqDto;
 import com.spring.adminlte.dto.HeaderDto;
 import com.spring.adminlte.dto.vo.FaqVo;
 import com.spring.adminlte.services.serviceImplements.FaqServiceImplement;
-import com.spring.adminlte.templatesDto.ResponseData;
+import com.spring.adminlte.templatesDto.DataResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +31,8 @@ public class FaqRestController {
     String msg = "";
 
     @PostMapping(value = "/getList")
-    public ResponseEntity<ResponseData<FaqVo>> getList(@RequestBody HeaderDto param) {
-        ResponseData<FaqVo> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<FaqVo>> getList(@RequestBody HeaderDto param) {
+        DataResponse<FaqVo> response = new DataResponse<>();
         try {
             FaqVo list = retreiveListFAQ();
             response.setBody(list);

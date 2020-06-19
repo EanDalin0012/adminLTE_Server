@@ -47,8 +47,8 @@ public class CompanyRestController {
      * @description Get List Company
      **/
     @PostMapping(value = "/getList")
-    public ResponseEntity<ResponseData<List<CompanyDto>>> getList(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<List<CompanyDto>> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<List<CompanyDto>>> getList(@RequestBody RequestData<HeaderDto> param) {
+        DataResponse<List<CompanyDto>> response = new DataResponse<>();
         HeaderDto headerDto                   = param.getHeader();
         try{
             List<CompanyDto> list = companyService.getList(Status.Delete.getValueStr());
@@ -68,8 +68,8 @@ public class CompanyRestController {
      * @description save company information
      **/
     @PostMapping(value = "/save")
-    public ResponseEntity<ResponseData<ReturnYNDto>> save(@RequestBody RequestData<CompanyDto> parma) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> save(@RequestBody RequestData<CompanyDto> parma) {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         HeaderDto header        = parma.getHeader();
         CompanyDto body         = parma.getBody();
 
@@ -103,8 +103,8 @@ public class CompanyRestController {
      * @description update company information
      **/
     @PostMapping(value = "/update")
-    public ResponseEntity<ResponseData<ReturnYNDto>> update (@RequestBody RequestData<CompanyDto> param) {
-        ResponseData<ReturnYNDto> response  = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> update (@RequestBody RequestData<CompanyDto> param) {
+        DataResponse<ReturnYNDto> response  = new DataResponse<>();
         HeaderDto header         = param.getHeader();
         CompanyDto body          = param.getBody();
 
@@ -136,8 +136,8 @@ public class CompanyRestController {
      * @description delete main category by id list
      **/
     @PostMapping(value = "/updateListByID")
-    public ResponseEntity<ResponseData<ReturnYNDto> > delete(@RequestBody RequestData<IDVo> param) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> delete(@RequestBody RequestData<IDVo> param) {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         HeaderDto header        = param.getHeader();
         IDVo listIDDto     = param.getBody();
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());

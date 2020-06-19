@@ -48,8 +48,8 @@ public class ProductRestController {
     * @description get product details list
     * */
     @PostMapping(value = "/getProductDetailsList")
-    public ResponseEntity<ResponseData<ProductDetailsVo>> getProductDetailsList(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<ProductDetailsVo> response = new ResponseData();
+    public ResponseEntity<DataResponse<ProductDetailsVo>> getProductDetailsList(@RequestBody RequestData<HeaderDto> param) {
+        DataResponse<ProductDetailsVo> response = new DataResponse();
         HeaderDto header = param.getHeader();
         ProductDetailsVo responseList = new ProductDetailsVo();
         try{
@@ -73,8 +73,8 @@ public class ProductRestController {
      * @return list of product
      **/
     @PostMapping(value = "/getProductList")
-    public ResponseEntity<ResponseData<List<ProductDto>>> getProductList(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<List<ProductDto>> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<List<ProductDto>>> getProductList(@RequestBody RequestData<HeaderDto> param) {
+        DataResponse<List<ProductDto>> response = new DataResponse<>();
         HeaderDto header = param.getHeader();
         try {
             List<ProductDto> list = productService.getList();
@@ -94,8 +94,8 @@ public class ProductRestController {
      * @return YN
      **/
     @PostMapping(value = "/save")
-    public ResponseEntity<ResponseData<ReturnYNDto>> save(@RequestBody RequestData<ProductDto> param) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> save(@RequestBody RequestData<ProductDto> param) {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         ProductDto product      = param.getBody();
         HeaderDto header        = param.getHeader();
         try {
@@ -129,8 +129,8 @@ public class ProductRestController {
      * @return YN
      **/
     @PostMapping(value = "/update")
-    public ResponseEntity<ResponseData<ReturnYNDto>> update(@RequestBody RequestData<ProductDto> param) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> update(@RequestBody RequestData<ProductDto> param) {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         ProductDto product      = param.getBody();
         HeaderDto header        = param.getHeader();
         try {
@@ -161,8 +161,8 @@ public class ProductRestController {
      * @return response
      **/
     @PostMapping(value = "/deleteByListID")
-    public ResponseEntity<ResponseData<ReturnYNDto>> deleteByListId (@RequestBody RequestData<IDVo> param) {
-        ResponseData<ReturnYNDto> response         = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> deleteByListId (@RequestBody RequestData<IDVo> param) {
+        DataResponse<ReturnYNDto> response         = new DataResponse<>();
         HeaderDto header                = param.getHeader();
         ProductDto product              = new ProductDto();
         IDVo listIDDto       = param.getBody();

@@ -8,7 +8,7 @@ import com.spring.adminlte.dao.ProductImageDao;
 import com.spring.adminlte.dto.*;
 import com.spring.adminlte.services.serviceImplements.FileSystemStorageService;
 import com.spring.adminlte.services.serviceImplements.ResourceFileInfoServiceImplement;
-import com.spring.adminlte.templatesDto.ResponseData;
+import com.spring.adminlte.templatesDto.DataResponse;
 import org.apache.commons.io.IOUtils;
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
@@ -67,17 +67,17 @@ public class FileRestController {
         }
     }
     @PostMapping(value = "/image")
-    public ResponseEntity<ResponseData<ImageDto>> store(@RequestBody MultipartFile file) {
-        ResponseData<ImageDto> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ImageDto>> store(@RequestBody MultipartFile file) {
+        DataResponse<ImageDto> response = new DataResponse<>();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/upload/product")
-    public ResponseData<ImageURLDto> handleFileUpload(@RequestParam("file") MultipartFile multipartFile,
+    public DataResponse<ImageURLDto> handleFileUpload(@RequestParam("file") MultipartFile multipartFile,
                                                       @RequestParam("fileImageURL") String fileImageURL,
                                                       @RequestParam("userID") String userID,
                                                       @RequestParam("productId") String productId) throws IOException {
-        ResponseData<ImageURLDto> response = new ResponseData<>();
+        DataResponse<ImageURLDto> response = new DataResponse<>();
         InputStream is = null;
         HeaderDto header = new HeaderDto();
         ImageURLDto imageUrl = new ImageURLDto();
@@ -194,8 +194,8 @@ public class FileRestController {
     }
 
     @PostMapping("/removeUrl")
-    public ResponseData<ReturnYNDto> handleFileRemove( @RequestParam("resourceFileInfoId") String resourceFileInfoId) throws IOException {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    public DataResponse<ReturnYNDto> handleFileRemove(@RequestParam("resourceFileInfoId") String resourceFileInfoId) throws IOException {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         HeaderDto header = new HeaderDto();
         header.setMsg("");
         header.setChannelTypeCode(ChannelTypeCode.ADMIN.getKey());

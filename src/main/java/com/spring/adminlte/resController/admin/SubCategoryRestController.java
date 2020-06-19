@@ -48,8 +48,8 @@ public class SubCategoryRestController {
      * @return list of sub category
      **/
     @PostMapping(value = "/getList")
-    public ResponseEntity<ResponseData<List<SubCategoryDetailDto>>> getList(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<List<SubCategoryDetailDto>> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<List<SubCategoryDetailDto>>> getList(@RequestBody RequestData<HeaderDto> param) {
+        DataResponse<List<SubCategoryDetailDto>> response = new DataResponse<>();
         HeaderDto header                          = param.getHeader();
         try{
             List<SubCategoryDetailDto> list = subCategoryDetailDao.getList();
@@ -69,8 +69,8 @@ public class SubCategoryRestController {
     * @description get all list of subcategory that not delete
     * */
     @PostMapping(value = "/subCategoryList")
-    public ResponseEntity<ResponseData<SubCategoryVo>> subCategoryList(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<SubCategoryVo> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<SubCategoryVo>> subCategoryList(@RequestBody RequestData<HeaderDto> param) {
+        DataResponse<SubCategoryVo> response = new DataResponse<>();
         SubCategoryVo responseList = new SubCategoryVo();
         HeaderDto header = param.getHeader();
             try{
@@ -92,8 +92,8 @@ public class SubCategoryRestController {
      * @return list of sub category
      **/
     @PostMapping(value = "/getSubCategoryList")
-    public ResponseEntity<ResponseData<List<SubCategoryDetailDto>>> getSubCategoryList(@RequestBody RequestData<SubCategoryDto> param) {
-        ResponseData<List<SubCategoryDetailDto>> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<List<SubCategoryDetailDto>>> getSubCategoryList(@RequestBody RequestData<SubCategoryDto> param) {
+        DataResponse<List<SubCategoryDetailDto>> response = new DataResponse<>();
         HeaderDto header                   = param.getHeader();
         try{
             List<SubCategoryDetailDto> list = subCategoryDetailDao.getList();
@@ -115,8 +115,8 @@ public class SubCategoryRestController {
      * @return ResponseMapDto
      **/
     @PostMapping(value = "/save")
-    public ResponseEntity<ResponseData<ReturnYNDto>> save (@RequestBody RequestData<SubCategoryDto> param) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> save (@RequestBody RequestData<SubCategoryDto> param) {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         HeaderDto header        = param.getHeader();
         SubCategoryDto body     = param.getBody();
         try{
@@ -150,8 +150,8 @@ public class SubCategoryRestController {
      * @return ResponseMapDto
      **/
     @PostMapping(value = "/update")
-    public ResponseEntity<ResponseData<ReturnYNDto>> update (@RequestBody RequestData<SubCategoryDto> param) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> update (@RequestBody RequestData<SubCategoryDto> param) {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         HeaderDto header        = param.getHeader();
         SubCategoryDto body     = param.getBody();
         try{
@@ -185,8 +185,8 @@ public class SubCategoryRestController {
      * @return response
      **/
     @PostMapping(value = "/deleteByListID")
-    public ResponseEntity<ResponseData<ReturnYNDto>> deleteByListId (@RequestBody RequestData<IDVo> param) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> deleteByListId (@RequestBody RequestData<IDVo> param) {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         HeaderDto header                = param.getHeader();
         SubCategoryDto subCategoryDto   = new SubCategoryDto();
         IDVo listIDDto             = param.getBody();

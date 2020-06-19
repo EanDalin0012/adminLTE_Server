@@ -1,16 +1,22 @@
 /**
+ * <pre>
+ *     Main Category API (Application Program Interface)
+ * </pre>
  * @CreateDate 02/03/2020
  * @Author Ean Dalin
- * @API Main Category
+ * @API api/main_category
  **/
 package com.spring.adminlte.resController.admin;
 
 import com.spring.adminlte.component.Translator;
 import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
+import com.spring.adminlte.dao.MainCategoryDao;
+import com.spring.adminlte.dao.SequenceDao;
 import com.spring.adminlte.dto.*;
 import com.spring.adminlte.dto.vo.IDVo;
 import com.spring.adminlte.mmap.MMap;
+import com.spring.adminlte.mmap.MultiMap;
 import com.spring.adminlte.templatesDto.*;
 import com.spring.adminlte.services.serviceImplements.MainCategoryServiceImplement;
 import org.slf4j.Logger;
@@ -26,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,24 +44,31 @@ public class MainCategoryRestController {
     private MainCategoryServiceImplement mainCategoryService;
     @Autowired
     private PlatformTransactionManager transactionManager;
-
+    @Autowired
+    private SequenceDao sequenceDao;
+    @Autowired
+    private MainCategoryDao mainCategoryDao;
     String msg = "";
 
     /**
+     * <pre>
+     *     retrieve all list of main category <br/> not status delete
+     * </pre>
      * @param param
      * @functionName getList
      * @description get main category list
      **/
     @PostMapping(value = "/getList")
-    public ResponseEntity<ResponseData<List<MainCategoryDto>>> getList(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<List<MainCategoryDto>> response = new ResponseData<>();
-        HeaderDto headerDto                        = param.getHeader();
-        try{
-            List<MainCategoryDto> list = mainCategoryService.getList(Status.Active.getValueStr());
-            headerDto.setResult(true);
-            response.setHeader(headerDto);
-            response.setBody(list);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<ResponseData<MMap, List<MMap>>> getList(@RequestBody MMap param) {
+        ResponseData<MMap, List<MMap>> dataResponse = new ResponseData<>();
+
+        try {
+            MMap headerDto      = param.getMMap("header");
+            List<MMap> response = mainCategoryService.getList(Status.Active.getValueStr());
+
+            dataResponse.setBody(response);
+            dataResponse.setHeader(headerDto);
+            return new ResponseEntity<>(dataResponse, HttpStatus.OK);
         }catch (Exception e) {
             log.error("\nget Error api main category list <<<=== getList() ===>>>:\n", e.getMessage());
             msg = "GET_ERROR_EXCEPTION";
@@ -63,70 +77,86 @@ public class MainCategoryRestController {
     }
 
     /**
+     * <pre>
+     *     register information of main category
+     * </pre>
      * @param param
      * @functionaName save
      * @description save main category information
      **/
     @PostMapping(value = "/save")
     public ResponseEntity<MMap> save(@RequestBody MMap param) throws Exception {
-            MMap response      = new MMap();
-            MMap getHeader     = param.getMMap("header");
-            MMap getBody       = param.getMMap("body");
-            try {
-                MMap input       = new MMap();
-                MMap responseBody       = new MMap();
-
-                input.setString("mainCategoryName", getBody.getString("mainCategoryName"));
-                input.setString("description",  getBody.getString("description"));
-                input.setLong("userID",       getHeader.getLong("userID"));
-                input.setString("status",      Status.Active.getValueStr());
-
-                Long save = mainCategoryService.save(input);
-
-                response.setString("returnYN", "N");
-                if (save > 0) {
-                    response.setString("returnYN", "Y");
-                }
-                return new ResponseEntity<>(response, HttpStatus.OK);
-            }catch (Exception e) {
-                log.error("get Exception ", e);
-                throw e;
-            }
+        return responseEntityInfo(param, "save");
     }
 
 
     /**
+     * <pre>
+     *     update information of main category
+     * </pre>
      * @param param
      * @functionName Update
      * @description update Main Category
      **/
     @PostMapping(value = "/update")
-    public ResponseEntity<ResponseData<ReturnYNDto>> update(@RequestBody RequestData<MainCategoryDto> param) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
-        HeaderDto header        = param.getHeader();
-        MainCategoryDto body    = param.getBody();
+    public ResponseEntity<MMap> update(@RequestBody MMap param) throws Exception {
+        return responseEntityInfo(param, "update");
+    }
 
-        try{
-            if (isValid(body, header.getLanguageCode()) == true ) {
-                body.setStatus(Status.Modify.getValueStr());
-                body.setCreateBy(1);
-                Long update = mainCategoryService.update(body);
-                if (update > 0) {
-                    response.setBody(new ReturnYNDto(true, SYN.Y.getValue()));
-                    response.setHeader(header);
+    /**
+     * <pre>
+     *     register or update information of main category
+     * </pre>
+     * @param param
+     * @param  function
+     * @return ResponseEntity<MMap>
+     * @throws Exception
+    * */
+    private ResponseEntity<MMap> responseEntityInfo(MMap param, String function) throws Exception {
+        MMap response      = new MMap();
+        MMap getHeader     = param.getMMap("header");
+        MMap getBody       = param.getMMap("body");
+
+        try {
+            MMap input     = new MMap();
+            String Yn       = "N";
+
+            input.setString("mainCategoryName"  , getBody.getString("mainCategoryName"    ));
+            input.setString("description"       , getBody.getString("description"         ));
+            input.setLong("userID"              , getHeader.getLong("userID"              ));
+
+            if (function == "save") {
+                int sequenceNo  = sequenceDao.getSequenceMainCategory();
+                input.setLong("id"  ,       sequenceNo);
+                input.setString("status",   Status.Active.getValueStr());
+
+                Long save = mainCategoryService.save(input);
+
+                if (save > 0) {
+                    Yn = "Y";
                     return new ResponseEntity<>(response, HttpStatus.OK);
                 }
             }
-        }catch (Exception e) {
-            log.error("\n get error api main category update ===>>>:", e.getMessage());
-            throw e;
+            if (function == "update") {
+                input.setLong("id"  , getBody.getLong("id")  );
+                input.setString("status"            , Status.Modify.getValueStr());
+
+                Long update = mainCategoryService.update(input);
+
+                if (update > 0) {
+                    Yn = "Y";
+                    response.setString("returnYN", Yn);
+                    return new ResponseEntity<>(response, HttpStatus.OK);
+                }
+            }
+
+            response.setString("returnYN", Yn);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("get Exception ", e);
+            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
-
-        header.setResult(false);
-        response.setHeader(header);
-        response.setBody(new ReturnYNDto(false, SYN.N.getValue()));
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -135,8 +165,8 @@ public class MainCategoryRestController {
      * @description delete main category by list of ID
      **/
     @PostMapping(value = "/deleteByListId")
-    public ResponseEntity<ResponseData<ReturnYNDto>> deleteByIDList(@RequestBody RequestData<IDVo> param) {
-        ResponseData<ReturnYNDto> response  = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> deleteByIDList(@RequestBody RequestData<IDVo> param) {
+        DataResponse<ReturnYNDto> response  = new DataResponse<>();
         HeaderDto header                    = param.getHeader();
         IDVo listId                     = param.getBody();
         MainCategoryDto mainCategoryDto     = new MainCategoryDto();

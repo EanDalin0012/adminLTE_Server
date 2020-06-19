@@ -16,8 +16,8 @@ import com.spring.adminlte.dto.ReturnYNDto;
 import com.spring.adminlte.dto.vo.ImportProductDetailsVo;
 import com.spring.adminlte.dto.vo.ImportProductVo;
 import com.spring.adminlte.services.serviceImplements.ImportProductServiceImplement;
+import com.spring.adminlte.templatesDto.DataResponse;
 import com.spring.adminlte.templatesDto.RequestData;
-import com.spring.adminlte.templatesDto.ResponseData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +53,8 @@ public class ImportProductRestController {
     * @decription inquiry data details of import product
     * */
     @PostMapping(value = "/getListDetails")
-    public ResponseEntity<ResponseData<ImportProductDetailsVo>> inquiryImportProductDetails(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<ImportProductDetailsVo> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ImportProductDetailsVo>> inquiryImportProductDetails(@RequestBody RequestData<HeaderDto> param) {
+        DataResponse<ImportProductDetailsVo> response = new DataResponse<>();
         HeaderDto header = param.getHeader();
         ImportProductDetailsVo responseList = new ImportProductDetailsVo();
         try{
@@ -74,8 +74,8 @@ public class ImportProductRestController {
     * @description get list of import product
     * */
     @PostMapping(value = "/getList")
-    public ResponseEntity<ResponseData<ImportProductVo>> getList(@RequestBody RequestData<HeaderDto> param) {
-        ResponseData<ImportProductVo> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ImportProductVo>> getList(@RequestBody RequestData<HeaderDto> param) {
+        DataResponse<ImportProductVo> response = new DataResponse<>();
         HeaderDto header = param.getHeader();
         ImportProductVo responseList = new ImportProductVo();
         try{
@@ -95,8 +95,8 @@ public class ImportProductRestController {
     * @description  save import product information
     * */
     @PostMapping(value = "/save")
-    public ResponseEntity<ResponseData<ReturnYNDto>> save (@RequestBody RequestData<ImportProductVo> requestData) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> save (@RequestBody RequestData<ImportProductVo> requestData) {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         HeaderDto header = requestData.getHeader();
         ImportProductVo list = requestData.getBody();
         TransactionStatus transactionStatus = transactionManager.getTransaction(new DefaultTransactionDefinition());

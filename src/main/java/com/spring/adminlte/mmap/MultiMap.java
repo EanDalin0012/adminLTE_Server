@@ -279,6 +279,27 @@ public class MultiMap extends ArrayList<LinkedHashMap<String, Object>> implement
             add( row );
         }
     }
+    /**
+     * Set the value of the object type in the corresponding key value.
+     *
+     * @param key Object
+     * @param value Object
+     */
+    public void add( String key, List<Object> value ) {
+        boolean add = false;
+        for ( int i = 0; i < size(); i++ ) {
+            if ( !get( i ).containsKey( key ) ) {
+                get( i ).put( key, value );
+                add = true;
+                break;
+            }
+        }
+        if ( !add ) {
+            MMap row = new MMap();
+            //row.set( key, value );
+            add( row );
+        }
+    }
 
     private Object getObject( Object key, int index ) {
 

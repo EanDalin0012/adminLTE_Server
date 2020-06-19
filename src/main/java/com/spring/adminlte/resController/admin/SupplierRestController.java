@@ -10,8 +10,8 @@ import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
 import com.spring.adminlte.dto.*;
 import com.spring.adminlte.dto.vo.IDVo;
+import com.spring.adminlte.templatesDto.DataResponse;
 import com.spring.adminlte.templatesDto.RequestData;
-import com.spring.adminlte.templatesDto.ResponseData;
 import com.spring.adminlte.services.serviceImplements.SupplierServiceImplement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,8 +45,8 @@ public class SupplierRestController {
     * @param header
     * */
     @PostMapping(value = "/getList")
-    public ResponseEntity<ResponseData<List<SupplierDto>>> getList(@RequestBody RequestData<HeaderDto> header) {
-        ResponseData<List<SupplierDto>> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<List<SupplierDto>>> getList(@RequestBody RequestData<HeaderDto> header) {
+        DataResponse<List<SupplierDto>> response = new DataResponse<>();
         try{
             List<SupplierDto>   list = supplierService.getList(Status.Delete.getValueStr());
             response.setHeader(header.getHeader());
@@ -64,10 +64,10 @@ public class SupplierRestController {
     * @param supplier
     * */
     @PostMapping(value = "/save")
-    public ResponseEntity<ResponseData<ReturnYNDto>> save(@RequestBody  RequestData<SupplierDto> supplier) {
+    public ResponseEntity<DataResponse<ReturnYNDto>> save(@RequestBody RequestData<SupplierDto> supplier) {
         SupplierDto supplierDto            =  supplier.getBody();
         HeaderDto header                   = supplier.getHeader();
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         try {
                 if (supplierDto != null ) {
                     if (isValid(supplierDto, header.getLanguageCode()) == true) {
@@ -94,8 +94,8 @@ public class SupplierRestController {
     }
 
     @PostMapping(value = "/update")
-    public ResponseEntity<ResponseData<ReturnYNDto>> update(@RequestBody ResponseData<SupplierDto> supplier) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<ReturnYNDto>> update(@RequestBody DataResponse<SupplierDto> supplier) {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         HeaderDto header                   = supplier.getHeader();
         SupplierDto supplierDto            = supplier.getBody();
         try {

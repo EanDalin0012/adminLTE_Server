@@ -1,22 +1,15 @@
 package com.spring.adminlte.templatesDto;
 
-public class ResponseData <H, T> {
-    private H header;
+import com.spring.adminlte.dto.HeaderDto;
+
+public class DataResponse<T> {
+    private HeaderDto header;
     private T body;
-
-    public ResponseData(H header, T body) {
-        this.header = header;
-        this.body = body;
-    }
-
-    public ResponseData() {
-    }
-
-    public H getHeader() {
+    public HeaderDto getHeader() {
         return header;
     }
 
-    public void setHeader(H header) {
+    public void setHeader(HeaderDto header) {
         this.header = header;
     }
 
@@ -30,7 +23,7 @@ public class ResponseData <H, T> {
 
     @Override
     public String toString() {
-        return "ResponseData{" +
+        return "DataResponse{" +
                 "header=" + header +
                 ", body=" + body +
                 '}';

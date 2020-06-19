@@ -9,8 +9,8 @@ import com.spring.adminlte.dto.RoleDto;
 import com.spring.adminlte.dto.vo.IDVo;
 import com.spring.adminlte.dto.vo.RoleVo;
 import com.spring.adminlte.services.serviceImplements.RoleServiceImplement;
+import com.spring.adminlte.templatesDto.DataResponse;
 import com.spring.adminlte.templatesDto.RequestData;
-import com.spring.adminlte.templatesDto.ResponseData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +47,9 @@ public class RoleRestController {
     * @description retrieve role list
     * */
     @PostMapping(value = "/getList")
-    public ResponseEntity<ResponseData<RoleVo>> getList(@RequestBody RequestData<HeaderDto> param) {
+    public ResponseEntity<DataResponse<RoleVo>> getList(@RequestBody RequestData<HeaderDto> param) {
         HeaderDto header = param.getHeader();
-        ResponseData<RoleVo> response = new ResponseData<>();
+        DataResponse<RoleVo> response = new DataResponse<>();
         RoleVo list = retrieveRoleList(header);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -59,23 +59,23 @@ public class RoleRestController {
      * @description save role information
      * */
     @PostMapping(value = "/save")
-    public ResponseEntity<ResponseData<ReturnYNDto>> save(@RequestBody RequestData<RoleDto> param) {
+    public ResponseEntity<DataResponse<ReturnYNDto>> save(@RequestBody RequestData<RoleDto> param) {
         return getResponseDataEntity(param, "save");
     }
 
     @PostMapping(value = "/update")
-    public ResponseEntity<ResponseData<ReturnYNDto>> update(@RequestBody RequestData<RoleDto> param) {
+    public ResponseEntity<DataResponse<ReturnYNDto>> update(@RequestBody RequestData<RoleDto> param) {
         return getResponseDataEntity(param, "update");
     }
 
     @PostMapping(value = "/deleteVo")
-    public ResponseEntity<ResponseData<ReturnYNDto>> deleteByListId (@RequestBody RequestData<IDVo> param) {
-        ResponseData<ReturnYNDto> response = executingUpdateByID(param);
+    public ResponseEntity<DataResponse<ReturnYNDto>> deleteByListId (@RequestBody RequestData<IDVo> param) {
+        DataResponse<ReturnYNDto> response = executingUpdateByID(param);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    private ResponseData<ReturnYNDto> executingUpdateByID(RequestData<IDVo> param){
-        ResponseData<ReturnYNDto> output = new ResponseData<>();
+    private DataResponse<ReturnYNDto> executingUpdateByID(RequestData<IDVo> param){
+        DataResponse<ReturnYNDto> output = new DataResponse<>();
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
         RoleDto role = new RoleDto();
         HeaderDto header = new HeaderDto();
@@ -109,8 +109,8 @@ public class RoleRestController {
         return output;
     }
 
-    private ResponseEntity<ResponseData<ReturnYNDto>> getResponseDataEntity(RequestData<RoleDto> param, String note) {
-        ResponseData<ReturnYNDto> response = executing(param, note);
+    private ResponseEntity<DataResponse<ReturnYNDto>> getResponseDataEntity(RequestData<RoleDto> param, String note) {
+        DataResponse<ReturnYNDto> response = executing(param, note);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -119,8 +119,8 @@ public class RoleRestController {
     *@param para note
     *@description save or update role information
     * */
-    private ResponseData<ReturnYNDto> executing(RequestData<RoleDto> param, String note)  {
-        ResponseData<ReturnYNDto> output = new ResponseData<>();
+    private DataResponse<ReturnYNDto> executing(RequestData<RoleDto> param, String note)  {
+        DataResponse<ReturnYNDto> output = new DataResponse<>();
         HeaderDto header = new HeaderDto();
         int save = 0;
         try {

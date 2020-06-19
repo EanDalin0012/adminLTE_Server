@@ -8,8 +8,8 @@ import com.spring.adminlte.dto.ReturnYNDto;
 import com.spring.adminlte.dto.UserDto;
 import com.spring.adminlte.dto.vo.UserVo;
 import com.spring.adminlte.services.serviceImplements.UserServiceImplement;
+import com.spring.adminlte.templatesDto.DataResponse;
 import com.spring.adminlte.templatesDto.RequestData;
-import com.spring.adminlte.templatesDto.ResponseData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +39,8 @@ public class UserRestController {
     * @description get user information list
     * */
     @PostMapping(value = "/list")
-    public ResponseEntity<ResponseData<UserVo>> getList(@RequestBody HeaderDto param) throws Exception{
-        ResponseData<UserVo> response = new ResponseData<>();
+    public ResponseEntity<DataResponse<UserVo>> getList(@RequestBody HeaderDto param) throws Exception{
+        DataResponse<UserVo> response = new DataResponse<>();
         HeaderDto header = param;
         try {
             UserVo list = userVo();
@@ -59,7 +59,7 @@ public class UserRestController {
      * @description save information of user
      * */
     @PostMapping(value = "/save")
-    public ResponseEntity<ResponseData<ReturnYNDto>> save(RequestData<UserDto> param) {
+    public ResponseEntity<DataResponse<ReturnYNDto>> save(RequestData<UserDto> param) {
         return getResponseDataEntity(param, "save");
     }
 
@@ -68,18 +68,18 @@ public class UserRestController {
      * @description save information of user
      * */
     @PostMapping(value = "/update")
-    public ResponseEntity<ResponseData<ReturnYNDto>> update(@RequestBody RequestData<UserDto> param) {
+    public ResponseEntity<DataResponse<ReturnYNDto>> update(@RequestBody RequestData<UserDto> param) {
         return getResponseDataEntity(param, "update");
     }
 
-    public ResponseEntity<ResponseData<UserDto>> getValueByID() {
-        ResponseData<UserDto> responseData = new ResponseData<>();
+    public ResponseEntity<DataResponse<UserDto>> getValueByID() {
+        DataResponse<UserDto> dataResponse = new DataResponse<>();
 
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(dataResponse, HttpStatus.OK);
     }
 
-    private ResponseEntity<ResponseData<ReturnYNDto>> getResponseDataEntity(RequestData<UserDto> param, String note) {
-        ResponseData<ReturnYNDto> response = new ResponseData<>();
+    private ResponseEntity<DataResponse<ReturnYNDto>> getResponseDataEntity(RequestData<UserDto> param, String note) {
+        DataResponse<ReturnYNDto> response = new DataResponse<>();
         HeaderDto header = param.getHeader();
         UserDto user = param.getBody();
         try {

@@ -8,10 +8,9 @@ import java.util.List;
 @Repository
 public interface MainCategoryService {
     Long save(MMap mMap) throws Exception;
-
-    List<MainCategoryDto> getList(String status);
+    List<MMap> getList(String status);
     Long delete(MainCategoryDto mainCategoryDto);
     MainCategoryDto getValueById(int id);
-    Long update(MainCategoryDto mainCategoryDto);
+    Long update(MMap param) throws Exception;
     int count();
 }

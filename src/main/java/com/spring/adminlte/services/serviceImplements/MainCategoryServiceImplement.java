@@ -16,14 +16,14 @@ public class MainCategoryServiceImplement implements MainCategoryService {
     private MainCategoryDao mainCategoryDao;
 
     @Override
-    public List<MainCategoryDto> getList(String status) {
+    public List<MMap> getList(String status) {
         return mainCategoryDao.getList(status);
     }
 
     @Override
     public Long save(MMap param) throws Exception {
         try {
-            ValidatorUtil.validate(param, "mainCategoryName", "userID", "status");
+            ValidatorUtil.validate(param, "id", "mainCategoryName", "userID", "status");
             return mainCategoryDao.save(param);
         }catch (Exception e) {
             throw e;
@@ -41,8 +41,9 @@ public class MainCategoryServiceImplement implements MainCategoryService {
     }
 
     @Override
-    public Long update(MainCategoryDto mainCategoryDto) {
-        return mainCategoryDao.update(mainCategoryDto);
+    public Long update(MMap param) throws Exception {
+        ValidatorUtil.validate(param, "id", "mainCategoryName", "userID", "status");
+        return mainCategoryDao.update(param);
     }
 
     @Override
