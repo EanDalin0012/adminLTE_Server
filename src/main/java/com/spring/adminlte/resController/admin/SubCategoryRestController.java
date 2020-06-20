@@ -5,15 +5,15 @@
  **/
 package com.spring.adminlte.resController.admin;
 
-import com.spring.adminlte.component.Translator;
-import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
-import com.spring.adminlte.dao.SubCategoryDetailDao;
-import com.spring.adminlte.dto.*;
-import com.spring.adminlte.dto.vo.IDVo;
-import com.spring.adminlte.dto.vo.SubCategoryVo;
+import com.spring.adminlte.dao.SequenceDao;
+import com.spring.adminlte.dao.SubCateDetailsDao;
+import com.spring.adminlte.dao.SubCategoryDao;
+import com.spring.adminlte.mmap.MMap;
+import com.spring.adminlte.mmap.MultiMap;
 import com.spring.adminlte.templatesDto.*;
 import com.spring.adminlte.services.serviceImplements.SubCategoryServiceImplement;
+import com.spring.adminlte.utils.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,27 +35,35 @@ public class SubCategoryRestController {
     private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
     @Autowired
     private SubCategoryServiceImplement subCategoryService;
-    @Autowired
-    private SubCategoryDetailDao subCategoryDetailDao;
+
     @Autowired
     private PlatformTransactionManager transactionManager;
+    @Autowired
+    private SequenceDao sequenceDao;
+    @Autowired
+    private SubCategoryDao subCategoryDao;
+    @Autowired
+    private SubCateDetailsDao subCateDetailsDao;
 
-    String msg = "";
     /**
+     * <pre>
+     *     get sub category list
+     * </pre>
      * @functionName getList
      * @param  param
-     * @description get sub category list
      * @return list of sub category
      **/
     @PostMapping(value = "/getList")
-    public ResponseEntity<DataResponse<List<SubCategoryDetailDto>>> getList(@RequestBody RequestData<HeaderDto> param) {
-        DataResponse<List<SubCategoryDetailDto>> response = new DataResponse<>();
-        HeaderDto header                          = param.getHeader();
+    public ResponseEntity<ResponseData<MMap,List<MMap>>> getList(@RequestBody MMap param) {
+        ResponseData<MMap,List<MMap>> responseData = new ResponseData<>();
+        MMap header = param.getMMap("header");
         try{
-            List<SubCategoryDetailDto> list = subCategoryDetailDao.getList();
-            response.setHeader(header);
-            response.setBody(list);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            MMap input = new MMap();
+            input.setString("status", Status.Delete.getValueStr());
+            List<MMap> list = subCateDetailsDao.retrieveSubCategoryDetails(input);
+            responseData.setHeader(header);
+            responseData.setBody(list);
+            return new ResponseEntity<>(responseData, HttpStatus.OK);
         }catch (Exception e) {
             log.error("\n get error api sub category get list:\n"+e.getMessage());
             throw e;
@@ -63,119 +71,31 @@ public class SubCategoryRestController {
 
     }
 
-    /*
-    * @functionName subCategoryList
-    * @param param
-    * @description get all list of subcategory that not delete
-    * */
-    @PostMapping(value = "/subCategoryList")
-    public ResponseEntity<DataResponse<SubCategoryVo>> subCategoryList(@RequestBody RequestData<HeaderDto> param) {
-        DataResponse<SubCategoryVo> response = new DataResponse<>();
-        SubCategoryVo responseList = new SubCategoryVo();
-        HeaderDto header = param.getHeader();
-            try{
-                    List<SubCategoryDto> list = subCategoryService.getList(Status.Delete.getValueStr());
-                    responseList.setList(list);
-                    response.setHeader(header);
-                    response.setBody(responseList);
-            }catch (Exception e) {
-                log.error("\n get error subcategory list \n", e.getMessage());
-                throw e;
-            }
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
 
     /**
-     * @functionName getList
+     * <pre>
+     *     save information of sub category
+     * </pre>
      * @param  param
-     * @description get sub category list
-     * @return list of sub category
-     **/
-    @PostMapping(value = "/getSubCategoryList")
-    public ResponseEntity<DataResponse<List<SubCategoryDetailDto>>> getSubCategoryList(@RequestBody RequestData<SubCategoryDto> param) {
-        DataResponse<List<SubCategoryDetailDto>> response = new DataResponse<>();
-        HeaderDto header                   = param.getHeader();
-        try{
-            List<SubCategoryDetailDto> list = subCategoryDetailDao.getList();
-            response.setHeader(header);
-            response.setBody(list);
-        }catch (Exception e) {
-            log.error("\n get error api sub category get list:\n", e.getMessage());
-            header.setResult(false);
-            header.setMsg(Translator.toLocale( header.getLanguageCode(),"GET_ERROR_EXCEPTION"));
-            throw e;
-        }
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    /**
-     * @functionName save
-     * @param  param
-     * @description get save information sub category
-     * @return ResponseMapDto
+     * @return ResponseEntity<ResponseData<MMap, MMap>>
+     * @throws Exception
      **/
     @PostMapping(value = "/save")
-    public ResponseEntity<DataResponse<ReturnYNDto>> save (@RequestBody RequestData<SubCategoryDto> param) {
-        DataResponse<ReturnYNDto> response = new DataResponse<>();
-        HeaderDto header        = param.getHeader();
-        SubCategoryDto body     = param.getBody();
-        try{
-            if (isValid(body, header.getLanguageCode()) == true) {
-                body.setStatus(Status.Active.getValueStr());
-                Long save = subCategoryService.save(body);
-                if (save > 0 ) {
-                    header.setResult(true);
-                    response.setHeader(header);
-                    response.setBody(new ReturnYNDto(true, SYN.Y.getValue()));
-                    return new ResponseEntity<>(response,HttpStatus.OK);
-                }
-            }
-        }catch (Exception e) {
-            log.error("\n get error api sub category save error:\n" + e.getMessage());
-            msg = Translator.toLocale( header.getLanguageCode(),"GET_ERROR_EXCEPTION");
-            throw e;
-        }
-
-        header.setResult(false);
-        header.setMsg(msg);
-        response.setHeader(header);
-        response.setBody(new ReturnYNDto(false, SYN.N.getValue()));
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<ResponseData<MMap, MMap>> save (@RequestBody MMap param) throws Exception {
+        return responseEntityInfo(param, "save");
     }
 
     /**
-     * @functionName update
+     * <pre>
+     *     update information of sub category
+     * </pre>
      * @param  param
-     * @description get update information sub category
-     * @return ResponseMapDto
+     * @return ResponseEntity<ResponseData<MMap,MMap >>
+     * @throws Exception
      **/
     @PostMapping(value = "/update")
-    public ResponseEntity<DataResponse<ReturnYNDto>> update (@RequestBody RequestData<SubCategoryDto> param) {
-        DataResponse<ReturnYNDto> response = new DataResponse<>();
-        HeaderDto header        = param.getHeader();
-        SubCategoryDto body     = param.getBody();
-        try{
-            if (isValidForUdate(body, header.getLanguageCode()) == true) {
-                body.setStatus(Status.Modify.getValueStr());
-                Long update = subCategoryService.update(body);
-                if (update > 0 ) {
-                    header.setResult(true);
-                    response.setHeader(header);
-                    response.setBody(new ReturnYNDto(true, SYN.Y.getValue()));
-                    return new ResponseEntity<>(response,HttpStatus.OK);
-                }
-            }
-        }catch (Exception e) {
-            log.error("\n get error api sub category save error:\n" + e.getMessage());
-            msg = Translator.toLocale( header.getLanguageCode(),"GET_ERROR_EXCEPTION");
-            throw e;
-        }
-
-        header.setResult(false);
-        header.setMsg(msg);
-        response.setHeader(header);
-        response.setBody(new ReturnYNDto(false, SYN.N.getValue()));
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<ResponseData<MMap,MMap >> update (@RequestBody MMap param) throws Exception {
+        return responseEntityInfo(param, "update");
     }
 
     /**
@@ -185,74 +105,127 @@ public class SubCategoryRestController {
      * @return response
      **/
     @PostMapping(value = "/deleteByListID")
-    public ResponseEntity<DataResponse<ReturnYNDto>> deleteByListId (@RequestBody RequestData<IDVo> param) {
-        DataResponse<ReturnYNDto> response = new DataResponse<>();
-        HeaderDto header                = param.getHeader();
-        SubCategoryDto subCategoryDto   = new SubCategoryDto();
-        IDVo listIDDto             = param.getBody();
+    public ResponseEntity< ResponseData<MMap, MMap>> deleteByListId (@RequestBody MMap param) throws Exception {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap header                       = param.getMMap("header");
+        MMap body                         = param.getMMap("body");
+        MultiMap list                     = body.getMultiMap("list");
+
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
         try{
-            if (listIDDto.getList().size() > 0) {
-                for ( IdDto idDto: listIDDto.getList()) {
-                    subCategoryDto.setId(idDto.getId());
-                    subCategoryDto.setStatus(Status.Delete.getValueStr());
-                    subCategoryService.delete(subCategoryDto);
-                }
-                transactionManager.commit(transactionStatus);
-                header.setResult(true);
-                response.setHeader(header);
-                response.setBody(new ReturnYNDto(true, SYN.Y.getValue()));
-                return new ResponseEntity<>(response, HttpStatus.OK);
+            int count = list.size();
+            for (int i =0; i < count; i++) {
+                MMap input = list.getData(i);
+                input.setString("status", Status.Delete.getValueStr());
+                System.out.println(input);
+                subCategoryService.delete(input);
             }
 
+            MMap resBody  = new MMap();
+            resBody.setString("returnYN", "Y");
+            response.setHeader(header);
+            response.setBody(resBody);
+            transactionManager.commit(transactionStatus);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (Exception e) {
             log.error("\n get error api sub category save error:\n" + e.getMessage());
-            msg = Translator.toLocale( header.getLanguageCode(),"GET_ERROR_EXCEPTION");
             transactionManager.rollback(transactionStatus);
            throw e;
         }
-
-        header.setResult(false);
-        header.setMsg(msg);
-        response.setHeader(header);
-        response.setBody(new ReturnYNDto(false, SYN.N.getValue()));
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
-     * @functionName isValid
-     * @param subCategory,languageCode
-     * @description check valid information of sub category
-     * @return true, false
-     */
-    private boolean isValid(SubCategoryDto subCategory, String languageCode) {
-        if (subCategory.getMainCatId() == 0) {
-            msg = Translator.toLocale( languageCode,"GET_ERROR_MAIN_CATEGORY_ID");
-            return false;
-        } else  if (subCategory.getCategoryName() == "" || subCategory.getCategoryName() == null) {
-            msg = Translator.toLocale( languageCode,"SUB_CATEGORY_REQUIRED");
-            return false;
+     * <pre>
+     *     get sub category information
+     * </pre>
+     * @param  param
+     * @return ResponseEntity<ResponseData<MMap, MMap>>
+     * @throws Exception
+     **/
+    @PostMapping(value = "/id")
+    public ResponseEntity<ResponseData<MMap, MMap>> getValueById(@RequestBody MMap param) {
+        ResponseData<MMap, MMap> responseData = new ResponseData<>();
+        MMap header = param.getMMap("header");
+        MMap body   = param.getMMap("body");
+        try {
+            MMap input = new MMap();
+            input.setLong("id", body.getLong("id"));
+            MMap response = subCategoryService.getValueById(input);
+            responseData.setHeader(header);
+            responseData.setBody(response);
+        }catch (Exception e) {
+            log.error("get error Exception getValueById", e);
+            throw e;
         }
-        return true;
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
     /**
-     * @functionName isValid
-     * @param subCategory,languageCode
-     * @description check valid information of sub category
-     * @return true, false
-     */
-    private boolean isValidForUdate(SubCategoryDto subCategory, String languageCode) {
-        if (subCategory.getId() == 0) {
-            msg = Translator.toLocale( languageCode,"GET_ERROR_MAIN_CATEGORY_ID");
-            return false;
-        } else if(subCategory.getMainCatId() == 0) {
-            msg = Translator.toLocale( languageCode,"GET_ERROR_MAIN_CATEGORY_ID");
-            return false;
-        } else  if (subCategory.getCategoryName() == "" || subCategory.getCategoryName() == null) {
-            msg = Translator.toLocale( languageCode,"SUB_CATEGORY_REQUIRED");
-            return false;
+     * <pre>
+     *     register or update information of main category
+     * </pre>
+     * @param param
+     * @param  function
+     * @return ResponseEntity<MMap>
+     * @throws Exception
+     * */
+    private ResponseEntity<ResponseData<MMap, MMap>> responseEntityInfo(MMap param, String function) throws Exception {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap getHeader     = param.getMMap("header");
+        MMap getBody       = param.getMMap("body");
+        TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
+        try {
+            MMap input          = new MMap();
+
+            MMap responseBody   = new MMap();
+            String Yn           = "N";
+
+            ValidatorUtil.validate(getBody, "subCategoryName", "mainCategoryId");
+
+            input.setString("subCategoryName",  getBody.getString("subCategoryName"));
+            input.setString("description",      getBody.getString("description"    ));
+            input.setLong("userID",     getHeader.getLong("userID"));
+
+            if (function == "save") {
+                int sequenceNo  = sequenceDao.getSequenceSubCategory();
+                input.setLong("id"  ,       sequenceNo);
+                input.setString("status",   Status.Active.getValueStr());
+
+
+                MMap inputDetail    = new MMap();
+                inputDetail.setLong("mnCateId", getBody.getLong("mainCategoryId"));
+                inputDetail.setLong("sbCateId", sequenceNo);
+
+                Long save = subCategoryService.save(input);
+                Long saveDetail = subCategoryDao.saveDetail(inputDetail);
+                if (save > 0 && saveDetail > 0) {
+                    Yn = "Y";
+                }
+            }
+            if (function == "update") {
+                input.setLong("id"  ,     getBody.getLong("id")  );
+                input.setString("status", Status.Modify.getValueStr());
+
+                MMap inputDetail    = new MMap();
+                inputDetail.setLong("mnCateId", getBody.getLong("mainCategoryId"));
+                inputDetail.setLong("sbCateId", getBody.getLong("id"));
+
+                Long update = subCategoryService.update(input);
+                Long updateDetail = subCategoryDao.updateDetail(inputDetail);
+                if (update > 0 && updateDetail > 0) {
+                    Yn = "Y";
+                }
+            }
+
+            transactionManager.commit(transactionStatus);
+            responseBody.setString("returnYN", Yn);
+            response.setHeader(getHeader);
+            response.setBody(responseBody);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            transactionManager.rollback(transactionStatus);
+            log.error("get Exception ", e);
+            throw e;
         }
-        return true;
     }
 }

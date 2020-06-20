@@ -2,9 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.SubCategoryDao">
 	
-	<resultMap type="SubCategoryDto"   		id="subCategoryDto">
+	<resultMap type="MMap"   		id="subCategoryDto">
 		<id property="id"	    			column="sub_id"/>
-		<id property="mainCatId" 			column="mn_cate_id"/>
 		<id property="categoryName" 		column="sub_cat_nm"/>
 		<id property="status" 				column="sub_cat_status"/>
 		<id property="createBy" 			column="sub_cat_create_by"/>
@@ -18,7 +17,6 @@
 	   <![CDATA[
 			select
 		 	  tsc.sub_id
-			, tsc.mn_cate_id
 			, tsc.sub_cat_nm
 			, tsc.sub_cat_desc
 			, tsc.sub_cat_status
@@ -31,37 +29,58 @@
 	   ]]>
 	</select>
 
-	<insert id="save" parameterType="subCategoryDto">
+	<insert id="save">
     	<![CDATA[
 	    	INSERT INTO tb_sb_category
 			(
-				  mn_cate_id
+				  sub_id
 				, sub_cat_nm
 				, sub_cat_status
 				, sub_cat_create_by
 				, sub_cate_create_date
-				, sub_cat_modify_by
-				, sub_cat_modify_date
 				, sub_cat_desc
 			)
 			VALUES (
-				  #{mainCatId}
-				, #{categoryName}
-				, #{status}
-				, #{createBy}
-				, to_char(NOW(), 'YYYYMMDD')
-				, #{modifyBy}
+				   #{id}
+				 , #{subCategoryName}
+				,  #{status}
+				,  #{userID}
 				, to_char(NOW(), 'YYYYMMDD')
 				, COALESCE(#{description}, '' )
 			);
     	]]>
     </insert>
 
+	<insert id="saveDetail">
+    	<![CDATA[
+	    	INSERT INTO tb_cate
+			(
+			  mn_cate_id
+				, sb_cate_id
+			)
+			VALUES (
+				  #{mnCateId}
+				, #{sbCateId}
+			);
+    	]]>
+    </insert>
+
+	<update id="updateDetail">
+		<![CDATA[
+			UPDATE tb_cate
+			SET
+				 mn_cate_id		= #{mnCateId}
+				, sb_cate_id	= #{sbCateId}
+			WHERE mn_cate_id 	= #{mnCateId}
+			and mn_cate_id 		= #{sbCateId}
+		]]>
+	</update>
+
+
 	<select id="getValueById" resultMap="subCategoryDto">
 	   <![CDATA[
 		  select
-			  tsc.sub_id
-	        , mn_cate_id
+			  sub_id
 			, sub_cat_nm
 			, sub_cat_status
 			, sub_cat_create_by
@@ -69,7 +88,8 @@
 			, sub_cat_modify_by
 			, sub_cat_modify_date
 			, sub_cat_desc
-	      from tb_sb_category tsc 			where tsc.sub_id = #{id}
+	      from tb_sb_category
+	      where sub_id = #{id}
 	     ]]>
 	</select>
 
@@ -81,21 +101,20 @@
 	   ]]>
 	</select>
 
-	<update id="update" parameterType="subCategoryDto">
+	<update id="update">
 		<![CDATA[
 			UPDATE tb_sb_category
 			SET
-				 mn_cate_id				= #{mainCatId}
-				, sub_cat_nm			= #{categoryName}
+				  sub_cat_nm			= #{subCategoryName}
 				, sub_cat_status		= #{status}
-				, sub_cat_modify_by		= #{modifyBy}
+				, sub_cat_modify_by		= #{userID}
 				, sub_cat_modify_date	= to_char(NOW(), 'YYYYMMDD')
 				, sub_cat_desc			= COALESCE( #{description}, '' )
 			WHERE sub_id 		    	= #{id}
 		]]>
 	</update>
 
-	<update id="delete" parameterType="subCategoryDto">
+	<update id="delete">
 		<![CDATA[
 			UPDATE tb_sb_category
 			 SET

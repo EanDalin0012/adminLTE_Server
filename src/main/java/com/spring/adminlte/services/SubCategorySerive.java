@@ -1,16 +1,13 @@
 package com.spring.adminlte.services;
 
-import com.spring.adminlte.dto.SubCategoryDto;
+import com.spring.adminlte.mmap.MMap;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface SubCategorySerive {
-    List<SubCategoryDto> getList(String status);
-    Long save(SubCategoryDto subCategoryDto);
-    Long delete(SubCategoryDto subCategoryDto);
-    SubCategoryDto getValueById(int id);
-    Long update(SubCategoryDto subCategoryDto);
+    Long save(MMap param) throws Exception;
+    Long delete(MMap param) throws  Exception;
+    MMap getValueById(MMap param);
+    Long update(MMap param) throws Exception;
     int count();
 }

@@ -108,12 +108,12 @@
 		]]>
 	</update>
 
-	<update id="delete" parameterType="mainCategoryDto">
+	<update id="delete">
 		<![CDATA[
 		UPDATE tb_mn_category
 	     SET
 	     	mn_cate_status			= #{status}
-	     	, mn_cat_modify_date		= to_char(NOW(), 'YYYYMMDD')
+	     	, mn_cat_modify_date	= to_char(NOW(), 'YYYYMMDD')
 	     WHERE   mn_cat_id			= #{id}
 		]]>
 	</update>

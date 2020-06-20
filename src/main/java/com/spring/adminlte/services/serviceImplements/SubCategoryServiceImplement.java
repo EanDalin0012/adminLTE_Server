@@ -1,40 +1,38 @@
 package com.spring.adminlte.services.serviceImplements;
 
 import com.spring.adminlte.dao.SubCategoryDao;
-import com.spring.adminlte.dto.SubCategoryDto;
+import com.spring.adminlte.mmap.MMap;
 import com.spring.adminlte.services.SubCategorySerive;
+import com.spring.adminlte.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 public class SubCategoryServiceImplement implements SubCategorySerive {
     @Autowired
     private SubCategoryDao subCategoryDao;
 
     @Override
-    public List<SubCategoryDto> getList(String status) {
-        return subCategoryDao.getList(status);
+    public Long save(MMap param) throws Exception {
+        ValidatorUtil.validate(param, "id", "subCategoryName", "status");
+        return subCategoryDao.save(param);
     }
 
     @Override
-    public Long save(SubCategoryDto subCategoryDto) {
-        return subCategoryDao.save(subCategoryDto);
+    public Long delete(MMap param) throws Exception {
+        ValidatorUtil.validate(param, "id", "status");
+        return subCategoryDao.delete(param);
     }
 
     @Override
-    public Long delete(SubCategoryDto subCategoryDto) {
-        return subCategoryDao.delete(subCategoryDto);
+    public MMap getValueById(MMap param) {
+        return subCategoryDao.getValueById(param);
     }
 
     @Override
-    public SubCategoryDto getValueById(int id) {
-        return subCategoryDao.getValueById(id);
-    }
-
-    @Override
-    public Long update(SubCategoryDto subCategoryDto) {
-        return subCategoryDao.update(subCategoryDto);
+    public Long update(MMap param) throws Exception {
+        ValidatorUtil.validate(param, "id", "subCategoryName", "status");
+        return subCategoryDao.update(param);
     }
 
     @Override

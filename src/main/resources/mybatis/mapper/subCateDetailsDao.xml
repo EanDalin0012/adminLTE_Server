@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.SubCateDetailsDao">
 
+	<resultMap type="MMap"   			id="subCategoryDetails">
+		<id property="subCatId"	    	column="sub_id"/>
+		<result property="subCatName" 	column="sub_cat_nm"/>
+		<result property="mainCatId" 	column="mn_cat_id"/>
+		<result property="mainCatName" 	column="mn_cat_nm"/>
+		<result property="description" 	column="sub_cat_desc"/>
+		<result property="createBy" 	column="sub_cat_create_by"/>
+		<result property="createDate" 	column="sub_cate_create_date"/>
+		<result property="modifyBy" 	column="sub_cat_modify_by"/>
+		<result property="modifyDate" 	column="sub_cat_modify_date"/>
+		<result property="status" 		column="sub_cat_status"/>
+	</resultMap>
+
 	<resultMap type="java.util.LinkedHashMap" id="UserResult">
 		<id property="mainCategoryId" column="mn_cat_id"/>
 		<result property="id" column="id"/>
@@ -26,6 +39,28 @@
 		inner join tb_mn_category tmc on tmc.mn_cat_id = tmsc.mn_cate_id
 		inner join tb_sb_category tsc on tsc.sub_id = tmsc.sb_cate_id
 		where tsc.sub_cat_status != '6'
+	   ]]>
+	</select>
+
+
+	<select id="retrieveSubCategoryDetails"  resultMap="subCategoryDetails">
+	   <![CDATA[
+		select
+			mc.mn_cat_id
+			, mc.mn_cat_nm
+			, sc.sub_id
+			, sc.sub_cat_nm
+			, sc.sub_cat_desc
+			, sc.sub_cat_create_by
+			, sc.sub_cate_create_date
+			, sc.sub_cat_modify_by
+			, sc.sub_cat_modify_date
+			, sc.sub_cat_status
+			from tb_cate c
+		inner join tb_mn_category mc on mc.mn_cat_id = c.mn_cate_id
+		inner join tb_sb_category sc on sc.sub_id = c.sb_cate_id
+		where sc.sub_cat_status != #{status}
+		order by c.mn_cate_id ;
 	   ]]>
 	</select>
 

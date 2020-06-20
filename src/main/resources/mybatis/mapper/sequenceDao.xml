@@ -7,4 +7,10 @@
 		  SELECT nextval('sequenceMainCategory');
 	     ]]>
 	</select>
+
+	<select id="getSequenceSubCategory" resultType='java.lang.Integer'>
+	   <![CDATA[
+		  SELECT nextval('sequenceSubCategory');
+	     ]]>
+	</select>
 </mapper>

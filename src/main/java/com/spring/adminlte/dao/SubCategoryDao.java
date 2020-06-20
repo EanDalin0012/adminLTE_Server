@@ -1,15 +1,16 @@
 package com.spring.adminlte.dao;
 
-import com.spring.adminlte.dto.SubCategoryDto;
+import com.spring.adminlte.mmap.MMap;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
 @Mapper
 public interface SubCategoryDao {
-    List<SubCategoryDto> getList(String status);
-    Long save(SubCategoryDto subCategoryDto);
-    Long delete(SubCategoryDto subCategoryDto);
-    SubCategoryDto getValueById(int id);
-    Long update(SubCategoryDto subCategoryDto);
+    Long save(MMap param);
+    Long saveDetail(MMap param);
+    Long updateDetail(MMap param);
+    Long delete(MMap param);
+
+    MMap getValueById(MMap param);
+    Long update(MMap param);
     int count();
 }

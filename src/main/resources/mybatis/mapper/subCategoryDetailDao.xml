@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.SubCategoryDetailDao">
-	
-	<resultMap type="SubCategoryDetailDto"   	id="subCategoryDetailDto">
+
+	<resultMap type="MMap"   					id="subCategoryDetailDto">
 		<id property="subCatId"	    			column="sub_id"/>
 		<id property="mainCatId" 				column="mn_cat_id"/>
 		<id property="subCatName" 				column="sub_cat_nm"/>
@@ -30,7 +30,7 @@
 				, tsc.sub_cat_modify_by
 			from tb_sb_category tsc
 			inner join tb_mn_category tmc on tmc.mn_cat_id = tsc.mn_cate_id
-			where tsc.sub_cat_status != '6'
+			where tsc.sub_cat_status != #{status}
 			order by tsc.sub_id DESC
 	   ]]>
 	</select>

@@ -1,11 +1,9 @@
 package com.spring.adminlte.services.serviceImplements;
 
 import com.spring.adminlte.dao.MainCategoryDao;
-import com.spring.adminlte.dto.MainCategoryDto;
 import com.spring.adminlte.mmap.MMap;
 import com.spring.adminlte.services.MainCategoryService;
 import com.spring.adminlte.utils.ValidatorUtil;
-import org.apache.tomcat.jni.Mmap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +29,15 @@ public class MainCategoryServiceImplement implements MainCategoryService {
     }
 
     @Override
-    public Long delete(MainCategoryDto mainCategoryDto) {
-        return mainCategoryDao.delete(mainCategoryDto);
+    public Long delete(MMap param) throws Exception{
+        ValidatorUtil.validate(param, "id", "status");
+        return mainCategoryDao.delete(param);
     }
 
     @Override
-    public MainCategoryDto getValueById(int id) {
-        return mainCategoryDao.getValueById(id);
+    public MMap getValueById(MMap param) throws Exception {
+        ValidatorUtil.validate(param, "id");
+        return mainCategoryDao.getValueById(param);
     }
 
     @Override
