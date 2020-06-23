@@ -1,4 +1,4 @@
-package com.spring.adminlte.resController.admin;
+package com.spring.adminlte.api.restcontroller.admin;
 
 import com.spring.adminlte.dao.SubCateDetailsDao;
 import org.slf4j.Logger;

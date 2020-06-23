@@ -1,11 +1,9 @@
 package com.spring.adminlte.dao;
 
-import com.spring.adminlte.dto.ProductDetailsDto;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
-
 @Mapper
 public interface ProductDetailsDao {
-    List<ProductDetailsDto> getList(String status);
+    MultiMap getList(MMap param);
 }

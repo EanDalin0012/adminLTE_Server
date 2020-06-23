@@ -2,7 +2,9 @@ package com.spring.adminlte.services.serviceImplements;
 
 import com.spring.adminlte.dao.SupplierDao;
 import com.spring.adminlte.dto.SupplierDto;
+import com.spring.adminlte.core.map.MMap;
 import com.spring.adminlte.services.SupplierService;
+import com.spring.adminlte.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +15,19 @@ public class SupplierServiceImplement implements SupplierService {
     private SupplierDao supplierDao;
 
     @Override
-    public List<SupplierDto> getList(String status) {
-        return supplierDao.getList(status);
+    public List<MMap> getList(MMap param) {
+        return supplierDao.getList(param);
     }
 
     @Override
-    public Long save(SupplierDto supplierDto) {
-        return supplierDao.save(supplierDto);
+    public Long save(MMap param) throws Exception {
+        ValidatorUtil.validate(param, "supName", "supContact","supEmail", "userID", "status");
+        return supplierDao.save(param);
     }
 
     @Override
-    public Long delete(SupplierDto supplierDto) {
-        return supplierDao.delete(supplierDto);
+    public Long delete(MMap param) {
+        return supplierDao.delete(param);
     }
 
     @Override
@@ -33,8 +36,9 @@ public class SupplierServiceImplement implements SupplierService {
     }
 
     @Override
-    public Long update(SupplierDto supplierDto) {
-        return supplierDao.update(supplierDto);
+    public Long update(MMap param) throws Exception {
+        ValidatorUtil.validate(param, "id","supName", "supContact","supEmail", "userID", "status");
+        return supplierDao.update(param);
     }
 
     @Override

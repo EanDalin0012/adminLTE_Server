@@ -1,4 +1,4 @@
-package com.spring.adminlte.resController.admin;
+package com.spring.adminlte.api.restcontroller.admin;
 
 import com.spring.adminlte.component.Translator;
 import com.spring.adminlte.constants.SYN;
@@ -8,8 +8,8 @@ import com.spring.adminlte.dto.ReturnYNDto;
 import com.spring.adminlte.dto.UserDto;
 import com.spring.adminlte.dto.vo.UserVo;
 import com.spring.adminlte.services.serviceImplements.UserServiceImplement;
-import com.spring.adminlte.templatesDto.DataResponse;
-import com.spring.adminlte.templatesDto.RequestData;
+import com.spring.adminlte.core.template.classes.DataResponse;
+import com.spring.adminlte.core.template.classes.RequestData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

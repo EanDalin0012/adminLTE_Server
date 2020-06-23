@@ -1,4 +1,4 @@
-package com.spring.adminlte.templatesDto;
+package com.spring.adminlte.core.template.classes;
 
 public class ResponseData <H, T> {
     private H header;

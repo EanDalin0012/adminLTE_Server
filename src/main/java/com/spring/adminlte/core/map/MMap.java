@@ -1,4 +1,6 @@
-package com.spring.adminlte.mmap;
+package com.spring.adminlte.core.map;
+
+import com.spring.adminlte.core.protocol.MProtocol;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MMap extends LinkedHashMap<String, Object> implements MProtocol{
+public class MMap extends LinkedHashMap<String, Object> implements MProtocol {
     private static final long serialVersionUID = -5861114305569703387L;
 
     private boolean nullToInitialize = false;

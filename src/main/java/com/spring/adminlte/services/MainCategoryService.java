@@ -1,6 +1,6 @@
 package com.spring.adminlte.services;
 
-import com.spring.adminlte.mmap.MMap;
+import com.spring.adminlte.core.map.MMap;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 

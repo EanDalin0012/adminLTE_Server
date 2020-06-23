@@ -6,13 +6,13 @@
  * @Author Ean Dalin
  * @API api/main_category
  **/
-package com.spring.adminlte.resController.admin;
+package com.spring.adminlte.api.restcontroller.admin;
 
 import com.spring.adminlte.constants.Status;
+import com.spring.adminlte.core.template.classes.ResponseData;
 import com.spring.adminlte.dao.SequenceDao;
-import com.spring.adminlte.mmap.MMap;
-import com.spring.adminlte.mmap.MultiMap;
-import com.spring.adminlte.templatesDto.*;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import com.spring.adminlte.services.serviceImplements.MainCategoryServiceImplement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

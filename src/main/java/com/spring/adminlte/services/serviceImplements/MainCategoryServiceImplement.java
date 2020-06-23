@@ -1,7 +1,7 @@
 package com.spring.adminlte.services.serviceImplements;
 
 import com.spring.adminlte.dao.MainCategoryDao;
-import com.spring.adminlte.mmap.MMap;
+import com.spring.adminlte.core.map.MMap;
 import com.spring.adminlte.services.MainCategoryService;
 import com.spring.adminlte.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;

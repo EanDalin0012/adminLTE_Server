@@ -1,15 +1,15 @@
 package com.spring.adminlte.services;
 
-import com.spring.adminlte.dto.ProductDto;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 @Repository
 public interface ProductSerive {
-    List<ProductDto> getList();
-    Long save(ProductDto productDto);
-    Long delete(ProductDto productDto);
-    ProductDto getProductValueById(int id);
-    Long update(ProductDto productDto);
+    MultiMap getList();
+    Long save(MMap param) throws Exception;
+    Long delete(MMap param) throws Exception;
+    MMap getProductValueById(int id);
+    Long update(MMap param) throws Exception;
     int count();
 }

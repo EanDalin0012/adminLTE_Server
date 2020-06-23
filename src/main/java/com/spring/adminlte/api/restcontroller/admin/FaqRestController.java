@@ -1,4 +1,4 @@
-package com.spring.adminlte.resController.admin;
+package com.spring.adminlte.api.restcontroller.admin;
 
 import com.spring.adminlte.component.Translator;
 import com.spring.adminlte.constants.Status;
@@ -6,7 +6,7 @@ import com.spring.adminlte.dto.FaqDto;
 import com.spring.adminlte.dto.HeaderDto;
 import com.spring.adminlte.dto.vo.FaqVo;
 import com.spring.adminlte.services.serviceImplements.FaqServiceImplement;
-import com.spring.adminlte.templatesDto.DataResponse;
+import com.spring.adminlte.core.template.classes.DataResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,43 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.ProductDetailsDao">
-	
-	<resultMap type="ProductDetailsDto"   	id="productDetailsDto">
-		<id property="productId"	    	column="pro_id"/>
-		<id property="productName" 			column="pro_nm"/>
-		<id property="subCategoryId" 		column="sub_cat_id"/>
-		<id property="subCategoryName" 		column="sub_cat_nm"/>
-		<id property="description" 			column="pro_desc"/>
-		<id property="resourceFileInfoId" 	column="resource_file_info_id"/>
-		<id property="mainCategoryId" 		column="mn_cat_id"/>
-		<id property="mainCategoryName" 	column="mn_cat_nm"/>
 
-		<id property="createBy" 			column="pro_create_by"/>
-		<id property="createDate" 			column="pro_create_date"/>
-		<id property="modifyBy" 			column="pro_modify_by"/>
-		<id property="modifyDate" 			column="pro_modify_date"/>
-		<id property="status" 				column="pro_status"/>
-	</resultMap>
-
-	<select id="getList" resultMap="productDetailsDto">
+	<select id="getList" resultType="MMap">
 	   <![CDATA[
 			select
-				tp.pro_id
-				,tp.pro_nm
-				,tp.sub_cat_id
-				,tsc.sub_cat_nm
-				,tp.pro_create_by
-				,tp.pro_create_date
-				,tp.pro_create_date
-				, tp.pro_modify_date
-				, tp.pro_desc
-				, tp.pro_status
-				, tp.resource_file_info_id
-				, tmc.mn_cat_id
-				, tmc.mn_cat_nm
+				tp.pro_id								as "productId"
+				,tp.pro_nm								as "productName"
+				,tp.pro_desc				as "description"
+				,tp.pro_status							as "status"
+				,tp.pro_create_by						as "createBy"
+				,tp.pro_create_date						as "createDate"
+				,tp.pro_modify_by 		as "modifyBy"
+				,tp.pro_modify_date		as "modifyDate"
+				,tsc.sub_id 							as "subCategoryId"
+				,tsc.sub_cat_nm							as "subCategoryName"
+				,tmc.mn_cat_id 							as "mainCategoryId"
+				,tmc.mn_cat_nm 							as "mainCategoryName"
+				, tp.resource_file_info_id				as "resourceFileInfoId"
 			from tb_product tp
-			inner join tb_sb_category tsc on tsc.sub_id = tp.sub_cat_id
-			inner join tb_mn_category tmc on tmc.mn_cat_id = tsc.mn_cate_id
+			inner join tb_sb_category tsc on tsc.sub_id =tp.sub_cat_id
+			inner join tb_cate tc on tc.sb_cate_id = tp.sub_cat_id
+			inner join tb_mn_category tmc on tmc.mn_cat_id = tc.mn_cate_id
 	   ]]>
 	</select>
 

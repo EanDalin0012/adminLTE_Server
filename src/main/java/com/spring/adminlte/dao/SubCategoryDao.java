@@ -1,6 +1,6 @@
 package com.spring.adminlte.dao;
 
-import com.spring.adminlte.mmap.MMap;
+import com.spring.adminlte.core.map.MMap;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

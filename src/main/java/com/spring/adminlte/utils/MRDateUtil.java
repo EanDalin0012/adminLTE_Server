@@ -1,6 +1,6 @@
 package com.spring.adminlte.utils;
 
-import com.spring.adminlte.resController.admin.CompanyRestController;
+import com.spring.adminlte.api.restcontroller.admin.CompanyRestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

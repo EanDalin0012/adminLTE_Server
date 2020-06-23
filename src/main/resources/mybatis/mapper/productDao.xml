@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.ProductDao">
-	
-	<resultMap type="ProductDto"   			id="productDto">
-		<id property="proId"	    		column="pro_id"/>
-		<id property="subCateId" 			column="sub_cat_id"/>
-		<id property="proName" 				column="pro_nm"/>
-		<id property="description" 			column="pro_desc"/>
-		<id property="resourceFileInfoId" 	column="resource_file_info_id"/>
 
-		<id property="createBy" 			column="pro_create_by"/>
-		<id property="createDate" 			column="pro_create_date"/>
-		<id property="modifyBy" 			column="pro_modify_by"/>
-		<id property="modifyDate" 			column="pro_modify_date"/>
-		<id property="status" 				column="pro_status"/>
-	</resultMap>
-
-	<select id="getList" resultMap="productDto">
+	<select id="getList" resultType="MMap">
 	   <![CDATA[
 			select
 				  tp.pro_id
@@ -39,7 +25,7 @@
 	   ]]>
 	</select>
 
-	<insert id="save" parameterType="productDto">
+	<insert id="save">
     	<![CDATA[
 	    	INSERT INTO tb_product
 			(
@@ -68,7 +54,7 @@
     	]]>
     </insert>
 
-	<select id="getValueById" resultMap="productDto">
+	<select id="getValueById" resultType="MMap">
 	   <![CDATA[
 		 select
 				  tp.pro_id
@@ -85,7 +71,7 @@
 	     ]]>
 	</select>
 
-	<select id="count" resultMap="productDto">
+	<select id="count">
 	   <![CDATA[
 		  select
 	     	count (*)
@@ -93,7 +79,7 @@
 	   ]]>
 	</select>
 
-	<update id="update" parameterType="productDto">
+	<update id="update">
 		<![CDATA[
 			UPDATE tb_product
 			SET
@@ -108,7 +94,7 @@
 		]]>
 	</update>
 
-	<update id="delete" parameterType="productDto">
+	<update id="delete">
 		<![CDATA[
 			UPDATE tb_product
 			 SET

@@ -4,14 +4,15 @@
  * @API Main Category
  **/
 
-package com.spring.adminlte.resController.admin;
+package com.spring.adminlte.api.restcontroller.admin;
 
 import com.spring.adminlte.component.Translator;
 import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
+import com.spring.adminlte.core.template.classes.DataResponse;
+import com.spring.adminlte.core.template.classes.RequestData;
 import com.spring.adminlte.dto.*;
 import com.spring.adminlte.dto.vo.IDVo;
-import com.spring.adminlte.templatesDto.*;
 import com.spring.adminlte.services.serviceImplements.CompanyServiceImplement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

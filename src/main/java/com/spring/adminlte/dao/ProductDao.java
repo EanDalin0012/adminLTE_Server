@@ -1,16 +1,15 @@
 package com.spring.adminlte.dao;
 
-import com.spring.adminlte.dto.ProductDto;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 
 @Mapper
 public interface ProductDao {
-    List<ProductDto> getList();
-    Long save(ProductDto productDto);
-    Long delete(ProductDto productDto);
-    ProductDto getProductValueById(int id);
-    Long update(ProductDto productDto);
+    MultiMap getList();
+    Long save(MMap param);
+    Long delete(MMap param);
+    MMap getProductValueById(int id);
+    Long update(MMap param);
     int count();
 }

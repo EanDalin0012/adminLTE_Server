@@ -1,4 +1,4 @@
-package com.spring.adminlte.templatesDto;
+package com.spring.adminlte.core.template.classes;
 
 import com.spring.adminlte.dto.HeaderDto;
 

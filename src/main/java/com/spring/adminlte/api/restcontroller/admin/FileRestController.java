@@ -1,4 +1,4 @@
-package com.spring.adminlte.resController.admin;
+package com.spring.adminlte.api.restcontroller.admin;
 
 import com.spring.adminlte.constants.BizResultCodeType;
 import com.spring.adminlte.constants.ChannelTypeCode;
@@ -8,7 +8,7 @@ import com.spring.adminlte.dao.ProductImageDao;
 import com.spring.adminlte.dto.*;
 import com.spring.adminlte.services.serviceImplements.FileSystemStorageService;
 import com.spring.adminlte.services.serviceImplements.ResourceFileInfoServiceImplement;
-import com.spring.adminlte.templatesDto.DataResponse;
+import com.spring.adminlte.core.template.classes.DataResponse;
 import org.apache.commons.io.IOUtils;
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
