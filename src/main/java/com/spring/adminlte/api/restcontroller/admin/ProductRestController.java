@@ -168,6 +168,7 @@ public class ProductRestController {
         MMap getHeader  = param.getMMap("header");
         MMap body       = param.getMMap("body");
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
+
         try {
             MMap input          = new MMap();
             MMap responseBody   = new MMap();
@@ -176,7 +177,7 @@ public class ProductRestController {
             ValidatorUtil.validate(body, "proName", "subCateId", "resourceFileInfoId");
 
             input.setString("proName",              body.getString("proName"             ));
-            input.setString("subCateId",            body.getString("subCateId"           ));
+            input.setLong("subCateId",              body.getLong("subCateId"             ));
             input.setString("resourceFileInfoId",   body.getString("resourceFileInfoId"  ));
             input.setLong("userID",                 getHeader.getLong("userID"           ));
             input.setString("description",          body.getString("description"         ));
@@ -189,8 +190,8 @@ public class ProductRestController {
                 }
             }
             if (function == "update") {
-                input.setLong("id"  ,     body.getLong("id")  );
-                input.setString("status", Status.Modify.getValueStr());
+                input.setLong("id"  ,     body.getLong("proId")  );
+                input.setString("status", Status.Modify.getValueStr() );
                 Long update = productService.update(input);
                 if (update > 0 ) {
                     Yn = "Y";

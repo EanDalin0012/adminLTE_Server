@@ -1,15 +1,15 @@
 package com.spring.adminlte.services;
 
-import com.spring.adminlte.dto.RoleDto;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import org.springframework.stereotype.Repository;
-import java.util.List;
 
 @Repository
 public interface RoleService {
-    List<RoleDto> getList(String status);
-    int save(RoleDto roleDto);
-    int delete(RoleDto roleDto);
-    RoleDto getValueById(int id);
-    int update(RoleDto roleDto);
+    MultiMap getList(MMap para);
+    int save(MMap param) throws Exception;
+    int delete(MMap param) throws Exception;
+    MMap getValueById(MMap param) throws Exception;
+    int update(MMap param) throws Exception;
     int count();
 }

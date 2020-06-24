@@ -34,8 +34,6 @@
 				, pro_desc
 				, pro_create_by
 				, pro_create_date
-				, pro_modify_by
-				, pro_modify_date
 				, pro_status
 				, resource_file_info_id
 			)
@@ -43,9 +41,7 @@
 				  #{subCateId}
 				, #{proName}
 				, COALESCE('', #{description} )
-				, #{createBy}
-				, to_char(NOW(), 'YYYYMMDD')
-				, #{modifyBy}
+				, #{userID}
 				, to_char(NOW(), 'YYYYMMDD')
 				, #{status}
 				, #{resourceFileInfoId}
@@ -83,14 +79,14 @@
 		<![CDATA[
 			UPDATE tb_product
 			SET
-				sub_cat_id			= #{subCateId}
-				, comp_id			= #{companyId}
-				, pro_nm			= #{productName}
-				, pro_desc			= COALESCE('', #{description} )
-				, pro_modify_by		= #{modifyBy}
-				, pro_modify_date	= to_char(NOW(), 'YYYYMMDD')
-				, pro_status		= #{status}
-			WHERE pro_id 		    = #{id}
+				sub_cat_id				= #{subCateId}
+				, pro_nm				= #{proName}
+				, pro_desc				= COALESCE('', #{description} )
+				, pro_status			= #{status}
+				, resource_file_info_id = #{resourceFileInfoId}
+				, pro_modify_by			= #{userID}
+				, pro_modify_date		= to_char(NOW(), 'YYYYMMDD')
+			WHERE pro_id 		    	= #{id}
 		]]>
 	</update>
 

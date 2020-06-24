@@ -1,26 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.UserDao">
-	
-	<resultMap type="UserDto"   		id="userDto">
-		<id property="id"	    		column="id"/>
-		<id property="firstName" 		column="first_name"/>
-		<id property="lastName" 		column="last_name"/>
-		<id property="email" 			column="email"/>
-		<id property="password" 		column="password"/>
-		<id property="gender" 			column="gender"/>
-		<id property="contact" 			column="contact"/>
-		<id property="dateOfBirth" 		column="dateOfBirth"/>
-		<id property="address" 			column="address"/>
 
-		<id property="createBy" 		column="create_by"/>
-		<id property="modifyBy" 		column="create_date"/>
-		<id property="createDate" 		column="modify_by"/>
-		<id property="modifyDate" 		column="modify_date"/>
-		<id property="status" 			column="status"/>
-	</resultMap>
 
-	<select id="getList" resultMap="userDto">
+	<select id="getList" resultType="MMap">
 	   <![CDATA[
 		 SELECT
 		 		  id
@@ -41,7 +24,7 @@
 	     ]]>
 	</select>
 
-	<insert id="save" parameterType="userDto">
+	<insert id="save">
     	<![CDATA[
 	    	INSERT INTO user_info
 			(
@@ -76,7 +59,7 @@
     	]]>
     </insert>
 
-	<select id="getValueById" resultMap="userDto">
+	<select id="getValueById" resultType="MMap">
 	   <![CDATA[
 		  SELECT
 	        id
@@ -96,7 +79,7 @@
 	     ]]>
 	</select>
 
-	<select id="count" resultMap="userDto">
+	<select id="count">
 	   <![CDATA[
 		  SELECT
 	     	COUNT (*)
@@ -104,7 +87,7 @@
 	     ]]>
 	</select>
 
-	<update id="update" parameterType="userDto">
+	<update id="update">
 		<![CDATA[
 		UPDATE user_info
 		SET
@@ -123,7 +106,7 @@
 		]]>
 	</update>
 
-	<update id="delete" parameterType="userDto">
+	<update id="delete">
 		<![CDATA[
 		update user_info
         set

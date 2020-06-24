@@ -1,41 +1,43 @@
 package com.spring.adminlte.services.serviceImplements;
 
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import com.spring.adminlte.dao.CompanyDao;
-import com.spring.adminlte.dto.CompanyDto;
-import com.spring.adminlte.services.Companyservice;
+import com.spring.adminlte.services.CompanyService;
+import com.spring.adminlte.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class CompanyServiceImplement implements Companyservice {
+public class CompanyServiceImplement implements CompanyService {
     @Autowired
     private CompanyDao companyDao;
 
     @Override
-    public List<CompanyDto> getList(String status) {
-        return companyDao.getList(status);
+    public MultiMap getList(MMap param) {
+        return companyDao.getList(param);
     }
 
     @Override
-    public Long save(CompanyDto companyDTO) {
-        return companyDao.save(companyDTO);
+    public Long save(MMap param) throws Exception {
+        ValidatorUtil.validate(param, "", "");
+        return companyDao.save(param);
     }
 
     @Override
-    public Long delete(CompanyDto companyDto) {
-        return companyDao.delete(companyDto);
+    public Long delete(MMap param) {
+        return companyDao.delete(param);
     }
 
     @Override
-    public CompanyDto getValueById(int id) {
-        return companyDao.getValueById(id);
+    public MMap getValueById(MMap param) {
+        return companyDao.getValueById(param);
     }
 
     @Override
-    public Long update(CompanyDto companyDTO) {
-        return companyDao.update(companyDTO);
+    public Long update(MMap param) throws Exception {
+        ValidatorUtil.validate(param, "", "");
+        return companyDao.update(param);
     }
 
     @Override

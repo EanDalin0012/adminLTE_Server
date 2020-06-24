@@ -5,11 +5,11 @@ import com.spring.adminlte.core.map.MultiMap;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserService {
+public interface CompanyService {
     MultiMap getList(MMap param);
-    int save(MMap param) throws Exception;
-    int delete(MMap parma);
+    Long save(MMap param) throws Exception;
+    Long delete(MMap param) throws Exception;
     MMap getValueById(MMap param);
-    int update(MMap param) throws Exception;
+    Long update(MMap param) throws Exception;
     int count();
 }

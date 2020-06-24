@@ -228,4 +228,23 @@ public class SubCategoryRestController {
             throw e;
         }
     }
+
+    @PostMapping(value = "/subCategoryList")
+    public ResponseEntity<ResponseData<MMap, MMap>> SubCateDetails(@RequestBody MMap param) {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        try {
+            MMap header = param.getMMap("header");
+            MMap input = new MMap();
+            MMap output = new MMap();
+            input.setString("status", Status.Delete.getValueStr());
+            MultiMap list = subCateDetailsDao.retrieveSubCategoryList(input);
+            output.setMultiMap("list", list);
+            response.setBody(output);
+            response.setHeader(header);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch (Exception e) {
+            log.error("get error api/sub_category/subCategoryList SubCateDetails()", e);
+            throw  e;
+        }
+    }
 }

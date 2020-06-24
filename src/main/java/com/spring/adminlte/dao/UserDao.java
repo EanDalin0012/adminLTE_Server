@@ -1,14 +1,14 @@
 package com.spring.adminlte.dao;
-import com.spring.adminlte.dto.UserDto;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
 @Mapper
 public interface UserDao {
-    List<UserDto> getList(String status);
-    int save(UserDto userDto);
-    int delete(UserDto userDto);
-    UserDto getValueById(int id);
-    int update(UserDto userDto);
+    MultiMap getList(MMap param);
+    int save(MMap param);
+    int delete(MMap param);
+    MMap getValueById(MMap param);
+    int update(MMap param);
     int count();
 }

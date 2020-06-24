@@ -1,11 +1,12 @@
 package com.spring.adminlte.services.serviceImplements;
 
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import com.spring.adminlte.dao.FaqDao;
-import com.spring.adminlte.dto.FaqDto;
 import com.spring.adminlte.services.FaqService;
+import com.spring.adminlte.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class FaqServiceImplement implements FaqService {
@@ -14,28 +15,30 @@ public class FaqServiceImplement implements FaqService {
     private FaqDao faqDao;
 
     @Override
-    public List<FaqDto> getList(String status) {
-        return faqDao.getList(status);
+    public MultiMap getList(MMap param) {
+        return faqDao.getList(param);
     }
 
     @Override
-    public int save(FaqDto faqDto) {
-        return faqDao.save(faqDto);
+    public int save(MMap param) throws Exception {
+        ValidatorUtil.validate(param, "EnTitle", "KHRTitle", "CHTitle");
+        return faqDao.save(param);
     }
 
     @Override
-    public int delete(FaqDto faqDto) {
-        return faqDao.delete(faqDto);
+    public int delete(MMap param) {
+        return faqDao.delete(param);
     }
 
     @Override
-    public FaqDto getValueById(int id) {
-        return faqDao.getValueById(id);
+    public MMap getValueById(MMap param) {
+        return faqDao.getValueById(param);
     }
 
     @Override
-    public int update(FaqDto faqDto) {
-        return faqDao.update(faqDto);
+    public int update(MMap param) throws  Exception {
+        ValidatorUtil.validate(param, "id","EnTitle", "KHRTitle", "CHTitle");
+        return faqDao.update(param);
     }
 
     @Override

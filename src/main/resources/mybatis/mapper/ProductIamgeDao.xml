@@ -101,7 +101,7 @@
 	     ]]>
 	</select>
 
-	<update id="update" parameterType="companyDto">
+	<update id="update">
 		<![CDATA[
 		UPDATE tb_pro_img
 		SET

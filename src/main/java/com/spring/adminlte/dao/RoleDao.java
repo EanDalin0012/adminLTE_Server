@@ -1,15 +1,15 @@
 package com.spring.adminlte.dao;
 
-import com.spring.adminlte.dto.RoleDto;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import org.apache.ibatis.annotations.Mapper;
-import java.util.List;
 
 @Mapper
 public interface RoleDao {
-    List<RoleDto> getList(String status);
-    int save(RoleDto roleDto);
-    int delete(RoleDto roleDto);
-    RoleDto getValueById(int id);
-    int update(RoleDto roleDto);
+    MultiMap getList(MMap param);
+    int save(MMap param);
+    int delete(MMap param);
+    MMap getValueById(MMap param);
+    int update(MMap param);
     int count();
 }

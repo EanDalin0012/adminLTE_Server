@@ -6,14 +6,12 @@
 
 package com.spring.adminlte.api.restcontroller.admin;
 
-import com.spring.adminlte.component.Translator;
-import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
-import com.spring.adminlte.core.template.classes.DataResponse;
-import com.spring.adminlte.core.template.classes.RequestData;
-import com.spring.adminlte.dto.*;
-import com.spring.adminlte.dto.vo.IDVo;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
+import com.spring.adminlte.core.template.classes.ResponseData;
 import com.spring.adminlte.services.serviceImplements.CompanyServiceImplement;
+import com.spring.adminlte.utils.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
-
 
 @RestController
 @RequestMapping(value = "/api/company_access")
@@ -40,171 +36,157 @@ public class CompanyRestController {
     @Autowired
     private PlatformTransactionManager transactionManager;
 
-    String msg;
 
     /**
+     * <pre>
+     *     get list of company
+     * </pre>
      * @param param
-     * @functionName getList
-     * @description Get List Company
+     * @return
+     * @throws
      **/
     @PostMapping(value = "/getList")
-    public ResponseEntity<DataResponse<List<CompanyDto>>> getList(@RequestBody RequestData<HeaderDto> param) {
-        DataResponse<List<CompanyDto>> response = new DataResponse<>();
-        HeaderDto headerDto                   = param.getHeader();
+    public ResponseEntity<ResponseData<MMap, MMap>> getList(@RequestBody MMap param) {
+        ResponseData<MMap, MMap> response   = new ResponseData<>();
+        MMap header                         = param.getMMap("header");
+
         try{
-            List<CompanyDto> list = companyService.getList(Status.Delete.getValueStr());
-            response.setHeader(headerDto);
-            response.setBody(list);
+            MMap input = new MMap();
+
+            input.setString("status", Status.Delete.getValueStr());
+            MultiMap list = companyService.getList(input);
+            MMap out = new MMap();
+            out.setMultiMap("list", list);
+
+            response.setHeader(header);
+            response.setBody(out);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (Exception e) {
             log.error("\n get error api company <<<=== getList() ===>>:\n", e.getMessage());
             throw  e;
         }
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
-     * @param parma
-     * @functionName save
-     * @description save company information
+     * <pre>
+     *     save information of company
+     * </pre>
+     * @param param
+     * @return
+     * @throws
      **/
     @PostMapping(value = "/save")
-    public ResponseEntity<DataResponse<ReturnYNDto>> save(@RequestBody RequestData<CompanyDto> parma) {
-        DataResponse<ReturnYNDto> response = new DataResponse<>();
-        HeaderDto header        = parma.getHeader();
-        CompanyDto body         = parma.getBody();
-
-        response.setHeader(header);
-        try {
-            if( isValid(body, header.getLanguageCode() ) ) {
-                body.setStatus(Status.Active.getValueStr());
-                System.out.println(body.toString());
-                Long save = companyService.save(body);
-                if (save > 0) {
-                    response.setBody(new ReturnYNDto(true, SYN.Y.getValue()));
-                    return new ResponseEntity<>(response, HttpStatus.OK);
-                }
-            } else {
-                header.setResult(false);
-                header.setMsg(msg);
-                response.setBody(new ReturnYNDto(false, SYN.N.getValue()));
-                return new ResponseEntity<>(response,HttpStatus.OK);
-            }
-
-        }catch (Exception e) {
-            log.error("\n get error api save company Error <<<=== save() ===>>>:" + e.getMessage());
-            throw e;
-        }
-        return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+    public ResponseEntity<ResponseData<MMap, MMap>> save(@RequestBody MMap param) throws Exception {
+        return execute(param, "save");
     }
 
     /**
+     * <pre>
+     *     update information of company
+     * </pre>
      * @param param
-     * @functionName update
-     * @description update company information
+     * @return ResponseData<MMap, MMap>
+     * @throws Exception
      **/
     @PostMapping(value = "/update")
-    public ResponseEntity<DataResponse<ReturnYNDto>> update (@RequestBody RequestData<CompanyDto> param) {
-        DataResponse<ReturnYNDto> response  = new DataResponse<>();
-        HeaderDto header         = param.getHeader();
-        CompanyDto body          = param.getBody();
-
-        response.setHeader(header);
-        try {
-            if (isValid(body, header.getLanguageCode())) {
-                body.setStatus(Status.Modify.getValueStr());
-                Long update = companyService.update(body);
-                if (update > 0) {
-                    response.setBody(new ReturnYNDto(true, SYN.Y.getValue()));
-                    return new ResponseEntity<>(response, HttpStatus.OK);
-                }
-            }
-        } catch (Exception e) {
-            log.error("\n get error company api Error <<<=== update() ===>>>:\n", e.getMessage());
-            throw  e;
-        }
-
-        header.setResult(false);
-        response.setHeader(header);
-        response.setBody(new ReturnYNDto(false, SYN.N.getValue()));
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<ResponseData<MMap, MMap>> update (@RequestBody MMap param) throws Exception {
+        return execute(param, "update");
     }
 
     /**
+     * <pre>
+     *
+     * </pre>
      * @param param
      * @functionName delete
      * @description delete main category by id list
      **/
     @PostMapping(value = "/updateListByID")
-    public ResponseEntity<DataResponse<ReturnYNDto>> delete(@RequestBody RequestData<IDVo> param) {
-        DataResponse<ReturnYNDto> response = new DataResponse<>();
-        HeaderDto header        = param.getHeader();
-        IDVo listIDDto     = param.getBody();
+    public ResponseEntity<ResponseData<MMap, MMap>> delete(@RequestBody MMap param) {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap header                       = param.getMMap("header");
+        MMap body                         = param.getMMap("body");
+        MultiMap list                     = body.getMultiMap("list");
+
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
-        CompanyDto company      = new CompanyDto();
-        Long delete = 0l;
+
         try{
-            if (listIDDto.getList().size() > 0) {
-                for (IdDto idDto : listIDDto.getList()) {
-                    boolean result = false;
-                    if (isValidListId(idDto, header.getLanguageCode())) {
-                        company.setId(idDto.getId());
-                        company.setStatus(Status.Delete.getValueStr());
-                        delete = companyService.delete(company);
-                    }
-                }
+            int count = list.size();
+            for (int i =0; i < count; i++) {
+                MMap input = list.getData(i);
+                input.setString("status", Status.Delete.getValueStr());
+                System.out.println(input);
+                companyService.delete(input);
             }
-            if (delete > 0 ) {
-                transactionManager.commit(transactionStatus);
-                header.setResult(true);
-                response.setHeader(header);
-                response.setBody(new ReturnYNDto(true, SYN.Y.getKey()));
-              return new ResponseEntity<>(response, HttpStatus.OK);
-            }
-        } catch (Exception e) {
-           transactionManager.rollback(transactionStatus);
-            log.error("\n get error api company delete api <<<=== delete() ===>>:\n", e.getMessage());
+            MMap resBody  = new MMap();
+            resBody.setString("returnYN", "Y");
+
+            response.setHeader(header);
+            response.setBody(resBody);
+            transactionManager.commit(transactionStatus);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch (Exception e) {
+            log.error("\n get error category get list by Id ===>>>:", e.getMessage());
+            transactionManager.rollback(transactionStatus);
             throw  e;
         }
-        header.setResult(false);
-        header.setMsg(msg);
-        response.setHeader(header);
-        response.setBody(new ReturnYNDto(false, SYN.N.getKey()));
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
-     * @param idDto,LanguageCode
-     * @functionName is isValidListId
-     * @description check valid
-     **/
-    private  boolean isValidListId(IdDto idDto, String LanguageCode) {
-        if (idDto.getId() == 0) {
-            msg = Translator.toLocale( LanguageCode,"SELECT_ROW_FOR_DELETE");
-            return false;
+     * <pre>
+     *     register or update information of main category
+     * </pre>
+     * @param param
+     * @param  function
+     * @return ResponseEntity<MMap>
+     * @throws Exception
+     * */
+    private ResponseEntity<ResponseData<MMap, MMap>> execute(MMap param, String function) throws Exception {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap getHeader  = param.getMMap("header");
+        MMap body       = param.getMMap("body");
+        TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
+
+        try {
+            MMap input          = new MMap();
+            MMap responseBody   = new MMap();
+            String Yn           = "N";
+
+            ValidatorUtil.validate(body, "proName", "subCateId", "resourceFileInfoId");
+
+            input.setString("proName",              body.getString("proName"             ));
+            input.setLong("subCateId",              body.getLong("subCateId"             ));
+            input.setString("resourceFileInfoId",   body.getString("resourceFileInfoId"  ));
+            input.setLong("userID",                 getHeader.getLong("userID"           ));
+            input.setString("description",          body.getString("description"         ));
+
+            if (function == "save") {
+                input.setString("status",   Status.Active.getValueStr());
+                Long save = companyService.save(input);
+                if (save > 0 ) {
+                    Yn = "Y";
+                }
+            }
+            if (function == "update") {
+                input.setLong("id"  ,     body.getLong("proId")  );
+                input.setString("status", Status.Modify.getValueStr() );
+                Long update = companyService.update(input);
+                if (update > 0 ) {
+                    Yn = "Y";
+                }
+            }
+
+            transactionManager.commit(transactionStatus);
+            responseBody.setString("returnYN", Yn);
+            response.setHeader(getHeader);
+            response.setBody(responseBody);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            transactionManager.rollback(transactionStatus);
+            log.error("get Exception ", e);
+            throw e;
         }
-        return  true;
     }
 
-    /**
-     * @param companyDto
-     * @param LanguageCode
-     * valid form control
-     **/
-    private boolean isValid(CompanyDto companyDto, String LanguageCode) {
-        if(companyDto.getName()== null || companyDto.getName().trim().equals("")){
-            msg = Translator.toLocale( LanguageCode,"Company_Name_Required");
-            return false;
-        }
-        if(companyDto.getContact() == null || companyDto.getContact().trim().equals("")) {
-            msg = Translator.toLocale( LanguageCode,"Contact_Required");
-            return false;
-        }
-        if (companyDto.getEmail() == null || companyDto.getEmail().trim().equals("")) {
-            msg = Translator.toLocale( LanguageCode,"Email_Required");
-            return false;
-        }
-        return true;
-    }
 }

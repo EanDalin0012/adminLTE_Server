@@ -1,12 +1,12 @@
 package com.spring.adminlte.services.serviceImplements;
 
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import com.spring.adminlte.dao.UserDao;
-import com.spring.adminlte.dto.UserDto;
 import com.spring.adminlte.services.UserService;
+import com.spring.adminlte.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserServiceImplement implements UserService {
@@ -14,28 +14,30 @@ public class UserServiceImplement implements UserService {
     @Autowired
     private UserDao userDao;
     @Override
-    public List<UserDto> getList(String status) {
-        return userDao.getList(status);
+    public MultiMap getList(MMap param) {
+        return userDao.getList(param);
     }
 
     @Override
-    public int save(UserDto userDto) {
-        return userDao.save(userDto);
+    public int save(MMap param) throws Exception{
+        ValidatorUtil.validate(param, "", "");
+        return userDao.save(param);
     }
 
     @Override
-    public int delete(UserDto userDto) {
-        return userDao.delete(userDto);
+    public int delete(MMap param) {
+        return userDao.delete(param);
     }
 
     @Override
-    public UserDto getValueById(int id) {
-        return userDao.getValueById(id);
+    public MMap  getValueById(MMap param) {
+        return userDao.getValueById(param);
     }
 
     @Override
-    public int update(UserDto userDto) {
-        return userDao.update(userDto);
+    public int update(MMap param) throws Exception{
+        ValidatorUtil.validate(param, "", "");
+        return userDao.update(param);
     }
 
     @Override

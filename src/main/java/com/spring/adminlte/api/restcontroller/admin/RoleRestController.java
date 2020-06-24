@@ -1,16 +1,10 @@
 package com.spring.adminlte.api.restcontroller.admin;
-import com.spring.adminlte.component.Translator;
-import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
-import com.spring.adminlte.dto.HeaderDto;
-import com.spring.adminlte.dto.IdDto;
-import com.spring.adminlte.dto.ReturnYNDto;
-import com.spring.adminlte.dto.RoleDto;
-import com.spring.adminlte.dto.vo.IDVo;
-import com.spring.adminlte.dto.vo.RoleVo;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
+import com.spring.adminlte.core.template.classes.ResponseData;
 import com.spring.adminlte.services.serviceImplements.RoleServiceImplement;
-import com.spring.adminlte.core.template.classes.DataResponse;
-import com.spring.adminlte.core.template.classes.RequestData;
+import com.spring.adminlte.utils.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-/*
+/**
+ * <pre>
+ *     api for role
+ * </pre>
  * @author Ean Dalin
  * @date 2020.05.18
  * */
@@ -41,141 +37,134 @@ public class RoleRestController {
 
     String msg = "";
 
-    /*
-    * @functionName getList
+    /**
+     * <pre>
+     *     get list of role
+     * </pre>
     * @param param
-    * @description retrieve role list
+    * @return  retrieve role list
     * */
     @PostMapping(value = "/getList")
-    public ResponseEntity<DataResponse<RoleVo>> getList(@RequestBody RequestData<HeaderDto> param) {
-        HeaderDto header = param.getHeader();
-        DataResponse<RoleVo> response = new DataResponse<>();
-        RoleVo list = retrieveRoleList(header);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<ResponseData<MMap, MMap>> getList(@RequestBody MMap param) {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap header = param.getMMap("header");
+
+        try{
+            MMap input = new MMap();
+            MMap output = new MMap();
+
+            input.setString("status", Status.Delete.getValueStr());
+            MultiMap list = roleService.getList(input);
+            output.setMultiMap("list", list);
+
+            response.setHeader(header);
+            response.setBody(output);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch (Exception e) {
+            log.error("\n get error get list of api role",e);
+            throw e;
+        }
     }
-    /*
-     * @functionName save
+
+    /**
+     * <pre>
+     *     save information of role
+     * </pre>
      * @param param
-     * @description save role information
+     * @return  ResponseData<MMap, MMap>
      * */
     @PostMapping(value = "/save")
-    public ResponseEntity<DataResponse<ReturnYNDto>> save(@RequestBody RequestData<RoleDto> param) {
-        return getResponseDataEntity(param, "save");
+    public ResponseEntity<ResponseData<MMap, MMap>> save(@RequestBody MMap param) throws Exception {
+        return execute(param, "save");
     }
 
     @PostMapping(value = "/update")
-    public ResponseEntity<DataResponse<ReturnYNDto>> update(@RequestBody RequestData<RoleDto> param) {
-        return getResponseDataEntity(param, "update");
+    public ResponseEntity<ResponseData<MMap, MMap>> update(@RequestBody MMap param) throws Exception {
+        return execute(param, "update");
     }
 
     @PostMapping(value = "/deleteVo")
-    public ResponseEntity<DataResponse<ReturnYNDto>> deleteByListId (@RequestBody RequestData<IDVo> param) {
-        DataResponse<ReturnYNDto> response = executingUpdateByID(param);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+    public ResponseEntity<ResponseData<MMap, MMap>> deleteByListId (@RequestBody MMap param) throws Exception {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap header                       = param.getMMap("header");
+        MMap body                         = param.getMMap("body");
+        MultiMap list                     = body.getMultiMap("list");
 
-    private DataResponse<ReturnYNDto> executingUpdateByID(RequestData<IDVo> param){
-        DataResponse<ReturnYNDto> output = new DataResponse<>();
         TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
-        RoleDto role = new RoleDto();
-        HeaderDto header = new HeaderDto();
-
-        try {
-            if (param.getBody().getList().size() > 0) {
-                for(IdDto obj: param.getBody().getList()) {
-                    role.setId(obj.getId());
-                    role.setStatus(Status.Delete.getValueStr());
-                    roleService.delete(role);
-                }
-                transactionManager.commit(transactionStatus);
-                header.setResult(true);
-                output.setHeader(header);
-                output.setBody(new ReturnYNDto(true, SYN.Y.getValue()));
-                return output;
+        try{
+            int count = list.size();
+            for (int i =0; i < count; i++) {
+                MMap input = list.getData(i);
+                input.setString("status", Status.Delete.getValueStr());
+                System.out.println(input);
+                roleService.delete(input);
             }
+
+            MMap resBody  = new MMap();
+            resBody.setString("returnYN", "Y");
+            response.setHeader(header);
+            response.setBody(resBody);
+            transactionManager.commit(transactionStatus);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (Exception e) {
-            log.error("\n get error executing update status to delete role \n", e.getMessage());
-            msg = Translator.toLocale(param.getHeader().getLanguageCode(), "");
+            log.error("\n get error api sub category save error:\n" + e.getMessage());
             transactionManager.rollback(transactionStatus);
             throw e;
-
         }
-
-        header.setResult(false);
-        header.setMsg(msg);
-        output.setHeader(header);
-        output.setBody(new ReturnYNDto(false, SYN.N.getValue()));
-
-        return output;
     }
 
-    private ResponseEntity<DataResponse<ReturnYNDto>> getResponseDataEntity(RequestData<RoleDto> param, String note) {
-        DataResponse<ReturnYNDto> response = executing(param, note);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+    /**
+     * <pre>
+     *     register or update information of role
+     * </pre>
+     * @param param
+     * @param  function
+     * @return ResponseEntity<MMap>
+     * @throws Exception
+     * */
+    private ResponseEntity<ResponseData<MMap, MMap>> execute(MMap param, String function) throws Exception {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap getHeader  = param.getMMap("header");
+        MMap body       = param.getMMap("body");
+        TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
 
-    /*
-    *@functionName executing
-    *@param para note
-    *@description save or update role information
-    * */
-    private DataResponse<ReturnYNDto> executing(RequestData<RoleDto> param, String note)  {
-        DataResponse<ReturnYNDto> output = new DataResponse<>();
-        HeaderDto header = new HeaderDto();
-        int save = 0;
         try {
-            if (isValid(param.getHeader().getLanguageCode(), param.getBody()) == true) {
-                switch (note) {
-                    case "save":
-                        save = roleService.save(param.getBody());
-                        break;
-                    case "update":
-                        if (param.getBody().getId() != 0) {
-                            save = roleService.update(param.getBody());
-                        } else {
-                            msg = Translator.toLocale(param.getHeader().getLanguageCode(), "Role_ID_Undefined");
-                        }
-                        break;
-                }
+            MMap input          = new MMap();
+            MMap responseBody   = new MMap();
+            String Yn           = "N";
 
-                if (save > 0) {
-                    header.setResult(true);
-                    output.setHeader(header);
-                    output.setBody(new ReturnYNDto(true, SYN.Y.getKey()));
-                    return output;
+            ValidatorUtil.validate(body, "proName", "subCateId", "resourceFileInfoId");
+
+            input.setString("roleName",             body.getString("proName"             ));
+            input.setString("description",          body.getString("description"         ));
+
+            if (function == "save") {
+                input.setString("status",   Status.Active.getValueStr());
+                int save = roleService.save(input);
+                if (save > 0 ) {
+                    Yn = "Y";
                 }
             }
+            if (function == "update") {
+                input.setLong("id"  ,     body.getLong("id")  );
+                input.setString("status", Status.Modify.getValueStr() );
+                int update = roleService.update(input);
+                if (update > 0 ) {
+                    Yn = "Y";
+                }
+            }
+
+            transactionManager.commit(transactionStatus);
+            responseBody.setString("returnYN", Yn);
+            response.setHeader(getHeader);
+            response.setBody(responseBody);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            log.error("\n get error save role\n",e.getMessage());
-            throw  e;
+            transactionManager.rollback(transactionStatus);
+            log.error("get Exception ", e);
+            throw e;
         }
-
-        header.setResult(false);
-        header.setMsg(msg);
-        output.setBody(new ReturnYNDto(false, SYN.N.getKey()));
-        output.setHeader(header);
-
-        return output;
-    };
-
-    private RoleVo retrieveRoleList(HeaderDto param) {
-        RoleVo response = new RoleVo();
-        try{
-            List<RoleDto> list = roleService.getList(Status.Delete.getValueStr());
-            response.setList(list);
-        }catch (Exception e) {
-            log.error("\n get error retrieve role list\n", e.getMessage());
-            throw  e;
-        }
-        return response;
-    }
-
-    private boolean isValid(String langCode, RoleDto role) {
-        if (role.getRoleName().equals("") || role.getRoleName() == null ) {
-            msg = Translator.toLocale(langCode, "Role_Name_Require");
-            return false;
-        }
-        return true;
     }
 
 }

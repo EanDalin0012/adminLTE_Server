@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.CompanyDao">
-	
-	<resultMap type="CompanyDto"   		id="companyDto">
-		<id property="id"	    		column="comp_id"/>
-		<id property="name" 			column="comp_nm"/>
-		<id property="contact" 			column="comp_contact"/>
-		<id property="email" 			column="comp_email"/>
-		<id property="address" 			column="comp_address"/>
-		<id property="description" 		column="comp_desc"/>
-		<id property="createBy" 		column="comp_create_by"/>
-		<id property="modifyBy" 		column="comp_create_date"/>
-		<id property="createDate" 		column="comp_modify_by"/>
-		<id property="modifyDate" 		column="comp_modify_date"/>
-		<id property="status" 			column="comp_status"/>
-	</resultMap>
 
-	<select id="getList" resultMap="companyDto">
+	<select id="getList" resultType="MMap">
 	   <![CDATA[
 		 SELECT
 		 		  comp_id
@@ -35,7 +21,7 @@
 	     ]]>
 	</select>
 
-	<insert id="save" parameterType="companyDto">
+	<insert id="save">
     	<![CDATA[
 	    	INSERT INTO tb_company
 			(
@@ -66,7 +52,7 @@
     	]]>
     </insert>
 
-	<select id="getValueById" resultMap="companyDto">
+	<select id="getValueById" resultType="MMap">
 	   <![CDATA[
 		  SELECT
 	        id 				AS  "id"
@@ -83,7 +69,7 @@
 	     ]]>
 	</select>
 
-	<select id="count" resultMap="companyDto">
+	<select id="count">
 	   <![CDATA[
 		  SELECT
 	     	COUNT (*)
@@ -91,7 +77,7 @@
 	     ]]>
 	</select>
 
-	<update id="update" parameterType="companyDto">
+	<update id="update" >
 		<![CDATA[
 		UPDATE tb_company
 		SET
@@ -108,7 +94,7 @@
 		]]>
 	</update>
 
-	<update id="delete" parameterType="companyDto">
+	<update id="delete">
 		<![CDATA[
 		update tb_company
         set

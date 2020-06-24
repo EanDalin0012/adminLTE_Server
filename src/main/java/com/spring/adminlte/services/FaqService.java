@@ -1,16 +1,15 @@
 package com.spring.adminlte.services;
 
-import com.spring.adminlte.dto.FaqDto;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface FaqService {
-    List<FaqDto> getList(String status);
-    int save(FaqDto faqDto);
-    int delete(FaqDto faqDto);
-    FaqDto getValueById(int id);
-    int update(FaqDto faqDto);
+    MultiMap getList(MMap param);
+    int save(MMap param) throws Exception;
+    int delete(MMap param);
+    MMap getValueById(MMap param);
+    int update(MMap param) throws Exception;
     int count();
 }

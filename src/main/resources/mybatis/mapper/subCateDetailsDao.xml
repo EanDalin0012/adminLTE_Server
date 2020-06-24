@@ -64,4 +64,22 @@
 	   ]]>
 	</select>
 
+	<select id="retrieveSubCategoryList"  resultType="MMap">
+	   <![CDATA[
+		select
+			tc.mn_cate_id 								as "mainCategoryId"
+			, tsc.sub_id								as "id"
+			, tsc.sub_cat_nm 							as "subCategoryName"
+			, tsc .sub_cat_desc 						as "description"
+			, tsc.sub_cat_status 						as "status"
+			, tsc.sub_cat_create_by 					as "createBy"
+			, tsc.sub_cate_create_date 					as "createDate"
+			,COALESCE(tsc.sub_cat_modify_by, null )		as "modifyBy"
+			,COALESCE(tsc.sub_cat_modify_date, null ) 	as "modifyDate"
+		from tb_sb_category tsc
+		inner join tb_cate tc on tc.sb_cate_id = tsc.sub_id
+		where tsc.sub_cat_status  != #{status}
+	   ]]>
+	</select>
+
 </mapper>

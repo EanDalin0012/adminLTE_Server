@@ -1,15 +1,15 @@
 package com.spring.adminlte.dao;
 
-import com.spring.adminlte.dto.FaqDto;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
 @Mapper
 public interface FaqDao {
-    List<FaqDto> getList(String status);
-    int save(FaqDto faqDto);
-    int delete(FaqDto faqDto);
-    FaqDto getValueById(int id);
-    int update(FaqDto faqDto);
+    MultiMap getList(MMap param);
+    int save(MMap param);
+    int delete(MMap param);
+    MMap getValueById(MMap param);
+    int update(MMap param);
     int count();
 }

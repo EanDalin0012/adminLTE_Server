@@ -1,33 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.RoleDao">
-	
-	<resultMap type="RoleDto"   		id="roleDto">
-		<id property="id"	    		column="id"/>
-		<id property="roleName" 		column="role_name"/>
 
-		<id property="createBy" 		column="create_by"/>
-		<id property="modifyBy" 		column="create_date"/>
-		<id property="createDate" 		column="modify_by"/>
-		<id property="modifyDate" 		column="modify_date"/>
-		<id property="status" 			column="status"/>
-	</resultMap>
-
-	<select id="getList" resultMap="roleDto">
+	<select id="getList" resultType="MMap">
 	   <![CDATA[
 		 SELECT
-		 		  id
-		 		, role_name
-		 		, create_by
-		 		, create_date
-		 		, modify_by
-		 		, modify_date
+		 		  id			as "id"
+		 		, role_name		as "roleName"
+		 		, create_by		as "createBy"
+		 		, create_date	as "createDate"
+		 		, modify_by		as "modifyBy"
+		 		, modify_date	as "modifyDate"
 		 FROM role
 		 WHERE status != #{status}
 	     ]]>
 	</select>
 
-	<insert id="save" parameterType="roleDto">
+	<insert id="save">
     	<![CDATA[
 	    	INSERT INTO role
 			(
@@ -50,7 +39,7 @@
     	]]>
     </insert>
 
-	<select id="getValueById" resultMap="roleDto">
+	<select id="getValueById" resultType="MMap">
 	   <![CDATA[
 		  SELECT
 	        id
@@ -63,7 +52,7 @@
 	     ]]>
 	</select>
 
-	<select id="count" resultMap="roleDto">
+	<select id="count">
 	   <![CDATA[
 		  SELECT
 	     	COUNT (*)
@@ -71,7 +60,7 @@
 	     ]]>
 	</select>
 
-	<update id="update" parameterType="roleDto">
+	<update id="update">
 		<![CDATA[
 		UPDATE role
 		SET
@@ -84,7 +73,7 @@
 		]]>
 	</update>
 
-	<update id="delete" parameterType="roleDto">
+	<update id="delete">
 		<![CDATA[
 		update role
         set
