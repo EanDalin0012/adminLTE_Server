@@ -4,20 +4,13 @@
 * @date 18-04-2020
 * */
 package com.spring.adminlte.api.restcontroller.admin;
-
-import com.spring.adminlte.component.Translator;
-import com.spring.adminlte.constants.SYN;
 import com.spring.adminlte.constants.Status;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.map.MultiMap;
+import com.spring.adminlte.core.template.classes.ResponseData;
 import com.spring.adminlte.dao.ImportProductDetailsDao;
-import com.spring.adminlte.dto.HeaderDto;
-import com.spring.adminlte.dto.ImportProductDetailsDto;
-import com.spring.adminlte.dto.ImportProductDto;
-import com.spring.adminlte.dto.ReturnYNDto;
-import com.spring.adminlte.dto.vo.ImportProductDetailsVo;
-import com.spring.adminlte.dto.vo.ImportProductVo;
 import com.spring.adminlte.services.serviceImplements.ImportProductServiceImplement;
-import com.spring.adminlte.core.template.classes.DataResponse;
-import com.spring.adminlte.core.template.classes.RequestData;
+import com.spring.adminlte.utils.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = "/api/import-product")
 public class ImportProductRestController {
@@ -45,116 +36,152 @@ public class ImportProductRestController {
     @Autowired
     private PlatformTransactionManager transactionManager;
 
-    String msg = "";
 
-    /*
-    * @functionName inquiryImportPrdoductDetials
+    /**
+     * <pre>
+     *     get list of import product
+     * </pre>
     * @param param
-    * @decription inquiry data details of import product
+     * @return
+     * @throws
     * */
     @PostMapping(value = "/getListDetails")
-    public ResponseEntity<DataResponse<ImportProductDetailsVo>> inquiryImportProductDetails(@RequestBody RequestData<HeaderDto> param) {
-        DataResponse<ImportProductDetailsVo> response = new DataResponse<>();
-        HeaderDto header = param.getHeader();
-        ImportProductDetailsVo responseList = new ImportProductDetailsVo();
+    public ResponseEntity<ResponseData<MMap, MMap>> inquiryImportProductDetails(@RequestBody MMap param) {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap header = param.getMMap("header");
+
         try{
-            List<ImportProductDetailsDto> list = importProductDetailsDao.getList(Status.Delete.getValueStr());
-            responseList.setList(list);
-            response.setBody(responseList);
+            MMap input = new MMap();
+            MMap output = new MMap();
+
+            input.setString("status", Status.Delete.getValueStr());
+            MultiMap list = importProductDetailsDao.getList(input);
+            output.setMultiMap("list", list);
+
+            response.setBody(output);
             response.setHeader(header);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+
         }catch (Exception e) {
             log.error("\n ====> get error inquiry import product details <=== \n");
             throw  e;
         }
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    /*
-    *@functionName getList()
+
+    /**
+     * <pre>
+     *     get list import product
+     * </pre>
     * @param param
-    * @description get list of import product
+     * @return
+     * @throws
     * */
     @PostMapping(value = "/getList")
-    public ResponseEntity<DataResponse<ImportProductVo>> getList(@RequestBody RequestData<HeaderDto> param) {
-        DataResponse<ImportProductVo> response = new DataResponse<>();
-        HeaderDto header = param.getHeader();
-        ImportProductVo responseList = new ImportProductVo();
+    public ResponseEntity<ResponseData<MMap, MMap>> getList(@RequestBody MMap param) {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap header = param.getMMap("header");
+
         try{
-            List<ImportProductDto> list = importProductService.getList(Status.Delete.getValueStr());
-            responseList.setList(list);
+            MMap input      = new MMap();
+            MMap output     = new MMap();
+
+            input.setString("status", Status.Delete.getValueStr());
+            MultiMap list   = importProductService.getList(input);
+            output.setMultiMap("list", list);
+
             response.setHeader(header);
-            response.setBody(responseList);
+            response.setBody(output);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (Exception e) {
             log.error("\n ===>> get error get list of import product <===\n", e.getMessage());
             throw e;
         }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
-    /*
-    * @functionName save
-    * @param requestData
-    * @description  save import product information
+    /**
+     * <pre>
+     *     register of import product
+     * </pre>
+    * @param param
+     * @return ResponseData<MMap, MMap>
+     * @throws Exception
     * */
     @PostMapping(value = "/save")
-    public ResponseEntity<DataResponse<ReturnYNDto>> save (@RequestBody RequestData<ImportProductVo> requestData) {
-        DataResponse<ReturnYNDto> response = new DataResponse<>();
-        HeaderDto header = requestData.getHeader();
-        ImportProductVo list = requestData.getBody();
-        TransactionStatus transactionStatus = transactionManager.getTransaction(new DefaultTransactionDefinition());
-        Long save = null;
-
-        try {
-            for ( ImportProductDto trmImp : list.getList() ) {
-                if (isValid(trmImp, header.getLanguageCode()) == true) {
-                    trmImp.setStatus(Status.Active.getValueStr());
-                    save = importProductService.save(trmImp);
-                }
-            }
-            if ( save > 0) {
-                transactionManager.commit(transactionStatus);
-                response.setHeader(header);
-                response.setBody( new ReturnYNDto(false, SYN.Y.getKey()));
-                return new ResponseEntity<>(response, HttpStatus.OK);
-            }
-
-        }catch (Exception e) {
-            transactionManager.rollback(transactionStatus);
-            throw e;
-        }
-
-        header.setResult(false);
-        header.setMsg(msg);
-
-        response.setHeader(header);
-        response.setBody( new ReturnYNDto(false, SYN.N.getKey()));
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<ResponseData<MMap, MMap>> save (@RequestBody MMap param) throws Exception {
+        return execute(param, "save");
     }
 
-    private  boolean isValid(ImportProductDto importProductDto, String languageCode) {
-        if (importProductDto.getProductId() == 0) {
-            msg = Translator.toLocale(languageCode, "");
-            return false;
-        }
-        if (importProductDto.getCompanyId() == 0) {
-            msg = Translator.toLocale(languageCode, "");
-            return  false;
-        }
-        if (importProductDto.getQuantity() == 0) {
-            msg = Translator.toLocale(languageCode, "");
-            return  false;
-        }
-        if (importProductDto.getPrice() == 0) {
-            msg = Translator.toLocale(languageCode, "");
-            return  false;
-        }
-        if (importProductDto.getTotal() == 0) {
-            msg = Translator.toLocale(languageCode, "");
-            return  false;
-        }
-        if (importProductDto.getSupplierId() == 0) {
-            msg = Translator.toLocale(languageCode, "");
-            return  false;
-        }
+    /**
+     * <pre>
+     *     update information of import product
+     * </pre>
+     * @param param
+     * @return ResponseData<MMap, MMap>
+     * @throws Exception
+     * */
+    @PostMapping(value = "/update")
+    public ResponseEntity<ResponseData<MMap, MMap>> update (@RequestBody MMap param) throws Exception {
+        return execute(param, "save");
+    }
 
-        return  true;
+    /**
+     * <pre>
+     *     register or update information of main category
+     * </pre>
+     * @param param
+     * @param  function
+     * @return ResponseEntity<MMap>
+     * @throws Exception
+     * */
+    private ResponseEntity<ResponseData<MMap, MMap>> execute(MMap param, String function) throws Exception {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap getHeader  = param.getMMap("header");
+        MMap body       = param.getMMap("body");
+        TransactionStatus transactionStatus    = transactionManager.getTransaction(new DefaultTransactionDefinition());
+
+        try {
+            MMap input          = new MMap();
+            MMap responseBody   = new MMap();
+            String Yn           = "N";
+
+            ValidatorUtil.validate(param, "productId", "supplierId", "companyId","quantity","price","total","discount", "currencyCode");
+
+            input.setString("productId",    body.getString("productId"      ));
+            input.setLong("supplierId",     body.getLong("companyId"        ));
+            input.setLong("companyId",      body.getLong("companyId"        ));
+            input.setLong("quantity",       body.getLong("quantity"         ));
+            input.setLong("price",          body.getLong("price"            ));
+            input.setString("total",        body.getString("total"          ));
+            input.setString("discount",     body.getString("discount"       ));
+            input.setString("currencyCode", body.getString("currencyCode"   ));
+            input.setLong("userID",         getHeader.getLong("userID"      ));
+            input.setString("description",  body.getString("description"    ));
+
+            if (function == "save") {
+                input.setString("status",   Status.Active.getValueStr());
+                Long save = importProductService.save(input);
+                if (save > 0 ) {
+                    Yn = "Y";
+                }
+            }
+            if (function == "update") {
+                input.setLong("id"  ,     body.getLong("id")  );
+                input.setString("status", Status.Modify.getValueStr() );
+                Long update = importProductService.update(input);
+                if (update > 0 ) {
+                    Yn = "Y";
+                }
+            }
+
+            transactionManager.commit(transactionStatus);
+            responseBody.setString("returnYN", Yn);
+            response.setHeader(getHeader);
+            response.setBody(responseBody);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            transactionManager.rollback(transactionStatus);
+            log.error("get Exception ", e);
+            throw e;
+        }
     }
 }

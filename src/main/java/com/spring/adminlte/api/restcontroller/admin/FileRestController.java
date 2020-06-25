@@ -54,7 +54,7 @@ public class FileRestController {
     public ResponseEntity<InputStreamResource> getImage(@PathVariable("id") int id) throws IOException {
 
         try{
-            ProductImageDto productImageDto = productImageService.getValueById(id);
+//            ProductImageDto productImageDto = productImageService.getValueById(id);
             String resource = productImageService.getPathImage(id);
 //            String resource = productImageDto.getUri();
             ClassPathResource imgFile = new ClassPathResource(resource);
