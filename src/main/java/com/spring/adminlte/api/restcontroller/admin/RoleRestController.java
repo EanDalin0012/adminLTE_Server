@@ -35,7 +35,6 @@ public class RoleRestController {
     @Autowired
     private PlatformTransactionManager transactionManager;
 
-    String msg = "";
 
     /**
      * <pre>

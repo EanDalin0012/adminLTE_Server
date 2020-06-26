@@ -1,51 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.ImportProductDetailsDao">
-	
-	<resultMap type="ImportProductDetailsDto"  id="importProductDetailsDto">
-		<id property="id"	    		column="import_pro_id"/>
-		<id property="productId" 		column="product_id"/>
-		<id property="productName" 		column="pro_nm"/>
-		<id property="companyId" 		column="comp_id"/>
-		<id property="companyName" 		column="comp_nm"/>
-		<id property="supplierId" 		column="supplier_id"/>
-		<id property="supplierName" 	column="sup_nm"/>
-		<id property="price" 			column="price"/>
-		<id property="discount" 		column="discount"/>
-		<id property="qty" 				column="qty"/>
 
-		<id property="total" 			column="total"/>
-		<id property="currencyCode" 	column="currency_code"/>
-		<id property="description" 		column="descr"/>
-
-		<id property="createBy" 		column="create_by"/>
-		<id property="modifyBy" 		column="modify_by"/>
-		<id property="createDate" 		column="create_date"/>
-		<id property="modifyDate" 		column="modify_date"/>
-		<id property="status" 			column="status"/>
-	</resultMap>
-
-	<select id="getList" resultMap="importProductDetailsDto">
+	<select id="getList" resultType="MMap">
 	   <![CDATA[
 		 select
-			 tip.import_pro_id
-			, tip.product_id
-			, tp.pro_nm
-			, tip.comp_id
-			, tc.comp_nm
-			, tip.supplier_id
-			, ts.sup_nm
-			, tip.price
-			, tip.discount
-			, tip.qty
-			, tip.total
-			, tip.currency_code
-			, tip.descr
-			, tip.status
-			, tip.create_by
-			, tip.create_date
-			, tip.modify_by
-			, tip.modify_date
+			 tip.import_pro_id		as "id"
+			, tip.product_id		as "productId"
+			, tp.pro_nm				as "productName"
+			, tip.comp_id			as "companyId"
+			, tc.comp_nm			as "companyName"
+			, tip.supplier_id		as "supplierId"
+			, ts.sup_nm				as "supplierName"
+			, tip.price				as "price"
+			, tip.discount			as "discount"
+			, tip.qty				as "qty"
+			, tip.total				as "total"
+			, tip.currency_code		as "currencyCode"
+			, tip.descr				as "description"
+			, tip.status			as "status"
+			, tip.create_by			as "createBy"
+			, tip.create_date		as "createDate"
+			, tip.modify_by			as "modifyBy"
+			, tip.modify_date		as "modifyDate"
 		 from  tb_import_product tip
 		 inner join tb_product tp on tip.product_id = tp.pro_id
 		 inner join tb_company tc on tc.comp_id	   = tip.comp_id

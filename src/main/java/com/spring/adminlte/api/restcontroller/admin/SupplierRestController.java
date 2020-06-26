@@ -33,7 +33,6 @@ public class SupplierRestController {
     @Autowired
     private PlatformTransactionManager transactionManager;
 
-    String msg = "";
 
     /**
      * <pre>

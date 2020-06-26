@@ -34,8 +34,6 @@ public class UserRestController {
     @Autowired
     private PlatformTransactionManager transactionManager;
 
-    String msg = "";
-
     /* @function getList
     * @param param
     * @description get user information list
