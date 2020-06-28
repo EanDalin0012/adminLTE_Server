@@ -1,50 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.ImportProductDao">
-	
-	<resultMap type="ImportProductDto"  id="importProductDto">
-		<id property="id"	    		column="import_pro_id"/>
-		<id property="productId" 		column="product_id"/>
-		<id property="supplierId" 		column="supplier_id"/>
-		<id property="companyId" 		column="comp_id"/>
-		<id property="quantity" 		column="qty"/>
-		<id property="price" 			column="price"/>
-		<id property="discount" 		column="discount"/>
-		<id property="total" 			column="total"/>
-		<id property="currencyCode" 	column="currency_code"/>
-		<id property="description" 		column="descr"/>
 
-		<id property="createBy" 		column="create_by"/>
-		<id property="modifyBy" 		column="modify_by"/>
-		<id property="createDate" 		column="create_date"/>
-		<id property="modifyDate" 		column="modify_date"/>
-		<id property="status" 			column="status"/>
-	</resultMap>
-
-	<select id="getList" resultMap="importProductDto">
+	<select id="getList" resultType="MMap">
 	   <![CDATA[
 		  SELECT
-			 tip.import_pro_id
-			 , tip.product_id
-			 , tip.comp_id
-			 , tip.supplier_id
-			 , tip.qty
-			 , tip.price
-			 , tip.discount
-			 , tip.total
-			 , tip.descr
-			 , tip.currency_code
-			 , tip.create_by
-			 , tip.create_date
-			 , tip.modify_by
-			 , tip.modify_date
-			 , tip.status
+			 tip.import_pro_id			as "id"
+			 , tip.product_id			as "productId"
+			 , tip.comp_id				as "companyId"
+			 , tip.supplier_id			as "supplierId"
+			 , tip.qty					as "quantity"
+			 , tip.price				as "price"
+			 , tip.discount				as "discount"
+			 , tip.total				as "total"
+			 , tip.descr				as "description"
+			 , tip.currency_code		as "currencyCode"
+			 , tip.create_by			as "createBy"
+			 , tip.create_date			as "createDate"
+			 , tip.modify_by			as "modifyBy"
+			 , tip.modify_date			as "modifyDate"
+			 , tip.status				as "status"
 			 FROM tb_import_product tip
 		 WHERE tip.status != #{status}
 	     ]]>
 	</select>
 
-	<insert id="save" parameterType="importProductDto">
+	<insert id="save">
     	<![CDATA[
 	    	INSERT INTO tb_import_product
 			(
@@ -59,8 +40,6 @@
 			 , descr
 			 , create_by
 			 , create_date
-			 , modify_by
-			 , modify_date
 			 , status
 			)
 			VALUES (
@@ -72,10 +51,8 @@
 			, #{discount}
 			, #{total}
 			, #{currencyCode}
-			, COALESCE('', #{description} )
+			, COALESCE(#{description}, '' )
 			, #{createBy}
-			, to_char(NOW(), 'YYYYMMDD')
-			, #{modifyBy}
 			, to_char(NOW(), 'YYYYMMDD')
 			, #{status}
 			)
@@ -83,30 +60,30 @@
     	]]>
     </insert>
 
-	<select id="getValueById" resultMap="importProductDto">
+	<select id="getValueById" resultType="MMap">
 	   <![CDATA[
 		  SELECT
-			 tip.import_pro_id
-			 , tip.product_id
-			 , tip.comp_id
-			 , tip.supplier_id
-			 , tip.qty
-			 , tip.price
-			 , tip.discount
-			 , tip.total
-			 , tip.descr
-			 , tip.currency_code
-			 , tip.create_by
-			 , tip.create_date
-			 , tip.modify_by
-			 , tip.modify_date
-			 , tip.status
+			 tip.import_pro_id					as "id"
+			 , tip.product_id					as "productId"
+			 , tip.comp_id						as "companyId"
+			 , tip.supplier_id					as "supplierId"
+			 , tip.qty							as "quantity"
+			 , tip.price						as "price"
+			 , tip.discount						as "discount"
+			 , tip.total						as "total"
+			 , tip.descr						as "description"
+			 , tip.currency_code				as "currencyCode"
+			 , tip.create_by					as "createBy"
+			 , tip.create_date					as "createDate"
+			 , COALESCE(tip.modify_by, '')		as "modifyBy"
+			 , COALESCE(tip.modify_date, '')	as "modifyDate"
+			 , tip.status						as "status"
 			 FROM tb_import_product tip
 		  WHERE  tip.import_pro_id = #{id}
 	     ]]>
 	</select>
 
-	<select id="count" resultMap="importProductDto">
+	<select id="count" resultMap="MMap">
 	   <![CDATA[
 		  SELECT
 	     	COUNT (*)
@@ -114,7 +91,7 @@
 	     ]]>
 	</select>
 
-	<update id="update" parameterType="importProductDto">
+	<update id="update">
 		<![CDATA[
 		UPDATE tb_import_product
 		SET
@@ -125,7 +102,7 @@
 			, price 			= #{price}
 			, discount			= #{discount}
 			, total				= #{total}
-			, descr				=  COALESCE('', #{description})
+			, descr				=  COALESCE(#{description}, '')
 			, currency_code		= #{currencyCode}
 			, modify_by			= #{modifyBy}
 			, modify_date		= to_char(NOW(), 'YYYYMMDD')
@@ -134,7 +111,7 @@
 		]]>
 	</update>
 
-	<update id="delete" parameterType="importProductDto">
+	<update id="delete">
 		<![CDATA[
 		update tb_import_product
         set

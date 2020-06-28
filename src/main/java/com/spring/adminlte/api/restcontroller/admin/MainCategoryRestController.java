@@ -53,10 +53,10 @@ public class MainCategoryRestController {
         ResponseData<MMap, List<MMap>> dataResponse = new ResponseData<>();
 
         try {
-            MMap headerDto      = param.getMMap("header");
+            MMap header      = param.getMMap("header");
             List<MMap> response = mainCategoryService.getList(Status.Active.getValueStr());
             dataResponse.setBody(response);
-            dataResponse.setHeader(headerDto);
+            dataResponse.setHeader(header);
             return new ResponseEntity<>(dataResponse, HttpStatus.OK);
         }catch (Exception e) {
             log.error("\nget Error api main category list <<<=== getList() ===>>>:\n", e.getMessage());
