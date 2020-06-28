@@ -31,7 +31,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/main_category")
 public class MainCategoryRestController {
-    private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
+    private static final Logger log = LoggerFactory.getLogger(MainCategoryRestController.class);
 
     @Autowired
     private MainCategoryServiceImplement mainCategoryService;
@@ -39,9 +39,6 @@ public class MainCategoryRestController {
     private PlatformTransactionManager transactionManager;
     @Autowired
     private SequenceDao sequenceDao;
-//    @Autowired
-//    private MainCategoryDao mainCategoryDao;
-    String msg = "";
 
     /**
      * <pre>
@@ -63,7 +60,6 @@ public class MainCategoryRestController {
             return new ResponseEntity<>(dataResponse, HttpStatus.OK);
         }catch (Exception e) {
             log.error("\nget Error api main category list <<<=== getList() ===>>>:\n", e.getMessage());
-            msg = "GET_ERROR_EXCEPTION";
            throw e;
         }
     }

@@ -35,7 +35,6 @@ public class SubCategoryRestController {
     private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
     @Autowired
     private SubCategoryServiceImplement subCategoryService;
-
     @Autowired
     private PlatformTransactionManager transactionManager;
     @Autowired
@@ -99,13 +98,15 @@ public class SubCategoryRestController {
     }
 
     /**
-     * @functionName deleteByListId
-     * @param  param
-     * @description get delete sub category by list of iD
-     * @return response
+     * <pre>
+     *      update status to delete of sub category
+     * </pre>
+     * @param param
+     * @return ResponseData<MMap, MMap>
+     * @throws
      **/
     @PostMapping(value = "/deleteByListID")
-    public ResponseEntity< ResponseData<MMap, MMap>> deleteByListId (@RequestBody MMap param) throws Exception {
+    public ResponseEntity<ResponseData<MMap, MMap>> deleteByListId (@RequestBody MMap param) throws Exception {
         ResponseData<MMap, MMap> response = new ResponseData<>();
         MMap header                       = param.getMMap("header");
         MMap body                         = param.getMMap("body");

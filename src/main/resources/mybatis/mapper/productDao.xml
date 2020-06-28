@@ -40,7 +40,7 @@
 			VALUES (
 				  #{subCateId}
 				, #{proName}
-				, COALESCE('', #{description} )
+				, COALESCE(#{description}, '' )
 				, #{userID}
 				, to_char(NOW(), 'YYYYMMDD')
 				, #{status}

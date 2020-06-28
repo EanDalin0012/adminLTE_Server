@@ -1,7 +1,7 @@
 package com.spring.adminlte.services.serviceImplements;
 
+import com.spring.adminlte.core.map.MMap;
 import com.spring.adminlte.dao.ResourceFileInfoDao;
-import com.spring.adminlte.dto.ResourceFileInfoDto;
 import com.spring.adminlte.services.ResourceFileInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,22 +17,17 @@ public class ResourceFileInfoServiceImplement implements ResourceFileInfoService
     }
 
     @Override
-    public int addCompanyProfile(ResourceFileInfoDto user) {
-        return resourceFileInfoDao.addCompanyProfile(user);
+    public int fileUpload(MMap param) {
+        return resourceFileInfoDao.fileUpload(param);
     }
 
     @Override
-    public int updateCompanyProfile(ResourceFileInfoDto user) {
-        return resourceFileInfoDao.updateCompanyProfile(user);
+    public MMap getResourceById(MMap param) {
+        return resourceFileInfoDao.getResourceById(param);
     }
 
     @Override
-    public ResourceFileInfoDto getResourceById(String resID) {
-        return resourceFileInfoDao.getResourceById(resID);
-    }
-
-    @Override
-    public int deleteById(String resourceFileInfoId) {
-        return resourceFileInfoDao.deleteById(resourceFileInfoId);
+    public int deleteById(MMap param) {
+        return resourceFileInfoDao.deleteById(param);
     }
 }

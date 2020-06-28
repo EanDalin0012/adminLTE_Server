@@ -5,7 +5,6 @@ import com.spring.adminlte.core.map.MMap;
 import com.spring.adminlte.core.map.MultiMap;
 import com.spring.adminlte.core.template.classes.ResponseData;
 import com.spring.adminlte.services.serviceImplements.UserServiceImplement;
-import com.spring.adminlte.core.template.classes.DataResponse;
 import com.spring.adminlte.utils.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/*
+/**
+ * <pre>
+ *     user information
+ * </pre>
 * @author ean dalin
 * @date 23/05/2020
 * */
@@ -34,9 +36,13 @@ public class UserRestController {
     @Autowired
     private PlatformTransactionManager transactionManager;
 
-    /* @function getList
+    /**
+     * <pre>
+     *     get list of user
+     * </pre>
     * @param param
-    * @description get user information list
+     * @return ResponseData<MMap, MMap>
+     * @throws Exception
     * */
     @PostMapping(value = "/list")
     public ResponseEntity<ResponseData<MMap, MMap>> getList(@RequestBody MMap param) throws Exception{
@@ -58,18 +64,26 @@ public class UserRestController {
         }
     }
 
-    /* @function save
+    /**
+     * <pre>
+     *     save information of user
+     * </pre>
      * @param param
-     * @description save information of user
+     * @return ResponseData<MMap, MMap>
+     * @throws Exception
      * */
     @PostMapping(value = "/save")
     public ResponseEntity<ResponseData<MMap, MMap>> save(@RequestBody MMap param) throws Exception{
         return execute(param, "save");
     }
 
-    /* @function update
+    /**
+     * <pre>
+     *     update information of user
+     * </pre>
      * @param param
-     * @description save information of user
+     * @return <ResponseData<MMap, MMap>
+     * @throws Exception
      * */
     @PostMapping(value = "/update")
     public ResponseEntity<ResponseData<MMap, MMap>> update(@RequestBody MMap param) throws Exception{

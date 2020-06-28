@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "api/product")
 public class ProductRestController {
-    private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
+    private static final Logger log = LoggerFactory.getLogger(ProductRestController.class);
     @Autowired
     private ProductServiceImplement productService;
     @Autowired

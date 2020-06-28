@@ -1,36 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.adminlte.dao.SupplierDao">
-	
-	<resultMap type="MMap"   					id="supplierDto">
-		<id property="id"	    				column="sup_id"/>
-		<id property="supName" 					column="sup_nm"/>
-		<id property="supContact" 				column="sup_contact"/>
-		<id property="supContactTwo" 			column="sup_contact_t"/>
-		<id property="supEmail" 				column="sup_email"/>
-		<id property="description" 				column="sup_desc"/>
-		<id property="status" 					column="sup_status"/>
-		<id property="createBy" 				column="sup_create_by"/>
-		<id property="modifyBy" 				column="sup_modify_by"/>
-		<id property="createDate" 				column="sup_create_date"/>
-		<id property="modifyDate" 				column="sup_modify_date"/>
 
-	</resultMap>
-
-	<select id="getList" resultMap="supplierDto">
+	<select id="getList">
 	   <![CDATA[
 		select
-			  ts.sup_id
-			, ts.sup_nm
-			, ts.sup_contact
-			, ts.sup_contact_t
-			, ts.sup_email
-			, ts.sup_desc
-			, ts.sup_status
-			, ts.sup_create_by
-			, ts.sup_create_date
-			, ts.sup_modify_by
-			, ts.sup_modify_date
+			  ts.sup_id								as "id"
+			, ts.sup_nm								as "supName"
+			, ts.sup_contact						as "supContact"
+			, ts.sup_contact_t						as "supContactTwo"
+			, ts.sup_email							as "supEmail"
+			, ts.sup_desc							as "description"
+			, ts.sup_status							as "status"
+			, ts.sup_create_by						as "createBy"
+			, ts.sup_create_date					as "createDate"
+			, COALESCE(ts.sup_modify_by, ' ')		as "modifyBy"
+			, COALESCE(ts.sup_modify_date, ' ')		as "modifyDate"
 			from tb_supplier ts
 			where ts.sup_status != #{status}
 	   ]]>
@@ -62,26 +47,26 @@
     	]]>
     </insert>
 
-	<select id="getValueById" resultMap="supplierDto">
+	<select id="getValueById" resultType="MMap">
 	   <![CDATA[
 		  select
-	          ts.sup_id
-			, ts.sup_nm
-			, ts.sup_contact
-			, ts.sup_contact_t
-			, ts.sup_email
-			, ts.sup_desc
-			, ts.sup_status
-			, ts.sup_create_by
-			, ts.sup_create_date
-			, ts.sup_modify_by
-			, ts.sup_modify_date
+	          ts.sup_id								as "id"
+			, ts.sup_nm								as "supName"
+			, ts.sup_contact						as "supContact"
+			, ts.sup_contact_t						as "supContactTwo"
+			, ts.sup_email							as "supEmail"
+			, ts.sup_desc							as "description"
+			, ts.sup_status							as "status"
+			, ts.sup_create_by						as "createBy"
+			, ts.sup_create_date					as "createDate"
+			, COALESCE(ts.sup_modify_by, ' ')		as "modifyBy"
+			, COALESCE(ts.sup_modify_date, ' ')		as "modifyDate"
 			from tb_supplier ts
 			where ts.sup_id = #{id}
 	     ]]>
 	</select>
 
-	<select id="count" resultMap="supplierDto">
+	<select id="count">
 	   <![CDATA[
 		  select
 	     	count (*)
@@ -106,7 +91,7 @@
 		]]>
 	</update>
 
-	<update id="delete" parameterType="supplierDto">
+	<update id="delete">
 		<![CDATA[
 		UPDATE tb_supplier
 	     SET

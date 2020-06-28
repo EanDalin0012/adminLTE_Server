@@ -5,7 +5,7 @@ import com.spring.adminlte.core.map.MultiMap;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductSerive {
+public interface ProductService {
     MultiMap getList();
     Long save(MMap param) throws Exception;
     Long delete(MMap param) throws Exception;

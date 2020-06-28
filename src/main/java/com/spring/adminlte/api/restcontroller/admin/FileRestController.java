@@ -4,18 +4,16 @@ import com.spring.adminlte.constants.BizResultCodeType;
 import com.spring.adminlte.constants.ChannelTypeCode;
 import com.spring.adminlte.constants.LangaugeCode;
 import com.spring.adminlte.constants.SYN;
-import com.spring.adminlte.dao.ProductImageDao;
+import com.spring.adminlte.core.map.MMap;
+import com.spring.adminlte.core.template.classes.ResponseData;
+import com.spring.adminlte.dao.ResourceFileInfoDao;
 import com.spring.adminlte.dto.*;
-import com.spring.adminlte.services.serviceImplements.FileSystemStorageService;
 import com.spring.adminlte.services.serviceImplements.ResourceFileInfoServiceImplement;
-import com.spring.adminlte.core.template.classes.DataResponse;
 import org.apache.commons.io.IOUtils;
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,143 +23,104 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/api/file")
 public class FileRestController {
-    private static final Logger log = LoggerFactory.getLogger(CompanyRestController.class);
-
-    @Autowired
-    private FileSystemStorageService fileSystemStorageService;
-    @Autowired
-    private ProductImageDao productImageService;
-    public FileResponseDto store() {
-        return null;
-    }
+    private static final Logger log = LoggerFactory.getLogger(FileRestController.class);
 
     @Autowired
     private ResourceFileInfoServiceImplement resourceFileInfoService;
-    /*
-    * @functionName getImage
-    * @description get image by path
-    * */
-    @GetMapping(value = "/logo/{id}")
-    public ResponseEntity<InputStreamResource> getImage(@PathVariable("id") int id) throws IOException {
-
-        try{
-//            ProductImageDto productImageDto = productImageService.getValueById(id);
-            String resource = productImageService.getPathImage(id);
-//            String resource = productImageDto.getUri();
-            ClassPathResource imgFile = new ClassPathResource(resource);
-            return ResponseEntity
-                    .ok()
-                    .contentType(MediaType.IMAGE_PNG)
-                    .body(new InputStreamResource(imgFile.getInputStream()));
-        }catch (Exception e) {
-            throw e;
-        }
-    }
-    @PostMapping(value = "/image")
-    public ResponseEntity<DataResponse<ImageDto>> store(@RequestBody MultipartFile file) {
-        DataResponse<ImageDto> response = new DataResponse<>();
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
+    @Autowired
+    private ResourceFileInfoDao resourceFileInfoDao;
+    /**
+     * <pre>
+     *     upload image
+     * </pre>
+     * @param multipartFile,
+     *        fileImageURL,
+     *         userID
+     * @return ResponseData<MMap, MMap>
+     * @throws IOException
+     *
+     * */
     @PostMapping("/upload/product")
-    public DataResponse<ImageURLDto> handleFileUpload(@RequestParam("file") MultipartFile multipartFile,
-                                                      @RequestParam("fileImageURL") String fileImageURL,
-                                                      @RequestParam("userID") String userID,
-                                                      @RequestParam("productId") String productId) throws IOException {
-        DataResponse<ImageURLDto> response = new DataResponse<>();
-        InputStream is = null;
-        HeaderDto header = new HeaderDto();
-        ImageURLDto imageUrl = new ImageURLDto();
+    public ResponseEntity<ResponseData<MMap, MMap>> handleFileUpload(@RequestParam("file") MultipartFile multipartFile,
+                                                                     @RequestParam("fileImageURL") String fileImageURL,
+                                                                     @RequestParam("userID") String userID) throws IOException {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        InputStream is      = null;
+        MMap header         = new MMap();
+        MMap responseBody   = new MMap();
+
         try {
             boolean file = multipartFile.isEmpty();
             if ( !file ) {
-                ResourceFileInfoDto profile = new ResourceFileInfoDto();
+                MMap input = new MMap();
+
                 UUID uuid = UUID.randomUUID();
                 String resID = uuid.toString();
                 String[] originalFilename = multipartFile.getOriginalFilename().split("\\.(?=[^\\.]+$)");
 
-                profile.setFileTypeCode(BizResultCodeType.FILE_TYPE_CODE.getValue());
-                profile.setFileName(originalFilename[0]);
-                profile.setFileExt(originalFilename[1]);
-                profile.setFileContentType(multipartFile.getContentType());
-
-                profile.setFileSize(multipartFile.getSize());
-                profile.setCreatedBy(userID);
-                profile.setUpdatedBy(userID);
-                profile.setFileImageURL(fileImageURL);
-
+                input.setString("fileTypeCode",     BizResultCodeType.FILE_TYPE_CODE.getValue());
+                input.setString("fileName",         originalFilename[0]);
+                input.setString("fileExt",          originalFilename[1]);
+                input.setString("fileContentType",  multipartFile.getContentType());
+                input.setLong("fileSize",           multipartFile.getSize());
+                input.setString("createdBy",        userID);
+                input.setString("fileImageURL",     fileImageURL);
                 is = multipartFile.getInputStream();
-                profile.setFileData(IOUtils.toByteArray(is));
+                input.set("fileData", IOUtils.toByteArray(is));
                 IOUtils.closeQuietly(is);
-                profile.setId( resID );
-                int add = resourceFileInfoService.addCompanyProfile( profile );
+                input.setString("id", resID);
+
+                int add = resourceFileInfoService.fileUpload( input );
+
+                header.setBoolean("result",         false);
+                header.setString("msg",             BizResultCodeType.RESPONSE_SUCCESS_CODE.getValue());
+                header.setString("authData",        BizResultCodeType.RESPONSE_SUCCESS_MESSAGE.getValue());
+                header.setString("channelTypeCode", ChannelTypeCode.ADMIN.getValue());
+                header.setString("userID",          userID);
+                header.setString("sessionId",       " ");
+                header.setString("languageCode",    LangaugeCode.EN.getValue());
 
                 if (add > 0) {
-                    imageUrl.setId(profile.getId());
-                    imageUrl.setImageURL(fileImageURL +"/images/resources/"+resID);
-                    header.setResult( true );
-                    header.setMsg( BizResultCodeType.RESPONSE_SUCCESS_CODE.getValue() );
-                    header.setAuthData( BizResultCodeType.RESPONSE_SUCCESS_MESSAGE.getValue() );
-
+                    responseBody.setString("id",        input.getString("id"));
+                    responseBody.setString("imageURL",  input.getString("/images/resources/"+resID));
+                    header.setBoolean("result",         true);
                     response.setHeader( header );
-                    response.setBody(imageUrl);
-                    return response;
+                    response.setBody(responseBody);
+                    return new ResponseEntity<>(response, HttpStatus.OK);
                 }
-//
-//                if ( StringUtils.isEmpty( profile.getFileImageURL().trim() == "ad" ) || profile.getFileImageURL().equals("dsd"))  {
-//                    // prepare data to update to m-banking db
-//                    String[] preProfile = profile.getFileImageURL().split( "/" );
-//                    resID = preProfile[preProfile.length - 1];
-//                    profile.setId( resID );
-//                    ResourceFileInfoDto resource = resourceFileInfoService.getResourceById( resID );
-//
-//                    if ( resource == null ) {
-////                        resourceFileInfoService.addCompanyProfile( profile );
-//                    } else {
-////                        resourceFileInfoService.updateCompanyProfile( profile );
-//                    }
-//
-//                } else {
-//                    // prepare data to insert to m-banking db
-//                    profile.setId( resID );
-//                    resourceFileInfoService.addCompanyProfile( profile );
-//                }
             }
 
         } catch (Exception e) {
             throw e;
         }
 
-        header.setResult( false );
-        header.setMsg( BizResultCodeType.RESPONSE_SUCCESS_CODE.getValue() );
-        header.setAuthData( BizResultCodeType.RESPONSE_SUCCESS_MESSAGE.getValue() );
-        response.setHeader( header );
-        response.setBody(imageUrl);
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/images/resources/{resID}")
-    public ResponseEntity<byte[]> getCompanyProfile(@PathVariable("resID") String resID) throws Exception {
+    public ResponseEntity<byte[]> resources1(@PathVariable("resID") String resID) throws Exception {
         HttpHeaders headers = new HttpHeaders();
         byte[] imageDataBytes = null;
         try {
-            ResourceFileInfoDto profile =  resourceFileInfoService.getResourceById(resID);
-            if(profile != null && profile.getFileData().length > 0){
-                imageDataBytes = profile.getFileData();
+
+
+            MMap input = new MMap();
+            input.setString("id", resID);
+            MMap profile =  resourceFileInfoDao.getResource(input);
+
+            if(profile != null){
+                imageDataBytes = (byte[])   profile.get("fileData") ; //profile.getFileData();
                 if(imageDataBytes.length > 204800){ // resize image if it is bigger than 200kb
-                    imageDataBytes = this.scale(imageDataBytes, profile.getFileExt());
+                    imageDataBytes = this.scale(imageDataBytes, profile.getString("fileExtension"));
                 }
 
-                String fileExt = profile.getFileExt();
+                String fileExt =  profile.getString("fileExtension");
 
                 if( fileExt.equalsIgnoreCase("JPG") ) {
                     headers.setContentType(MediaType.IMAGE_JPEG);
@@ -179,6 +138,7 @@ public class FileRestController {
         return new ResponseEntity<byte[]>(imageDataBytes, headers, HttpStatus.OK);
     }
 
+
     public byte[] scale(byte[] fileData,String ext) throws IOException {
 
         ByteArrayInputStream in = new ByteArrayInputStream(fileData);
@@ -194,22 +154,35 @@ public class FileRestController {
     }
 
     @PostMapping("/removeUrl")
-    public DataResponse<ReturnYNDto> handleFileRemove(@RequestParam("resourceFileInfoId") String resourceFileInfoId) throws IOException {
-        DataResponse<ReturnYNDto> response = new DataResponse<>();
-        HeaderDto header = new HeaderDto();
-        header.setMsg("");
-        header.setChannelTypeCode(ChannelTypeCode.ADMIN.getKey());
-        header.setAuthData("");
-        header.setLanguageCode(LangaugeCode.EN.getKey());
-        response.setBody(new ReturnYNDto(false, SYN.N.getKey()));
+    public ResponseEntity<ResponseData<MMap, MMap>> handleFileRemove(@RequestParam("resourceFileInfoId") String resourceFileInfoId) throws IOException {
+        ResponseData<MMap, MMap> response = new ResponseData<>();
+        MMap header = new MMap();
+        MMap body = new MMap();
+
+        header.setString("msg",             ""  );
+        header.setString("sessionId",       ""  );
+        header.setLong("userID",            0   );
+        header.setString("channelTypeCode", ChannelTypeCode.ADMIN.getKey());
+        header.setString("authData",        ""  );
+        header.setString("languageCode",    LangaugeCode.EN.getKey());
+        header.setBoolean("result",         false   );
+
+        body.setBoolean("result",           false);
+        body.setString("resultMessage",     SYN.N.getKey());
+
         try {
             if (resourceFileInfoId.isEmpty() || resourceFileInfoId.equals("")) {
-                int delete = resourceFileInfoService.deleteById(resourceFileInfoId);
+                MMap input = new MMap();
+                input.setString("resourceFileInfoId", resourceFileInfoId);
+                int delete = resourceFileInfoService.deleteById(input);
                 if (delete > 0) {
-                    header.setResult(true);
+                    header.setBoolean("result", true    );
+                    body.setBoolean("result",   true    );
+
                     response.setHeader(header);
-                    response.setBody(new ReturnYNDto(true, SYN.Y.getKey()));
-                    return response;
+                    response.setBody(body);
+
+                    return new ResponseEntity<>(response, HttpStatus.OK);
                 }
             }
 
@@ -217,9 +190,7 @@ public class FileRestController {
             log.error("\n get error: handle file remove\n", e.getMessage());
             throw  e;
         }
-
-        response.setHeader(header);
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     }

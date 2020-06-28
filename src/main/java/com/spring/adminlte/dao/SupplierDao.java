@@ -1,6 +1,5 @@
 package com.spring.adminlte.dao;
 
-import com.spring.adminlte.dto.SupplierDto;
 import com.spring.adminlte.core.map.MMap;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,7 +10,7 @@ public interface SupplierDao {
     List<MMap> getList(MMap param);
     Long save(MMap param);
     Long delete(MMap param);
-    SupplierDto getValueById(int id);
+    MMap getValueById(MMap param);
     Long update(MMap param);
     int count();
 }

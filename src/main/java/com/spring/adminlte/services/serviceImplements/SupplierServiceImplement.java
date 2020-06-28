@@ -1,7 +1,6 @@
 package com.spring.adminlte.services.serviceImplements;
 
 import com.spring.adminlte.dao.SupplierDao;
-import com.spring.adminlte.dto.SupplierDto;
 import com.spring.adminlte.core.map.MMap;
 import com.spring.adminlte.services.SupplierService;
 import com.spring.adminlte.utils.ValidatorUtil;
@@ -31,8 +30,8 @@ public class SupplierServiceImplement implements SupplierService {
     }
 
     @Override
-    public SupplierDto getValueById(int id) {
-        return supplierDao.getValueById(id);
+    public MMap getValueById(MMap param) {
+        return supplierDao.getValueById(param);
     }
 
     @Override

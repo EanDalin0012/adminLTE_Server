@@ -3,13 +3,13 @@ package com.spring.adminlte.services.serviceImplements;
 import com.spring.adminlte.dao.ProductDao;
 import com.spring.adminlte.core.map.MMap;
 import com.spring.adminlte.core.map.MultiMap;
-import com.spring.adminlte.services.ProductSerive;
+import com.spring.adminlte.services.ProductService;
 import com.spring.adminlte.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProductServiceImplement implements ProductSerive {
+public class ProductServiceImplement implements ProductService {
     @Autowired
     private ProductDao productDao;
     @Override

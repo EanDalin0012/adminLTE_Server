@@ -85,10 +85,13 @@ public class SupplierRestController {
         return responseEntityInfo(param, "update");
     }
 
-    /*
-    * @functionName updateStatus
+    /**
+     * <pre>
+     *     update status to delete of suppliers
+     * </pre>
     * @param param
-    * @description update status to delete
+     * @return ResponseData<MMap, MMap>
+     * @throws
     * */
     @PostMapping(value = "/updateStatus")
     public ResponseEntity<ResponseData<MMap, MMap>> updateStatus(@RequestBody MMap param) {
